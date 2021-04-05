@@ -1,7 +1,7 @@
 {{isAdmin}} - Role
-<mat-toolbar color="primary">
-  <ng-container *ngIf="!isAdmin; else vieAdmin">
-  <span>My App</span>
+<mat-toolbar class="color-IDB">
+  <ng-container *ngIf="!isAdmin; else vieAdmin" class="color-IDB">
+  <span>Estado de Cuentas IDB</span>
   <span class="spacer"></span>
   <div>
     <a mat-button [routerLink]="'/login'">Login</a>
@@ -9,7 +9,7 @@
     <a mat-button [routerLink]="'/admin'">Admin</a>
   </div>
 </ng-container>
-  <button (click)="isAdmin=!isAdmin">Change</button>
+
 </mat-toolbar>
 
 
