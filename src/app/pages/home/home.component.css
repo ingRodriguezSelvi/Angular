@@ -1,0 +1,30 @@
+.Header a{
+  padding-top: 15%;
+  color: #033C60;
+  width: auto;
+  flex: 1 1;
+  padding-left: 3.5rem;
+  text-align: center;
+
+  margin: 2rem auto;
+  text-align: center;
+  height: 350px;
+
+}
+
+table{
+  width: 100%;
+
+}
+
+.mat-elevation-z8{
+  padding-top: 5rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+th{
+  background-color:#013476 ;
+  color: #fff;
+}
+
