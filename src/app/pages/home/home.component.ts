@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
+import{AuthService} from '@auth/auth.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,9 +12,15 @@ export class HomeComponent implements OnInit {
   displayedColumns: string[] = ['Fecha de Emision', 'Fecha de Cancelacion', 'Nº Factura', 'Paciente','Monto de Honorario'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
-  constructor() { }
+  medico=this.authSvc.dataMedico();
+
+
+
+  constructor(private authSvc:AuthService) { }
 
   ngOnInit(): void {
+
+
   }
 
 
@@ -24,6 +32,10 @@ export interface PeriodicElement {
   fechaCancelacion: string;
   montoHonorario:number;
 }
+
+
+
+
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {fechaEmision:'04/06/2021',fechaCancelacion:'04/06/2021',numeroFactura:20003864,paciente:'Andres Rodriguez',montoHonorario:70000000},
