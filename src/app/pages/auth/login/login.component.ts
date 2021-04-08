@@ -12,12 +12,13 @@ export class LoginComponent implements OnInit {
   constructor(private authSvc:AuthService) { }
 
   ngOnInit(): void {
-    const userData:User ={
-      username: 'V12522533',
-      password: 'Idb.1234',
-      rememberMe:true
+    const userData ={
+
+      username: `ing.rodriguez.selvi@gmail.com`,
+      password: `123456`
+
     };
-    this.authSvc.login(userData).subscribe(data=>{console.log(data)});
+    this.authSvc.login(userData).subscribe(data=>{console.log('Login')});
   }
 
 }

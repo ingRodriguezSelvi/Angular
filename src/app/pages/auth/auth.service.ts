@@ -16,24 +16,30 @@ export class AuthService {
 
 
 
-  url:string="http://172.18.16.50:5005/"
+
   constructor(private http:HttpClient) {}
 
-  login(authData:User):Observable<UserResponse>{
+  login(authData:User):Observable<UserResponse | void>{
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         accept: '*/*'
       })
     };
-    let direccion= this.url+"api/Account/Login";
-    return this.http.post<UserResponse>(direccion,authData,httpOptions);
+
+    return this.http.post<UserResponse>(`${environment.API_URL}/auth/login`,authData)
+    .pipe(map((res:UserResponse)=>{
+      console.log('Res->',res);
+      this.saveToken(res.token);
+    }));
 
   }
   logout():void{}
 
   private readToken():void{}
-  private saveToken():void{}
+  private saveToken(token:string){
+    localStorage.setItem('token',token);
+  }
   private handlerError(err:any):Observable<never>{
     let errorMessage = 'Un Error a ocurrido recuperando data';
     if(err){

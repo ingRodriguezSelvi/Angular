@@ -1,9 +1,5 @@
 {
-  "userId":1,
-  "username":"ing.rodriguez.selvi@gmail.com",
-  "password":"123456",
-  "token":"01",
-  "roles":"ADMIN",
-  "message":"This user is admin"
-
+  "cedula": "V12522533",
+  "password": "Idb.1234",
+  "rememberMe": true
 }

@@ -1,13 +1,13 @@
-export type Roles= 'MEDICO'|'ADMIN';
-export interface User{
-  username:string;
-  password:string;
-  rememberMe:boolean;
+export type Roles = 'SUSCRIPTOR' | 'ADMIN';
+
+export interface User {
+  username: string;
+  password: string;
 }
 
-export interface UserResponse{
- statuscode:number,
- succeeded:boolean,
- message:string,
- result:object
+export interface UserResponse  {
+ message: string;
+ token: string;
+ userId: string;
+ role:Roles
 }
