@@ -8,6 +8,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import {MaterialModule} from './material.module';
 import { SidebarModule } from './shared/components/sidebar/sidebar.module';
 import { HttpClientModule } from '@angular/common/http';
+import {ReactiveFormsModule,FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -23,6 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     BrowserAnimationsModule,
     SidebarModule,
+    ReactiveFormsModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [],

@@ -1,8 +1,8 @@
 export type Roles= 'MEDICO'|'ADMIN';
 export interface User{
-  username:string;
+  cedula:string;
   password:string;
-  rememberMe:boolean;
+
 }
 
 export interface UserResponse{
@@ -11,3 +11,5 @@ export interface UserResponse{
  message:string,
  result:object
 }
+
+

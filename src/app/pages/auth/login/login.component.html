@@ -2,13 +2,19 @@
   <mat-card>
     <mat-card-content>
       <h1>Grupo de Clinicas IDB</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+
       <mat-form-field class="full-width-input">
-        <input matInput    placeholder="Usuario" type="text" required>
+        <input matInput    placeholder="Usuario" type="text"
+        formControlName="cedula" required>
       </mat-form-field>
       <mat-form-field class="full-width-input separator">
-        <input matInput   placeholder="Contraseña" type="password" required>
+        <input matInput   placeholder="Contraseña" type="password"
+        formControlName="password" required>
       </mat-form-field >
-      <button type="submit" mat-raised-button class="backgorundButton" [routerLink]="'/home'">Ingresar</button>
+      <button type="submit" mat-raised-button class="backgorundButton" >Ingresar</button>
+    </form>
     </mat-card-content>
   </mat-card>
 </div>

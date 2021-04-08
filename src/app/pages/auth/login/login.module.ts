@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import {MaterialModule} from '@app/material.module';
+import{FormGroup,FormControl,Validators} from '@angular/forms'
+import{ReactiveFormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
     LoginComponent
@@ -11,6 +13,7 @@ import {MaterialModule} from '@app/material.module';
   imports: [
     CommonModule,
     LoginRoutingModule,
+    ReactiveFormsModule,
     MaterialModule
   ]
 })
