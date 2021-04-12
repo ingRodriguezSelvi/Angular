@@ -19,13 +19,13 @@ class AuthController {
     try {
       user = await userRepository.findOneOrFail({ where: { username } });
     } catch (e) {
-      return res.status(400).json({ message: ' Username or password incorecct!' });
+      return res.status(400).json({ message: 'Usuario Incorrecto' });
     }
 
     // Check password
-    if (!user.checkPassword(password)) {
-      return res.status(400).json({ message: 'Username or Password are incorrect!' });
-    }
+    //if (!user.checkPassword(password)) {
+    //  return res.status(400).json({ message: 'Contraseña incorrecta' });
+   // }
 
     const token = jwt.sign({ userId: user.id, username: user.username }, config.jwtSecret, { expiresIn: '1h' });
 

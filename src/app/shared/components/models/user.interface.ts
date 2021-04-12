@@ -5,11 +5,11 @@ export interface User{
 
 }
 
-export interface UserResponse{
- statuscode:number,
- succeeded:boolean,
- message:string,
- result:object
+export interface UserResponse  {
+ StatusCode:number;
+ Succeded:boolean;
+ Message:string;
+ result:object;
 }
 
 

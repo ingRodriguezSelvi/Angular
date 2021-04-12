@@ -1,5 +1,5 @@
 <div class="Header">
-  <a>Dr(a) </a>
+  <a>Dr(a)  </a>
   <a>Cedula #NumeroCedula</a>
   <a>Saldo Bs: #SaldoBs</a>
   <a>Saldo $: #SaldoDol</a>
@@ -10,41 +10,7 @@
   <div>
     <h1>Honorarios Cancelados en Bs</h1>
   </div>
-  <table mat-table [dataSource]="dataSource">
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="Fecha de Emision">
-      <th mat-header-cell *matHeaderCellDef> Fecha de Emision </th>
-      <td mat-cell *matCellDef="let element"> {{element.fechaEmision}} </td>
-    </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="Fecha de Cancelacion">
-      <th mat-header-cell *matHeaderCellDef> Fecha de Cancelacion </th>
-      <td mat-cell *matCellDef="let element"> {{element.fechaCancelacion}} </td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="Nº Factura">
-      <th mat-header-cell *matHeaderCellDef> Nº Factura </th>
-      <td mat-cell *matCellDef="let element"> {{element.numeroFactura}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="Paciente">
-      <th mat-header-cell *matHeaderCellDef> Paciente </th>
-      <td mat-cell *matCellDef="let element"> {{element.paciente}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="Monto de Honorario">
-      <th mat-header-cell *matHeaderCellDef> Monto de Honorario </th>
-      <td mat-cell *matCellDef="let element"> {{element.montoHonorario}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
 

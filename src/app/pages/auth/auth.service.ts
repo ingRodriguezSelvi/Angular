@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { CATCH_ERROR_VAR, NULL_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 import { User, UserResponse } from '@app/shared/components/models/user.interface';
 import {environment} from '@env/environment';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
@@ -12,32 +12,31 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import{Medicos,Cobros,Monedas} from '@app/shared/components/models/data';
 
 
-
 const helper = new JwtHelperService();
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 private loggedIn = new BehaviorSubject<boolean>(false);
-
-
   url:string="http://172.18.16.50:5005/"
   constructor(private http:HttpClient) {
     this.readToken();
   }
-
   get isLogged():Observable<boolean>{
     return this.loggedIn.asObservable();
   }
+  dataMedico(x:Medicos){
 
-  dataMedico(){
-
-  }
-  getMedico(){
-
+   let medico:Medicos=x
+    return medico;
 
   }
-
+  getMedico():Observable<Medicos|void>{
+    let direccion= '../assets/mocks/Medicos.json';
+    return this.http.get<Medicos>(direccion).pipe(map((res:Medicos)=>{
+      return res;
+    }));
+  }
   login(authData:User):Observable<UserResponse | void>{
     const httpOptions = {
       headers: new HttpHeaders({
@@ -53,19 +52,13 @@ private loggedIn = new BehaviorSubject<boolean>(false);
       this.loggedIn.next(true);
 
     }
-
     ));
-
   }
-
-
-
   logout():void{
     localStorage.removeItem('token');
     this.loggedIn.next(false);
     //set userIsLogged=false
   }
-
   private readToken():void{
    // const userToken=localStorage.getItem('token');
    // const isExired = helper.isTokenExpired(userToken);
