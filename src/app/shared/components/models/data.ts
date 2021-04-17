@@ -1,24 +1,26 @@
 export interface Medicos{
 
+  id:number;
   nombre:string;
-  apellido:string;
-  cedula:string;
-  numerosDocum:number[]
+  rif:string;
+  codigo:string;
 
 }
 
-export interface Cobros extends Medicos{
-
-  fechaEmision:string;
-  fechaCancelacion:string;
-  numeroDocum:number;
-  nombrePaciente:string
-  apellidoPaciente:string;
-  montoHonorario:number;
-
+export interface Cobros {
+  numero:number;
+  fecha:Date;
+  montoBs:number;
+  montoDol:number;
 }
 
 export interface Monedas{
   dolar:number;
   bolivar:number;
+}
+export interface OrdenMedica {
+  ordernum:number;
+  fechaEmis:string;
+  monto:number;
+  montodol:number;
 }

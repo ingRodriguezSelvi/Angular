@@ -6,11 +6,10 @@ import {environment} from '@env/environment';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError,map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
-
 import { stringify } from '@angular/compiler/src/util';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import{Medicos,Cobros,Monedas} from '@app/shared/components/models/data';
-
+import { MedDataService } from '../home/Services/med-data.service';
 
 const helper = new JwtHelperService();
 @Injectable({
@@ -19,25 +18,13 @@ const helper = new JwtHelperService();
 export class AuthService {
 private loggedIn = new BehaviorSubject<boolean>(false);
   url:string="http://172.18.16.50:5005/"
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,private privatemeddata:MedDataService) {
     this.readToken();
   }
   get isLogged():Observable<boolean>{
     return this.loggedIn.asObservable();
   }
-  dataMedico(x:Medicos){
-
-   let medico:Medicos=x
-    return medico;
-
-  }
-  getMedico():Observable<Medicos|void>{
-    let direccion= '../assets/mocks/Medicos.json';
-    return this.http.get<Medicos>(direccion).pipe(map((res:Medicos)=>{
-      return res;
-    }));
-  }
-  login(authData:User):Observable<UserResponse | void>{
+  login(authData:User):Observable<UserResponse>{
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -46,11 +33,7 @@ private loggedIn = new BehaviorSubject<boolean>(false);
     };
     let direccion= this.url+"api/Account/Login";
     return this.http.post<UserResponse>(direccion,authData,httpOptions).pipe(map((res:UserResponse)=>{
-
-      console.log('Res->',res);
-      this.saveToken(JSON.stringify(res.result));
-      this.loggedIn.next(true);
-
+      return res;
     }
     ));
   }
@@ -69,6 +52,22 @@ private loggedIn = new BehaviorSubject<boolean>(false);
   private saveToken(token:string):void{
     localStorage.setItem('token',token);
   }
+   saveMedico():Observable<Medicos>{
+   const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        accept: '*/*',
+        Authorization: "Bearer "+localStorage.getItem('token')
+      })
+    };
+    console.log('Key-> '+localStorage.getItem('token'));
+    console.log('Key-> '+localStorage.getItem('message'));
+    let direccion = "http://172.18.16.50:5005/"
+    return this.http.get<Medicos>(direccion+'api/Data/DoctorData',httpOptions).
+      pipe(map((res:Medicos)=>{
+     return res;
+    }));
+  }
   private handlerError(err:any):Observable<never>{
     let errorMessage = 'Un Error a ocurrido recuperando data';
     if(err){
@@ -78,5 +77,4 @@ private loggedIn = new BehaviorSubject<boolean>(false);
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
-  //1:14:18 segundos
 }

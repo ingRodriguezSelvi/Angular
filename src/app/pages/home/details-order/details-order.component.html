@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Detalle de Orden de Pago #orderNumber</h2>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="Fecha de emision">
+    <th mat-header-cell *matHeaderCellDef> Fec Emi </th>
+    <td mat-cell *matCellDef="let element"> {{element.fechaEmision}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="Numero de factura">
+    <th mat-header-cell *matHeaderCellDef> Num Fac </th>
+    <td mat-cell *matCellDef="let element"> {{element.numeroDocum}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="Paciente">
+    <th mat-header-cell *matHeaderCellDef> Paciente </th>
+    <td mat-cell *matCellDef="let element"> {{element.paciente}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="Cedula">
+    <th mat-header-cell *matHeaderCellDef> Cedula </th>
+    <td mat-cell *matCellDef="let element"> {{element.cedula}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Monto Honorario">
+    <th mat-header-cell *matHeaderCellDef> Monto Honorario </th>
+    <td mat-cell *matCellDef="let element"> {{element.montoHonorario}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Monto Honorario dolar">
+    <th mat-header-cell *matHeaderCellDef> Monto Honorario $ </th>
+    <td mat-cell *matCellDef="let element"> {{element.montoDol}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

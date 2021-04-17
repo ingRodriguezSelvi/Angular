@@ -1,0 +1,12 @@
+table{
+  width: 1024px;
+  height: auto;
+}
+th{
+  background: #013476;
+  color: #fff;
+  font-size: 1rem;
+}
+td{
+  font-size: 1rem;
+}

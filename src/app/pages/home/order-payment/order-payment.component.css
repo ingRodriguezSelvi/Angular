@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+  padding-left: 4rem;
+  padding-right: 4%;
+}
+th{background: #013476;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+}
+td{
+  text-align:start;
+  font-size: 1rem;
+}
+a{
+  color: #013476;
+}

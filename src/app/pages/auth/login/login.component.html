@@ -15,7 +15,11 @@
       </mat-form-field >
       <button type="submit" mat-raised-button class="backgorundButton" >Ingresar</button>
     </form>
+    <div class="alert alert-danger" *ngIf="errorStatus">
+      <p>{{errorMsj}}</p>
+    </div>
     </mat-card-content>
   </mat-card>
 </div>
 </Div>
+

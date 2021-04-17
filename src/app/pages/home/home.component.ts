@@ -1,9 +1,14 @@
 import { jsDocComment } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
 import { Medicos } from '@app/shared/components/models/data';
 import{AuthService} from '@auth/auth.service';
+
+import { Observer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { MedDataService } from './Services/med-data.service';
 
 /////////////////////////////////////////////////////////////////////
 
@@ -13,40 +18,32 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['Fecha de Emision', 'Fecha de Cancelacion', 'Nº Factura', 'Paciente','Monto de Honorario'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
-  showMedico() {
-    this.authSvc.getMedico()
-      .subscribe((res) => {
-        console.log(res);
-        return res;
-      } );
-  }
+  honorariosPorCancelar=false;
+  fontStyleControl = new FormControl();
+  fontStyle?: string;
 
-  constructor(private authSvc:AuthService ) { }
+  medico:Medicos={"codigo":" ","id":0,"nombre": " ", "rif":" "};
+
+
+  time = new Observable<string>((observer: Observer<string>) => {
+    setInterval(() => observer.next(new Date().toString()), 1000);
+  });
+  constructor(private authSvc:AuthService,private servicesMed:MedDataService ) { }
+
   ngOnInit(): void {
-    let medico;
-   medico=this.showMedico();
+    this.authSvc.saveMedico().subscribe(res=>{
+      let medico:Medicos= res;
+      this.medico=medico;
+    })
 
 
   }
+
+  cancelar(){
+
+      this.honorariosPorCancelar=!this.honorariosPorCancelar;
+      console.log(this.honorariosPorCancelar);
+
+  }
 }
-export interface PeriodicElement {
-  paciente: string;
-  numeroFactura: number;
-  fechaEmision: string;
-  fechaCancelacion: string;
-  montoHonorario:number;
-}
-const ELEMENT_DATA: PeriodicElement[] = [
-  {fechaEmision:'04/06/2021',fechaCancelacion:'04/06/2021',numeroFactura:20003864,paciente:'Andres Rodriguez',montoHonorario:70000000},
-  {fechaEmision:'04/06/2021',fechaCancelacion:'04/06/2021',numeroFactura:20003864,paciente:'Andres Rodriguez',montoHonorario:70000000},
-  {fechaEmision:'04/06/2021',fechaCancelacion:'04/06/2021',numeroFactura:20003864,paciente:'Andres Rodriguez',montoHonorario:70000000},
-  {fechaEmision:'04/06/2021',fechaCancelacion:'04/06/2021',numeroFactura:20003864,paciente:'Andres Rodriguez',montoHonorario:70000000},
-  {fechaEmision:'04/06/2021',fechaCancelacion:'04/06/2021',numeroFactura:20003864,paciente:'Andres Rodriguez',montoHonorario:70000000},
-  {fechaEmision:'04/06/2021',fechaCancelacion:'04/06/2021',numeroFactura:20003864,paciente:'Andres Rodriguez',montoHonorario:70000000},
-  {fechaEmision:'04/06/2021',fechaCancelacion:'04/06/2021',numeroFactura:20003864,paciente:'Andres Rodriguez',montoHonorario:70000000},
-  {fechaEmision:'04/06/2021',fechaCancelacion:'04/06/2021',numeroFactura:20003864,paciente:'Andres Rodriguez',montoHonorario:70000000},
-  {fechaEmision:'04/06/2021',fechaCancelacion:'04/06/2021',numeroFactura:20003864,paciente:'Andres Rodriguez',montoHonorario:70000000},
-];

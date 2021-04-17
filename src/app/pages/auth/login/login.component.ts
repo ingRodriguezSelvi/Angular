@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '@app/shared/components/models/user.interface';
+import { User, UserResponse } from '@app/shared/components/models/user.interface';
 import { AuthService } from '../auth.service';
 import{FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,6 +13,9 @@ export class LoginComponent implements OnInit {
     cedula:[''],
     password:[''],
   });
+
+  errorStatus= false;
+  errorMsj="";
   constructor(private authSvc:AuthService, private fb:FormBuilder,
     private router:Router) { }
 
@@ -20,21 +23,17 @@ export class LoginComponent implements OnInit {
 
   }
   onLogin():void{
-
     if(this.loginForm.invalid){
       return;
     }
 
     const formValue=this.loginForm.value;
-    this.authSvc.login(formValue).subscribe((res)=>{
-      if(res){
-        window.alert("Usuario o contraseña incorrectos")
-      }else{
 
-        this.router.navigate(['/home']);
-      }
+    this.authSvc.login(formValue).subscribe(data=>{
+      let dataResponse:UserResponse=data;
+      console.log(dataResponse.result.token);
+        localStorage.setItem('token',data.result.token);
+        this.router.navigate(['home'])
     })
-  }
-
-
+ }
 }

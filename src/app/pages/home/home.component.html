@@ -1,16 +1,19 @@
 <div class="Header">
-  <a>Dr(a)  </a>
-  <a>Cedula #NumeroCedula</a>
-  <a>Saldo Bs: #SaldoBs</a>
-  <a>Saldo $: #SaldoDol</a>
+  <a>Dr(a) {{medico.nombre}} </a>
+  <a>Cedula {{medico.rif}}</a>
 </div>
-
-
 <div class="mat-elevation-z8">
   <div>
-    <h1>Honorarios Cancelados en Bs</h1>
+    <mat-button-toggle-group name="TypeMoney" (click)="cancelar()" aria-label="Type the order">
+      <mat-button-toggle value="cancelados" class="fontToogle">Honorarios Cancelados en Bs</mat-button-toggle>
+      <mat-button-toggle value="xCancelar" class="fontToogle">Honorarios por Cancelar</mat-button-toggle>
+    </mat-button-toggle-group>
   </div>
-
-
 </div>
+<ng-container *ngIf="!honorariosPorCancelar; else honorariosporcancelar"  >
+  <app-order-payment></app-order-payment>
+</ng-container>
+<ng-template #honorariosporcancelar>
+ <h1>Error 404 no Data</h1>
+</ng-template>
 
