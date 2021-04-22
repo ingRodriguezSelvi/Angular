@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   fontStyleControl = new FormControl();
   fontStyle?: string;
 
-  medico:Medicos={"codigo":" ","id":0,"nombre": " ", "rif":" "};
+  medico:Medicos={"codigo":" ","id":0,"nombres": " ","apellidos":" ", "rif":" "};
 
 
   time = new Observable<string>((observer: Observer<string>) => {

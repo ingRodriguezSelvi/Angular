@@ -14,14 +14,21 @@ import { MedDataService } from '../Services/med-data.service';
 })
 export class OrderPaymentComponent implements OnInit {
 
-  displayedColumns: string[] = ['Numero de Orden', 'Fecha de Emision', 'Monto','Monto Dolar'];
+  displayedColumns: string[] = [
+                                'Numero de Orden',
+                                'Numero de Factura','Paciente','Fecha de la Factura',
+                                'Monto en Bs','Monto en $'
+                               ];
   dataSource = JSON.parse(localStorage.getItem('cobros')||'{}');
   montoBs="";
 
   constructor(public dialog:MatDialog,private medSrvc:MedDataService,private service:AuthService) {}
 
-  openModal(){
-    this.dialog.open(DetailsOrderComponent);
+  openModal(numero:number){
+
+    console.log(numero);
+
+    this.dialog.open(DetailsOrderComponent,{data:{numero}});
   }
 
   ngOnInit(): void {

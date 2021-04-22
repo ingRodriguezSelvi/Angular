@@ -3,25 +3,28 @@ padding: 4rem 1rem;
 
 }
 .mat-card{
-  max-width: 300px;
-  margin: 2rem auto;
+  max-width: 400px;
+  margin: 4.5rem auto;
   text-align: center;
-  height: 350px;
-
+  height: auto;
+  opacity: 0.80;
+  padding-top: 2rem;
 }
 
 .full-width-input,button{
   width: 100%;
+  opacity: 1;
 }
 
 .separator{
   margin-bottom: 2rem;
 }
 .backgorundButton{
-  background-color:#013476;
+  background-color:#0077cb;
   color: #fff;
 }
 
 .heigth{
   height: 100%;
+  background: url("https://idbclinicas.com/wp-content/uploads/2017/09/fondo.png") no-repeat center center fixed;
 }

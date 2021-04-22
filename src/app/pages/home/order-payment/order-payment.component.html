@@ -1,19 +1,27 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" >
   <ng-container matColumnDef="Numero de Orden">
     <th mat-header-cell *matHeaderCellDef> Número de Orden</th>
-    <td mat-cell *matCellDef="let element"><a (click)="openModal()"> {{element.numero}} </a> </td>
+    <td mat-cell *matCellDef="let element"><a (click)="openModal(element.numero)" style="cursor: pointer; color: #013476;"> {{element.numero}} </a> </td>
   </ng-container>
-  <ng-container matColumnDef="Fecha de Emision">
-    <th mat-header-cell *matHeaderCellDef> Fecha de Emisión </th>
-    <td mat-cell *matCellDef="let element"> {{element.fecha|date}} </td>
+  <ng-container matColumnDef="Numero de Factura">
+    <th mat-header-cell *matHeaderCellDef> Número de Factura </th>
+    <td mat-cell *matCellDef="let element"> {{element.numero_Fact}} </td>
   </ng-container>
-  <ng-container matColumnDef="Monto">
-    <th mat-header-cell *matHeaderCellDef> Monto </th>
-    <td mat-cell *matCellDef="let element"> {{element.montoBs|number}} </td>
+  <ng-container matColumnDef="Paciente">
+    <th mat-header-cell *matHeaderCellDef> Paciente </th>
+    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
   </ng-container>
-  <ng-container matColumnDef="Monto Dolar">
+  <ng-container matColumnDef="Fecha de la Factura">
+    <th mat-header-cell *matHeaderCellDef> Fecha de la Factura </th>
+    <td mat-cell *matCellDef="let element"> {{element.fecha_Fact}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Monto en Bs">
+    <th mat-header-cell *matHeaderCellDef> Monto en Bs </th>
+    <td mat-cell *matCellDef="let element"> {{element.monto_Bruto_Bs|number}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Monto en $">
     <th mat-header-cell *matHeaderCellDef> Monto en $ </th>
-    <td mat-cell *matCellDef="let element"> {{element.montoDol|number}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.monto_Bruto_Dol|number}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

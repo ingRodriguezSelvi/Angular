@@ -1,12 +1,12 @@
 <div class="Header">
-  <a>Dr(a) {{medico.nombre}} </a>
+  <a>Dr(a) {{medico.nombres}} {{medico.apellidos}} </a>
   <a>Cedula {{medico.rif}}</a>
 </div>
 <div class="mat-elevation-z8">
   <div>
     <mat-button-toggle-group name="TypeMoney" (click)="cancelar()" aria-label="Type the order">
-      <mat-button-toggle value="cancelados" class="fontToogle">Honorarios Cancelados en Bs</mat-button-toggle>
-      <mat-button-toggle value="xCancelar" class="fontToogle">Honorarios por Cancelar</mat-button-toggle>
+      <mat-button-toggle value="cancelados" class="fontToogle">Honorarios cobrados</mat-button-toggle>
+      <mat-button-toggle value="xCancelar" class="fontToogle">Honorarios por cobrar</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
 </div>

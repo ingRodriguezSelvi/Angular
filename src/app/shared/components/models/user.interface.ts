@@ -10,7 +10,7 @@ export interface User{
 export interface UserResponse  {
  StatusCode:number;
  Succeded:boolean;
- Message:string;
+ message:string;
  result:LoginResponse;
 }
 

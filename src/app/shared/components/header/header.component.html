@@ -1,20 +1,15 @@
 
 <mat-toolbar class="color-IDB">
   <ng-container *ngIf="!isAdmin; else vieAdmin" class="color-IDB">
-  <span>Estado de Cuentas IDB</span>
+  <img src="https://idbclinicas.com/wp-content/uploads/2017/09/baja.png" alt="">
   <span class="spacer"></span>
   <div>
     <a mat-button [routerLink]="'/login'">Ingresar</a>
-    <a mat-button >Cerrar sesion</a>
-    <a mat-button [routerLink]="'/admin'">Admin</a>
+    <a mat-button (click)='closedSesion()' *ngIf="isLogin"  >Cerrar sesión</a>
+    <a mat-button [routerLink]="'/admin'">Administrador</a>
   </div>
 </ng-container>
-
 </mat-toolbar>
-
-
-
-
 <ng-template #vieAdmin>
 <button mat-icon-button (click)="onToggleSidenav()">
   <mat-icon>

@@ -11,6 +11,9 @@ import {MatTableModule} from "@angular/material/table";
 import{MatPaginatorModule} from "@angular/material/paginator";
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 
 const myModules=[MatToolbarModule,
@@ -24,7 +27,10 @@ const myModules=[MatToolbarModule,
                 MatPaginatorModule,
                 MatButtonToggleModule,
                 MatIconModule,
-                MatDialogModule];
+                MatDialogModule,
+                MatFormFieldModule,
+                MatSelectModule,
+                MatRadioModule];
 
 @NgModule({
   imports: [...myModules],

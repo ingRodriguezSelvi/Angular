@@ -1,0 +1,50 @@
+<div class="heigth">
+ <div class="login-form">
+   <br>
+  <mat-card>
+    <mat-card-content>
+      <h1>Registro del médico</h1>
+      <form [formGroup]="registerForms" (ngSubmit)="registrar()" >
+        <mat-form-field class="full-width-input">
+          <input type="text" matInput placeholder="Nombre" formControlName="nombre">
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input type="text" matInput placeholder="Apellido" formControlName="apellido">
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <mat-label>Sexo</mat-label>
+          <mat-select formControlName="sexo">
+            <mat-option value="masculino">Masculino</mat-option>
+            <mat-option value="femenino">Femenino</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input type="email" matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input type="tel" matInput placeholder="Celular" formControlName="celular">
+        </mat-form-field>
+        <mat-form-field class="full-width-input" >
+          <mat-label  >Especialidad</mat-label>
+          <mat-select formControlName="especialidad"  >
+            <mat-option *ngFor="let especialidad of especialidades" value={{especialidad.especialidad}}>{{especialidad.especialidad}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input type="text" matInput placeholder="Zona" formControlName="zona">
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input type="text" matInput placeholder="Ciudad" formControlName="ciudad">
+        </mat-form-field>
+        <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" >
+          <p>Al pulsar 'Avanzar' estas aceptando las <a href="url">políticas de términos y condiciones</a>, así mismo contar con el documento firmado y sellado por el departamento de finanzas.
+          </p>
+        </div>
+        <button type="submit"mat-raised-button class="backgroundButton">Avanzar</button>
+        </form>
+    </mat-card-content>
+    <br>
+    <br>
+  </mat-card>
+ </div>
+</div>

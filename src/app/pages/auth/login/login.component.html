@@ -1,25 +1,29 @@
-<Div class="heigth"><div class="login-form">
+<div class="heigth"><div class="login-form">
   <mat-card>
     <mat-card-content>
-      <h1>Grupo de Clinicas IDB</h1>
+      <h1>Portal de Médicos IDB</h1>
       <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
 
 
       <mat-form-field class="full-width-input">
         <input matInput    placeholder="Usuario" type="text"
-        formControlName="cedula" required>
+        formControlName="cedula" >
       </mat-form-field>
       <mat-form-field class="full-width-input separator">
         <input matInput   placeholder="Contraseña" type="password"
-        formControlName="password" required>
+        formControlName="password" >
       </mat-form-field >
       <button type="submit" mat-raised-button class="backgorundButton" >Ingresar</button>
     </form>
-    <div class="alert alert-danger" *ngIf="errorStatus">
-      <p>{{errorMsj}}</p>
+    <div>
+      <br>
+      <a href="">¿Haz olvidado su usuario ó contraseña?</a>
+    </div>
+    <div class="alert alert-danger" style="margin-top: 1.5rem;text-align: left;" *ngIf="alerta" >
+      <p>{{msj}}</p>
     </div>
     </mat-card-content>
   </mat-card>
 </div>
-</Div>
+<div>
 

@@ -21,7 +21,7 @@ export class MedDataService {
         accept: '*/*',
         Authorization: "Bearer "+localStorage.getItem('token')
       })}
-      return this.http.get<Cobros[]>(direccion+'api/Data/OrdenesData',httpOptions).
+      return this.http.get<Cobros[]>(direccion+'api/Data/OrdenesConDetalle',httpOptions).
       pipe(map((res:Cobros[])=>{
         return res;
       }))

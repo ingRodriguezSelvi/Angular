@@ -8,14 +8,16 @@ import { catchError,map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 import { stringify } from '@angular/compiler/src/util';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import{Medicos,Cobros,Monedas} from '@app/shared/components/models/data';
+import{Medicos,Cobros,Monedas, EspecialidadI} from '@app/shared/components/models/data';
 import { MedDataService } from '../home/Services/med-data.service';
 
 const helper = new JwtHelperService();
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+loger ='false';
 private loggedIn = new BehaviorSubject<boolean>(false);
   url:string="http://172.18.16.50:5005/"
   constructor(private http:HttpClient,private privatemeddata:MedDataService) {
@@ -40,7 +42,19 @@ private loggedIn = new BehaviorSubject<boolean>(false);
   logout():void{
     localStorage.removeItem('token');
     this.loggedIn.next(false);
+
     //set userIsLogged=false
+  }
+
+  checkActivy(){
+
+    if(localStorage.getItem('token')){
+      this.loger='true';
+      localStorage.setItem('loger',this.loger)
+    }else{
+      this.loger='false'
+      localStorage.setItem('loger',this.loger)
+    }
   }
   private readToken():void{
    // const userToken=localStorage.getItem('token');
@@ -52,6 +66,22 @@ private loggedIn = new BehaviorSubject<boolean>(false);
   private saveToken(token:string):void{
     localStorage.setItem('token',token);
   }
+
+  getEspecialidad():Observable<EspecialidadI[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        accept: '*/*',
+        Authorization: "Bearer "+localStorage.getItem('token')
+      })
+    };
+    let direccion = "http://172.18.16.50:5005/"
+    return this.http.get<EspecialidadI[]>(direccion+'api/Data/Especialidades',httpOptions).
+      pipe(map((res:EspecialidadI[])=>{
+     return res;
+    }));
+  }
+
    saveMedico():Observable<Medicos>{
    const httpOptions = {
       headers: new HttpHeaders({
@@ -77,4 +107,5 @@ private loggedIn = new BehaviorSubject<boolean>(false);
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
+
 }

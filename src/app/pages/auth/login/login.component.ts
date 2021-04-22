@@ -3,12 +3,15 @@ import { User, UserResponse } from '@app/shared/components/models/user.interface
 import { AuthService } from '../auth.service';
 import{FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
+import { HeaderComponent } from '@app/shared/components/header/header.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  alerta=false;
+  msj=''
   loginForm = this.fb.group({
     cedula:[''],
     password:[''],
@@ -20,8 +23,16 @@ export class LoginComponent implements OnInit {
     private router:Router) { }
 
   ngOnInit(): void {
+    this.checkToken();
 
   }
+
+  checkToken(){
+    if(localStorage.getItem('token')){
+      this,this.router.navigate(['home']);
+    }
+  }
+
   onLogin():void{
     if(this.loginForm.invalid){
       return;
@@ -31,9 +42,16 @@ export class LoginComponent implements OnInit {
 
     this.authSvc.login(formValue).subscribe(data=>{
       let dataResponse:UserResponse=data;
-      console.log(dataResponse.result.token);
+      console.log(dataResponse.message);
+      if(dataResponse.message==='Usuario o contraseña incorrecta.')
+      {
+        this.alerta=true;
+        this.msj='Usuario o contraseña incorrecta.';
+      }else{
         localStorage.setItem('token',data.result.token);
-        this.router.navigate(['home'])
+        this.router.navigate(['register']);
+
+      }
     })
  }
 }
