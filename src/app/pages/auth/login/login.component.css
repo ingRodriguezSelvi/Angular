@@ -3,11 +3,11 @@ padding: 4rem 1rem;
 
 }
 .mat-card{
-  max-width: 400px;
-  margin: 4.5rem auto;
+width: max-content;
+  margin: 4rem 66%;
   text-align: center;
-  height: auto;
-  opacity: 0.80;
+  height: 350px;
+  opacity: 0.88;
   padding-top: 2rem;
 }
 
@@ -17,7 +17,7 @@ padding: 4rem 1rem;
 }
 
 .separator{
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 .backgorundButton{
   background-color:#0077cb;
@@ -26,5 +26,13 @@ padding: 4rem 1rem;
 
 .heigth{
   height: 100%;
-  background: url("https://idbclinicas.com/wp-content/uploads/2017/09/fondo.png") no-repeat center center fixed;
+  background: url("https://idbclinicas.com/wp-content/uploads/2017/09/fondo-1.png")  no-repeat center center fixed;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+}
+.h1{
+  margin-top: 0%;
+  margin-bottom: 0;
 }

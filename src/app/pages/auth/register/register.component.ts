@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { EspecialidadI, MedicosI } from '@app/shared/components/models/data';
 import { AuthService } from '../auth.service';
 
@@ -23,7 +24,8 @@ export class RegisterComponent implements OnInit {
     ciudad:[''],
   })
 
-  constructor(private fr:FormBuilder, private authserv:AuthService) { }
+  constructor(private fr:FormBuilder, private authserv:AuthService,
+    private router:Router) { }
 
   ngOnInit(): void {
 
@@ -39,6 +41,7 @@ export class RegisterComponent implements OnInit {
   registrar(){
     const formValue:MedicosI=this.registerForms.value;
     console.log(formValue);
+    this.router.navigate(['home']);
   }
 
 }
