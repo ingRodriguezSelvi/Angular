@@ -16,30 +16,23 @@ export class LoginComponent implements OnInit {
     cedula:[''],
     password:[''],
   });
-
   errorStatus= false;
   errorMsj="";
   constructor(private authSvc:AuthService, private fb:FormBuilder,
     private router:Router) { }
-
   ngOnInit(): void {
     this.checkToken();
-
   }
-
   checkToken(){
     if(localStorage.getItem('token')){
       this,this.router.navigate(['home']);
     }
   }
-
   onLogin():void{
     if(this.loginForm.invalid){
       return;
     }
-
     const formValue=this.loginForm.value;
-
     this.authSvc.login(formValue).subscribe(data=>{
       let dataResponse:UserResponse=data;
       console.log(dataResponse.message);

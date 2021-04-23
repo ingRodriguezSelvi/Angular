@@ -10,9 +10,7 @@ import { stringify } from '@angular/compiler/src/util';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import{Medicos,Cobros,Monedas, EspecialidadI, MedicosI} from '@app/shared/components/models/data';
 import { MedDataService } from '../home/Services/med-data.service';
-
 const helper = new JwtHelperService();
-
 @Injectable({
   providedIn: 'root',
 })
@@ -45,7 +43,6 @@ private loggedIn = new BehaviorSubject<boolean>(false);
 
     //set userIsLogged=false
   }
-
   checkActivy(){
 
     if(localStorage.getItem('token')){
@@ -66,7 +63,6 @@ private loggedIn = new BehaviorSubject<boolean>(false);
   private saveToken(token:string):void{
     localStorage.setItem('token',token);
   }
-
   getEspecialidad():Observable<EspecialidadI[]>{
     const httpOptions = {
       headers: new HttpHeaders({
@@ -81,7 +77,6 @@ private loggedIn = new BehaviorSubject<boolean>(false);
      return res;
     }));
   }
-
    saveMedico():Observable<MedicosI>{
    const httpOptions = {
       headers: new HttpHeaders({
@@ -105,5 +100,4 @@ private loggedIn = new BehaviorSubject<boolean>(false);
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
-
 }
