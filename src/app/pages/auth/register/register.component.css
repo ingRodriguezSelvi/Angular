@@ -3,10 +3,10 @@
 }
 .mat-card{
   max-width: 600px;
-  margin: auto auto;
+  margin: 2.5rem auto;
   text-align: center;
   opacity: 0.85;
-  padding-top: 6.5rem;
+  padding-top: 1rem;
 
 }
 .backgroundButton{

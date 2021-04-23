@@ -4,11 +4,11 @@ padding: 4rem 1rem;
 }
 .mat-card{
 width: max-content;
-  margin: 4rem 66%;
+  margin: 18% auto;
   text-align: center;
-  height: 350px;
+  height: 300px;
   opacity: 0.88;
-  padding-top: 2rem;
+  padding-top: 1.4rem;
 }
 
 .full-width-input,button{
@@ -17,7 +17,7 @@ width: max-content;
 }
 
 .separator{
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .backgorundButton{
   background-color:#0077cb;

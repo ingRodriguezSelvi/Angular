@@ -1,39 +1,45 @@
-<h2 mat-dialog-title>Detalle de Orden de Pago {{data.numero}}</h2>
+<div *ngIf="loadding">
+  <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
+</div>
+<div *ngIf="!loadding">
+  <h2 mat-dialog-title>Detalle de Orden de Pago {{data.numero}}</h2>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
 
-  <!-- Position Column -->
+    <!-- Position Column -->
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="Numero de factura">
-    <th mat-header-cell *matHeaderCellDef> Num Fac </th>
-    <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
-  </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="Numero de factura">
+      <th mat-header-cell *matHeaderCellDef> Num Fac </th>
+      <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+    </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="Paciente">
-    <th mat-header-cell *matHeaderCellDef> Paciente </th>
-    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-  </ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Paciente">
+      <th mat-header-cell *matHeaderCellDef> Paciente </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="Fecha">
-    <th mat-header-cell *matHeaderCellDef> Fecha </th>
-    <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
-  </ng-container>
-  <ng-container matColumnDef="Monto Honorario">
-    <th mat-header-cell *matHeaderCellDef> Monto Honorario </th>
-    <td mat-cell *matCellDef="let element"> {{element.montoBs}} </td>
-  </ng-container>
-  <ng-container matColumnDef="Monto Honorario dolar">
-    <th mat-header-cell *matHeaderCellDef> Monto Honorario $ </th>
-    <td mat-cell *matCellDef="let element"> {{element.montoDol}} </td>
-  </ng-container>
-
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Fecha">
+      <th mat-header-cell *matHeaderCellDef> Fecha </th>
+      <td mat-cell *matCellDef="let element"> {{element.fecha|date}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Monto Honorario" >
+      <th mat-header-cell *matHeaderCellDef class="alin-regth"> Monto Honorario </th>
+      <td mat-cell *matCellDef="let element" class="alin-regth"> {{element.montoBs|number}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Monto Honorario dolar" >
+      <th mat-header-cell *matHeaderCellDef class="alin-regth"> Monto Honorario $ </th>
+      <td mat-cell *matCellDef="let element" class="alin-regth"> {{element.montoDol|number}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div class="monto">
+   <span > Monto total en Bs: {{data.totalBs|number}} Monto total en USD: {{data.totalDol|number}}</span>
+  </div>
+</div>

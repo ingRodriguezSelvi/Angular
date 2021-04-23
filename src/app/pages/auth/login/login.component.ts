@@ -43,14 +43,13 @@ export class LoginComponent implements OnInit {
     this.authSvc.login(formValue).subscribe(data=>{
       let dataResponse:UserResponse=data;
       console.log(dataResponse.message);
-      if(dataResponse.message==='Usuario o contraseña incorrecta.')
+      if(dataResponse.Succeded==false)
       {
         this.alerta=true;
-        this.msj='Usuario o contraseña incorrecta.';
+        this.msj=dataResponse.message;
       }else{
         localStorage.setItem('token',data.result.token);
         this.router.navigate(['register']);
-
       }
     })
  }

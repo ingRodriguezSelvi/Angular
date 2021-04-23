@@ -1,8 +1,8 @@
 import { jsDocComment } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵflushModuleScopingQueueAsMuchAsPossible } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
-import { Medicos } from '@app/shared/components/models/data';
+import { Medicos, MedicosI } from '@app/shared/components/models/data';
 import{AuthService} from '@auth/auth.service';
 
 import { Observer } from 'rxjs';
@@ -23,8 +23,9 @@ export class HomeComponent implements OnInit {
   fontStyleControl = new FormControl();
   fontStyle?: string;
 
-  medico:Medicos={"codigo":" ","id":0,"nombres": " ","apellidos":" ", "rif":" "};
-
+  medico:MedicosI={'celular':0,'ciudad':'','email':'','sexo':'','zona':'','apellidos':'','exId':'','id':0,'nombres':'','rif':''}
+   date=new Date();
+  sexo='';
 
   time = new Observable<string>((observer: Observer<string>) => {
     setInterval(() => observer.next(new Date().toString()), 1000);
@@ -32,10 +33,19 @@ export class HomeComponent implements OnInit {
   constructor(private authSvc:AuthService,private servicesMed:MedDataService ) { }
 
   ngOnInit(): void {
+
     this.authSvc.saveMedico().subscribe(res=>{
-      let medico:Medicos= res;
+      let medico:MedicosI= res;
       this.medico=medico;
+      if(medico.sexo==='F'){
+        this.sexo='Dra.';
+      }else if(medico.sexo==='M'){
+        this.sexo='Dr.'
+      }
+
     })
+
+
 
 
   }

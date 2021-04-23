@@ -1,12 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Cobros, PaymentsDetailsI } from '@app/shared/components/models/data';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MedDataService } from '../Services/med-data.service';
 
-const DATA:PaymentsDetailsI[]=[
-  {numero:50013687,nombre:'FLORENCIA CARUSO',fecha:'2021-03-29T00:00:00',montoBs:45361824,montoDol:24},
-  {numero:50013687,nombre:'FLORENCIA CARUSO',fecha:'2021-03-29T00:00:00',montoBs:45361824,montoDol:24},
-  {numero:50013687,nombre:'FLORENCIA CARUSO',fecha:'2021-03-29T00:00:00',montoBs:45361824,montoDol:24}
-]
+
 
 @Component({
   selector: 'app-details-order',
@@ -16,16 +13,18 @@ const DATA:PaymentsDetailsI[]=[
 export class DetailsOrderComponent implements OnInit {
 
   displayedColumns: string[] = ['Numero de factura', 'Paciente','Fecha','Monto Honorario','Monto Honorario dolar'];
-  dataSource = DATA;
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data:{numero:number}) { }
+  dataSource = JSON.parse(localStorage.getItem('cobros')||'{}');
+  loadding=false;
+  constructor(@Inject(MAT_DIALOG_DATA) public data:{numero:number,totalBs:number,totalDol:number},private oshvc:MedDataService ) { }
 
 
 
   ngOnInit(): void {
-
-
-
+    this.loadding=true
+    this.dataSource=this.oshvc.getDetailsOrder(this.data.numero).subscribe(res=>{
+      let orderDara:PaymentsDetailsI[]=res;
+      this.dataSource=orderDara;
+      this.loadding=false;
+    })
   }
-
 }

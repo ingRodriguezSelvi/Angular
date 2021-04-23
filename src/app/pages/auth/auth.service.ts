@@ -8,7 +8,7 @@ import { catchError,map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 import { stringify } from '@angular/compiler/src/util';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import{Medicos,Cobros,Monedas, EspecialidadI} from '@app/shared/components/models/data';
+import{Medicos,Cobros,Monedas, EspecialidadI, MedicosI} from '@app/shared/components/models/data';
 import { MedDataService } from '../home/Services/med-data.service';
 
 const helper = new JwtHelperService();
@@ -82,7 +82,7 @@ private loggedIn = new BehaviorSubject<boolean>(false);
     }));
   }
 
-   saveMedico():Observable<Medicos>{
+   saveMedico():Observable<MedicosI>{
    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -90,11 +90,9 @@ private loggedIn = new BehaviorSubject<boolean>(false);
         Authorization: "Bearer "+localStorage.getItem('token')
       })
     };
-    console.log('Key-> '+localStorage.getItem('token'));
-    console.log('Key-> '+localStorage.getItem('message'));
     let direccion = "http://172.18.16.50:5005/"
-    return this.http.get<Medicos>(direccion+'api/Data/DoctorData',httpOptions).
-      pipe(map((res:Medicos)=>{
+    return this.http.get<MedicosI>(direccion+'api/Data/DoctorData',httpOptions).
+      pipe(map((res:MedicosI)=>{
      return res;
     }));
   }

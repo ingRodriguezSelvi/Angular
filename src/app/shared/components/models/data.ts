@@ -1,10 +1,10 @@
 export interface Medicos{
 
-  id:number;
+  id:number
   nombres:string;
   apellidos:string;
   rif:string;
-  codigo:string;
+  exId:string;
 
 }
 

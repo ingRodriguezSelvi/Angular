@@ -1,12 +1,35 @@
 table{
   width: 1024px;
   height: auto;
+
 }
 th{
-  background: #013476;
+  background: #0077cb;
   color: #fff;
   font-size: 1rem;
 }
 td{
   font-size: 1rem;
+}
+tr:hover{
+  background: #00B0BD;
+  color: #ffff;
+  opacity: 0.70;
+  box-shadow: 2px 2px 5px #999;
+
+}
+.alin-regth{
+  text-align: right;
+  }
+.monto{
+  margin: 1rem auto;
+  text-align: right;
+  max-width: 950px;
+  color: #0077cb;
+  font-style: normal;
+}
+h2{
+  text-align: center;
+  font-weight: 500;
+  color: #0077cb;
 }

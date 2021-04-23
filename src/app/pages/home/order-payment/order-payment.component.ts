@@ -13,7 +13,7 @@ import { MedDataService } from '../Services/med-data.service';
   styleUrls: ['./order-payment.component.css']
 })
 export class OrderPaymentComponent implements OnInit {
-
+  loadding=false;
   displayedColumns: string[] = [
                                 'Numero de Orden',
                                 'Numero de Factura','Paciente','Fecha de la Factura',
@@ -24,19 +24,17 @@ export class OrderPaymentComponent implements OnInit {
 
   constructor(public dialog:MatDialog,private medSrvc:MedDataService,private service:AuthService) {}
 
-  openModal(numero:number){
-
-    console.log(numero);
-
-    this.dialog.open(DetailsOrderComponent,{data:{numero}});
+  openModal(numero:number,totalBs:number,totalDol:number){
+    this.dialog.open(DetailsOrderComponent,{data:{numero,totalBs,totalDol}});
   }
 
   ngOnInit(): void {
-
+    this.loadding=true;
     this.dataSource=this.medSrvc.getOrder().subscribe(data=>{
       let orderData:Cobros[]= data;
       let cont:number=0;
       this.dataSource=orderData;
+      this.loadding=false;
     })
 
   }

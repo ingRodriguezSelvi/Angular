@@ -1,9 +1,12 @@
 table {
   width: 80%;
   margin-left: 5.1rem;
+  text-align: center;
+  padding-bottom: 2rem;
+  height: auto;
 }
-th{background: #0077cb;;
-  color: #fff;
+th{background: #0077cb;
+  color: #ffff;
   text-align: center;
   font-size: 1rem;
 }
@@ -13,4 +16,17 @@ td{
 }
 a{
   color: #013476;
+}
+.alin-regth{
+text-align: right;
+}
+.loadding{
+  max-width: 350px;
+  margin: 2rem auto;
+}
+tr:hover{
+  background: #ffff;
+  color: #ffff;
+  opacity: 0.90;
+  box-shadow: 2px 2px 5px #999;
 }
