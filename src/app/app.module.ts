@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {  LOCALE_ID,NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,8 +9,11 @@ import {MaterialModule} from './material.module';
 import { SidebarModule } from './shared/components/sidebar/sidebar.module';
 import { HttpClientModule } from '@angular/common/http';
 import {ReactiveFormsModule,FormsModule} from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { registerLocaleData } from '@angular/common';
+import localeEsAr from '@angular/common/locales/es-AR';
 
-
+registerLocaleData(localeEsAr);
 
 
 
@@ -31,9 +34,10 @@ import {ReactiveFormsModule,FormsModule} from '@angular/forms';
     SidebarModule,
     ReactiveFormsModule,
     FormsModule,
+    ToastrModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ { provide: LOCALE_ID, useValue: 'es-Ar' }],
   bootstrap: [AppComponent]
 })
 export class AppModule {  }

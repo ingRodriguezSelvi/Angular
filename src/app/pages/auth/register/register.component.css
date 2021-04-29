@@ -5,7 +5,7 @@
   max-width: 600px;
   margin: 2.5rem auto;
   text-align: center;
-  opacity: 0.85;
+  opacity: 0.95;
   padding-top: 1rem;
 
 }
@@ -21,7 +21,7 @@ h1{
 }
 .heigth{
   height: 100%;
-  background: url("https://idbclinicas.com/wp-content/uploads/2017/09/fondo-1.png")  no-repeat center center fixed;
+  background: url("https://idbclinicas.com/wp-content/uploads/2017/09/fondo-scaled.jpg")  no-repeat center center fixed;
   height: 100%;
   background-repeat: no-repeat;
   background-size: 100% 100%;

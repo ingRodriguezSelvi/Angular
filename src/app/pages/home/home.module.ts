@@ -7,12 +7,14 @@ import { OrderPaymentComponent } from './order-payment/order-payment.component';
 import { DetailsOrderComponent } from './details-order/details-order.component';
 import { FormControl } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     OrderPaymentComponent,
     DetailsOrderComponent,
+    UserInfoComponent,
 
   ],
   entryComponents:[DetailsOrderComponent],

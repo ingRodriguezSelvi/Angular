@@ -3,44 +3,55 @@
    <br>
   <mat-card>
     <mat-card-content>
+
       <h1>Registro del médico</h1>
-      <form [formGroup]="registerForms" (ngSubmit)="registrar()" >
-        <mat-form-field class="full-width-input">
-          <input type="text" matInput placeholder="Nombre" formControlName="nombre">
+      <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" >
+        <p style="text-align: center;">Por favor validar y completar los datos mostrados en el formulario
+        </p>
+      </div>
+      <form [formGroup]="registerForms" (ngSubmit)="registrar(registerForms.value)" >
+        <mat-form-field class="full-width-input" hidden>
+          <input type="text" matInput placeholder="id" formControlName="id" [(ngModel)]="medico.medico.id" value={{medico.medico.id}}>
+        </mat-form-field>
+        <mat-form-field class="full-width-input" hidden>
+          <input type="text" matInput placeholder="rif" formControlName="rif" [(ngModel)]="medico.medico.rif" value={{medico.medico.rif}}>
         </mat-form-field>
         <mat-form-field class="full-width-input">
-          <input type="text" matInput placeholder="Apellido" formControlName="apellido">
+          <input type="text" matInput placeholder="Nombre" formControlName="nombres" [(ngModel)]="medico.medico.nombres" value={{medico.medico.nombres}}>
         </mat-form-field>
         <mat-form-field class="full-width-input">
+          <input type="text" matInput placeholder="Apellido" formControlName="apellidos" [(ngModel)]="medico.medico.apellidos" value={{medico.medico.apellidos}}>
+        </mat-form-field>
+        <mat-form-field class="full-width-input" >
           <mat-label>Sexo</mat-label>
-          <mat-select formControlName="sexo">
-            <mat-option value="masculino">Masculino</mat-option>
-            <mat-option value="femenino">Femenino</mat-option>
+          <mat-select formControlName="sexo" [(ngModel)]="medico.medico.sexo" value={{medico.medico.sexo}} required>
+            <mat-option value="M">Masculino</mat-option>
+            <mat-option value="F">Femenino</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="full-width-input">
-          <input type="email" matInput placeholder="Email" formControlName="email">
+          <input type="email" matInput placeholder="Email" [(ngModel)]="medico.medico.email" formControlName="email" value={{medico.medico.email}}>
         </mat-form-field>
         <mat-form-field class="full-width-input">
-          <input type="tel" matInput placeholder="Celular" formControlName="celular">
+          <input type="tel" matInput placeholder="Celular" [(ngModel)]="medico.medico.celular" formControlName="celular" value={{medico.medico.celular}}>
         </mat-form-field>
         <mat-form-field class="full-width-input" >
           <mat-label  >Especialidad</mat-label>
-          <mat-select formControlName="especialidad"  >
-            <mat-option *ngFor="let especialidad of especialidades" value={{especialidad.especialidad}}>{{especialidad.especialidad}}</mat-option>
+          <mat-select formControlName="especialidad" required  >
+            <mat-option *ngFor="let especialidad of especialidades" value={{especialidad.id}}>{{especialidad.especialidad}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="full-width-input">
-          <input type="text" matInput placeholder="Zona" formControlName="zona">
+          <input type="text" matInput placeholder="Zona de residencia" [(ngModel)]="medico.medico.zona" formControlName="zona" value={{medico.medico.zona}}>
         </mat-form-field>
         <mat-form-field class="full-width-input">
-          <input type="text" matInput placeholder="Ciudad" formControlName="ciudad">
+          <input type="text" matInput placeholder="Ciudad" formControlName="ciudad" [(ngModel)]="medico.medico.ciudad" value={{medico.medico.ciudad}}>
         </mat-form-field>
         <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" >
-          <p>Al pulsar 'Avanzar' estas aceptando las <a href="url">políticas de términos y condiciones</a>, así mismo contar con el documento firmado y sellado por el departamento de finanzas.
+          <p>Al pulsar "Avanzar" usted esta aceptando las <a (click)="openModal()"style="cursor: pointer; color: #013476;">políticas de términos y condiciones</a>, y el mandato de cobranzas del Grupos de Clínicas IDB
           </p>
         </div>
-        <button type="submit"mat-raised-button class="backgroundButton">Avanzar</button>
+        <button type="submit"mat-raised-button class="backgroundButton"[disabled]="registerForms .invalid">Avanzar</button>
         </form>
     </mat-card-content>
     <br>

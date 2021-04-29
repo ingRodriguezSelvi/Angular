@@ -1,7 +1,14 @@
-<div *ngIf="loadding">
+<div >
+<div *ngIf="loadding" class="loadding">
   <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
 </div>
-<div *ngIf="!loadding">
+<div *ngIf="!loadding" >
+  <mat-card class="tabla">
+    <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" >
+      <p style="text-align: center;">Montos netos después de retenciones ley y administrativas. Para su preguntas quedamos a la orden en el departamento
+        de pagos. Trabajamos por su bienestar.
+      </p>
+    </div>
   <h2 mat-dialog-title>Detalle de Orden de Pago {{data.numero}}</h2>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -13,7 +20,7 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="Numero de factura">
-      <th mat-header-cell *matHeaderCellDef> Num Fac </th>
+      <th mat-header-cell *matHeaderCellDef>Factura </th>
       <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
     </ng-container>
 
@@ -26,20 +33,37 @@
     <!-- Symbol Column -->
     <ng-container matColumnDef="Fecha">
       <th mat-header-cell *matHeaderCellDef> Fecha </th>
-      <td mat-cell *matCellDef="let element"> {{element.fecha|date}} </td>
+      <td mat-cell *matCellDef="let element"> {{(element.fecha|date:'dd/MM/YYYY')}} </td>
     </ng-container>
-    <ng-container matColumnDef="Monto Honorario" >
-      <th mat-header-cell *matHeaderCellDef class="alin-regth"> Monto Honorario </th>
-      <td mat-cell *matCellDef="let element" class="alin-regth"> {{element.montoBs|number}} </td>
+    <ng-container matColumnDef="Monto Honorario Bs" >
+      <th mat-header-cell *matHeaderCellDef > Monto Bs </th>
+      <td mat-cell *matCellDef="let element" class="alin-regth"> {{element.montoBs|number:'1.2'}} </td>
     </ng-container>
-    <ng-container matColumnDef="Monto Honorario dolar" >
-      <th mat-header-cell *matHeaderCellDef class="alin-regth"> Monto Honorario $ </th>
-      <td mat-cell *matCellDef="let element" class="alin-regth"> {{element.montoDol|number}} </td>
+    <ng-container matColumnDef="Monto Honorario USD" >
+      <th mat-header-cell *matHeaderCellDef > Monto USD </th>
+      <td mat-cell *matCellDef="let element" class="alin-regth"> {{element.montoDol|number:'1.2'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="% de Comisión" >
+      <th mat-header-cell *matHeaderCellDef > % de Comisión </th>
+      <td mat-cell *matCellDef="let element" class="alin-regth"> {{element.porc_Comis|number:'1.2'}} </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <div class="monto">
-   <span > Monto total en Bs: {{data.totalBs|number}} Monto total en USD: {{data.totalDol|number}}</span>
-  </div>
+
+    <table   >
+      <thead>
+        <th class="font">Total en Bs</th>
+        <th class="font">Total en USD</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font-rigth">{{data.totalBs|number:'1.2'}}</td>
+          <td class="font-rigth">{{data.totalDol|number:'1.2'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card>
+
+</div>
 </div>

@@ -8,15 +8,18 @@ import { MedDataService } from '../Services/med-data.service';
   styleUrls: ['./details-order.component.css']
 })
 export class DetailsOrderComponent implements OnInit {
-  displayedColumns: string[] = ['Numero de factura', 'Paciente','Fecha','Monto Honorario','Monto Honorario dolar'];
+  displayedColumns: string[] = ['Numero de factura', 'Paciente','Fecha','Monto Honorario Bs','Monto Honorario USD',
+                                '% de Comisión'];
   dataSource = JSON.parse(localStorage.getItem('cobros')||'{}');
+  totales= [{}];
   loadding=false;
-  constructor(@Inject(MAT_DIALOG_DATA) public data:{numero:number,totalBs:number,totalDol:number},private oshvc:MedDataService ) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data:{numero:number,totalBs:number,totalDol:number,x:number},private oshvc:MedDataService ) { }
   ngOnInit(): void {
     this.loadding=true
-    this.dataSource=this.oshvc.getDetailsOrder(this.data.numero).subscribe(res=>{
+    this.dataSource=this.oshvc.getDetailsOrder(this.data.numero,this.data.x).subscribe(res=>{
       let orderDara:PaymentsDetailsI[]=res;
       this.dataSource=orderDara;
+
       this.loadding=false;
     })
   }

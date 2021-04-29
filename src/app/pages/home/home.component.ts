@@ -2,6 +2,7 @@ import { jsDocComment } from '@angular/compiler';
 import { Component, OnInit, ɵflushModuleScopingQueueAsMuchAsPossible } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Medicos, MedicosI } from '@app/shared/components/models/data';
 import{AuthService} from '@auth/auth.service';
 import { Observer } from 'rxjs';
@@ -17,28 +18,26 @@ import { MedDataService } from './Services/med-data.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  honorariosPorCancelar=false;
+
+  login=false;
+
   fontStyleControl = new FormControl();
   fontStyle?: string;
-  medico:MedicosI={'celular':0,'ciudad':'','email':'','sexo':'','zona':'','apellidos':'','exId':'','id':0,'nombres':'','rif':''}
-   date=new Date();
-  sexo='';
   time = new Observable<string>((observer: Observer<string>) => {
     setInterval(() => observer.next(new Date().toString()), 1000);
   });
-  constructor(private authSvc:AuthService,private servicesMed:MedDataService ) { }
+  constructor(private authSvc:AuthService,private servicesMed:MedDataService,
+    private router:Router ) { }
   ngOnInit(): void {
-    this.authSvc.saveMedico().subscribe(res=>{
-      let medico:MedicosI= res;
-      this.medico=medico;
-      if(medico.sexo==='F'){
-        this.sexo='Dra.';
-      }else if(medico.sexo==='M'){
-        this.sexo='Dr.'
-      }
-    })
-  }
-  cancelar(){
-      this.honorariosPorCancelar=!this.honorariosPorCancelar;
+    localStorage.removeItem('cedula');
+    localStorage.removeItem('password');
+    if(localStorage.getItem('token')){
+      this.login=true
+    }else if(!localStorage.getItem('token')){
+      this.login=false;
+    }
+    if(this.login==false){
+      this.router.navigate(['login']);
+    }
   }
 }

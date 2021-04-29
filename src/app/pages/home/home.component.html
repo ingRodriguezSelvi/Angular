@@ -1,20 +1,10 @@
-<div class="Header">
-  <a>{{sexo}} {{medico.nombres}} {{medico.apellidos}} </a>
-  <a>Cédula {{medico.rif}}</a>
-  <a >Fecha: {{date|date}}</a>
+<div class="background">
+<app-user-info></app-user-info>
+<app-order-payment ></app-order-payment>
+<br>
+<br>
+<br>
+<br>
+<br>
 </div>
-<div class="mat-elevation-z8">
-  <div>
-    <mat-button-toggle-group name="TypeMoney" (click)="cancelar()" aria-label="Type the order">
-      <mat-button-toggle value="cancelados" class="fontToogle">Honorarios cobrados</mat-button-toggle>
-      <mat-button-toggle value="xCancelar" class="fontToogle">Honorarios por cobrar</mat-button-toggle>
-    </mat-button-toggle-group>
-  </div>
-</div>
-<ng-container *ngIf="!honorariosPorCancelar; else honorariosporcancelar"  >
-  <app-order-payment></app-order-payment>
-</ng-container>
-<ng-template #honorariosporcancelar>
- <h1>Error 404 no Data</h1>
-</ng-template>
 

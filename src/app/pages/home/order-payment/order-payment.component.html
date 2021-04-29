@@ -1,34 +1,76 @@
-<div *ngIf="loadding" class="loadding">
-  <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
-</div>
-<div *ngIf="!loadding">
-<table mat-table [dataSource]="dataSource" >
-  <ng-container matColumnDef="Numero de Orden">
-    <th mat-header-cell *matHeaderCellDef> Número de Orden</th>
-    <td mat-cell *matCellDef="let element"><a (click)="openModal(element.numero,element.montoBs,element.montoDol)" style="cursor: pointer; color: #013476;"> {{element.numero}} </a> </td>
-  </ng-container>
-  <ng-container matColumnDef="Numero de Factura">
-    <th mat-header-cell *matHeaderCellDef> Número de Factura </th>
-    <td mat-cell *matCellDef="let element"> {{element.numero_Fact}} </td>
-  </ng-container>
-  <ng-container matColumnDef="Paciente">
-    <th mat-header-cell *matHeaderCellDef> Paciente </th>
-    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-  </ng-container>
-  <ng-container matColumnDef="Fecha de la Factura">
-    <th mat-header-cell *matHeaderCellDef> Fecha de la Factura </th>
-    <td mat-cell *matCellDef="let element"> {{element.fecha_Fact|date}} </td>
-  </ng-container>
-  <ng-container matColumnDef="Monto en Bs">
-    <th mat-header-cell *matHeaderCellDef class="alin-regth"> Monto en Bs </th>
-    <td mat-cell *matCellDef="let element" class="alin-regth"> {{element.monto_Bruto_Bs|number}} </td>
-  </ng-container>
-  <ng-container matColumnDef="Monto en $">
-    <th mat-header-cell *matHeaderCellDef class="alin-regth"> Monto en $ </th>
-    <td mat-cell *matCellDef="let element" class="alin-regth"> {{element.monto_Bruto_Dol|number}} </td>
-  </ng-container>
+<div class="containeru">
+  <div >
+    <mat-button-toggle-group name="sedes" #toggleSede="matButtonToggleGroup" class="sedes" (click)="tipoSede(toggleSede.value)" >
+      <mat-button-toggle *ngFor="let sede of sedes" class="sedes1 fontToogle" checked value={{sede.id}} >{{sede.nombre}}</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <mat-card class="mat-card-payment">
+    <div>
+      <div>
+        <mat-button-toggle-group name="TypeMoney" #toggleGroup="matButtonToggleGroup" (click)="tipoHono(toggleGroup.value)" aria-label="Type the order">
+          <mat-button-toggle value="honorariosCobrados" checked class="fontToogle">Honorarios cobrados</mat-button-toggle>
+          <mat-button-toggle value="honorariosXCobrar" class="fontToogle">Honorarios por cobrar</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    <div *ngIf="!honorariosPorCancelar; else honorariosporcancelar">
+        <div *ngIf="loadding" class="loadding">
+          <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
+        </div>
+        <div *ngIf="!loadding">
+          <mat-form-field>
+            <mat-label>Buscar por mes</mat-label>
+            <mat-select formControlName="Mes" value={{mes}}>
+              <mat-option value="masculino">Marzo</mat-option>
+              <mat-option value="femenino">Febrero</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Buscar por paciente</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Juan Perez" #input>
+          </mat-form-field>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+        <table mat-table [dataSource]="dataSource" >
+          <ng-container matColumnDef="Numero de Factura">
+            <th mat-header-cell *matHeaderCellDef> Número de Factura </th>
+            <td mat-cell *matCellDef="let element"> {{element.numero_Fact}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Numero de Orden">
+            <th mat-header-cell *matHeaderCellDef>Orden de Pago</th>
+            <td mat-cell *matCellDef="let element"><a (click)="openModal(element.numero,element.montoBs,element.montoDol,toggleSede.value)" style="cursor: pointer; color: #013476;"> {{element.numero}} </a> </td>
+          </ng-container>
+          <ng-container matColumnDef="Paciente">
+            <th mat-header-cell *matHeaderCellDef class="font-center"> Paciente </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Fecha de la Factura">
+            <th mat-header-cell *matHeaderCellDef> Fecha de la Factura </th>
+            <td mat-cell *matCellDef="let element"> {{element.fecha_Fact|date:'dd/MM/YYYY'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Monto en Bs">
+            <th mat-header-cell *matHeaderCellDef class="alin-regth"> Monto Bs </th>
+            <td mat-cell *matCellDef="let element" class="alin-regth monto"> {{element.monto_Bruto_Bs|number:'1.2-2'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Monto en $">
+            <th mat-header-cell *matHeaderCellDef class="alin-regth"> Monto USD </th>
+            <td mat-cell *matCellDef="let element" class="alin-regth monto"> {{element.monto_Bruto_Dol|number:'1.2'}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+        <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" >
+          <p style="text-align: center;">Montos netos después de retenciones ley y administrativas. Para su preguntas quedamos a la orden en el departamento
+             de pagos. Trabajamos por su bienestar.
+          </p>
+        </div>
+        </div>
+
+    </div>
+
+    <ng-template #honorariosporcancelar>
+      <h1>Error 404 no Data</h1>
+    </ng-template>
+  </mat-card>
 </div>

@@ -18,6 +18,12 @@ export interface MedicosI extends Medicos{
 
 }
 
+export interface UpdateMed {
+  medico:MedicosI;
+  cedula:string;
+  password:string;
+}
+
 export interface Cobros {
   numero:number;
   fecha:Date;
@@ -47,11 +53,19 @@ export interface PaymentsDetailsI{
   fecha:string;
   montoBs:number;
   montoDol:number;
+  monto_Neto_Bs:number;
+  monto_Neto_Dol:number;
+  monto_Comis_Bs:number;
+  monto_Comis_Dol:number;
+  porc_Comis:number;
 }
 
 export interface EspecialidadI{
   id:number;
   especialidad:string;
 }
-
+export interface Sedes{
+  id:number;
+  nombre:string;
+}
 

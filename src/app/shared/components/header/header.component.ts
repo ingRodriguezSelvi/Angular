@@ -21,7 +21,6 @@ isLogin=false;
     if(localStorage.getItem('token')){
       this.isLogin=true;
     }
-
   }
 
   onToggleSidenav():void{

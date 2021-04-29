@@ -5,16 +5,9 @@
   flex: 1 1;
   padding-left: 3.5rem;
   text-align: center;
-
   margin: 2rem auto;
   text-align: center;
   height: 350px;
-
-}
-
-table{
-  width: 50%;
-
 }
 
 .mat-elevation-z8{
@@ -22,12 +15,17 @@ table{
   padding-left: 5rem;
   padding-right: 5rem;
 }
-
-th{
-  background-color:#013476 ;
-  color: #fff;
-}
 .fontToogle{
   font-size: 0.9rem;
+}
+.background{
+  background: #DDDD;
+  margin-top: -0px;
+  background: #ddd;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+
 }
 

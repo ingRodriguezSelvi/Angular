@@ -8,8 +8,8 @@ export interface User{
 }
 
 export interface UserResponse  {
- StatusCode:number;
- Succeded:boolean;
+ statusCode:number;
+ succeeded:boolean;
  message:string;
  result:LoginResponse;
 }
