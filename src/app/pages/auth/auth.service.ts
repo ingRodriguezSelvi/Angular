@@ -8,7 +8,7 @@ import { catchError,map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 import { stringify } from '@angular/compiler/src/util';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import{Medicos,Cobros,Monedas, EspecialidadI, MedicosI, UpdateMed} from '@app/shared/components/models/data';
+import{Medicos,Cobros,Monedas, EspecialidadI, MedicosI} from '@app/shared/components/models/data';
 import { MedDataService } from '../home/Services/med-data.service';
 const helper = new JwtHelperService();
 @Injectable({
@@ -37,7 +37,7 @@ private loggedIn = new BehaviorSubject<boolean>(false);
     }
     ));
   }
-  updateMedico(updData:UpdateMed){
+  updateMedico(updData:MedicosI){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',

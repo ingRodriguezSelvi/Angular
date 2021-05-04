@@ -1,10 +1,8 @@
 .tabla{
-  margin-top: -4%
+  margin-top: 0%
 }
-table{
-  width: 1024px;
-  height: auto;
-
+.mat-elevation-z8{
+width: 1048px;
 }
 .font{
   font-weight: 500;
@@ -55,5 +53,24 @@ h2{
 mat-card{
   margin-top: 1.5rem;
   color: #fff;
-}
 
+
+}
+.totales{
+  width: 25%;
+  max-width:  750px;
+  margin: 0 60%;
+  text-align: right;
+}
+.totales td{
+  text-align: right;
+  margin-left: 0;
+}
+.card-user-info{
+  background: #0077cb;
+  width: auto;
+  border-radius: 8px;
+  padding-bottom: -5%;
+  box-shadow: 2px 2px 5px #999;
+
+}

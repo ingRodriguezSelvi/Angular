@@ -3,7 +3,6 @@
 }
 table {
   width: 100%;
-
   padding-bottom: 2rem;
   height: auto;
 }
@@ -75,13 +74,22 @@ td[_ngcontent-txw-c182] {
 }
 .mat-card-payment{
   padding-left: 0%;
+
 }
 mat-form-field{
-  width: 25%;
+  width: 12%;
   padding: 1.5%;
   flex-direction: row;
   align-items: center;
   margin: 0 0;
 }
-
-
+.mat-raised-button{
+  background: #0077cb;
+  color: #fff;
+  font-weight: 400;
+  padding: 0.3rem;
+  border-radius: 4px;
+}
+.mat-button-toggle-group{
+  border: 0px;
+}

@@ -4,11 +4,12 @@ padding: 4rem 1rem;
 }
 .mat-card{
 width: max-content;
-  margin: 18% auto;
+  margin: auto auto;
   text-align: center;
   height: auto;
   opacity: 0.88;
   padding-top: 1.4rem;
+  margin-top: 22.5%;
 }
 
 .full-width-input,button{
@@ -25,7 +26,7 @@ width: max-content;
 }
 
 .heigth{
-  height: 1024px;
+  height: auto;
   background: url("https://idbclinicas.com/wp-content/uploads/2017/09/fondo-scaled.jpg")  no-repeat center center fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -44,4 +45,34 @@ width: max-content;
 #alert p{
   text-align: center;
 
+}
+
+@media screen and (max-width: 500px) {
+  .mat-card{
+    width: 350px;
+    height: auto;
+    margin-top: 70%;
+  }
+  .heigth{
+    height: auto;
+    background: url("https://idbclinicas.com/wp-content/uploads/2017/09/fondo-scaled.jpg")  no-repeat center center fixed/1000px 1000px;
+    background-repeat: no-repeat;
+
+  }
+
+}
+@media screen and (max-height:825px) {
+  .heigth{
+    height: auto;
+    background: url("https://idbclinicas.com/wp-content/uploads/2017/09/fondo-scaled.jpg")  no-repeat center center fixed/1000px 1000px;
+    background-repeat: no-repeat;
+  }
+  .mat-card{
+    margin-top: 15%;
+  }
+}
+@media screen and (max-height:715px){
+.mat-card{
+  margin-top: 12%;
+}
 }

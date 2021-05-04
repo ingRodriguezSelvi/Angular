@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Cobros, PaymentsDetailsI, Sedes } from '@app/shared/components/models/data';
+import { Cobros, OrdenMedica, PaymentsDetailsI, Sedes } from '@app/shared/components/models/data';
 import { Observable } from 'rxjs';
 import { catchError,map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
@@ -27,19 +27,32 @@ export class MedDataService {
     }))
   }
 
-  getOrder(x:number):Observable<Cobros[]>{
+  getOrder(x:number,a:number,m:number):Observable<Cobros[]>{
 
     const httpOptions = {
       headers: new HttpHeaders({
         accept: '*/*',
         Authorization: "Bearer "+localStorage.getItem('token'),
         Sede: String(x)
-      }),
+      }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
      }
       return this.http.get<Cobros[]>(this.direccion+'api/Data/OrdenesConDetalle',httpOptions).
       pipe(map((res:Cobros[])=>{
         return res;
       }))
+  }
+  getOrderAgrup(x:number,a:number,m:number):Observable<OrdenMedica[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        accept: '*/*',
+        Authorization: "Bearer "+localStorage.getItem('token'),
+        Sede: String(x)
+      }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
+     }
+     return this.http.get<OrdenMedica[]>(this.direccion+'api/Data/OrdenesData',httpOptions).
+     pipe(map((res:OrdenMedica[])=>{
+       return res;
+     }))
   }
   getDetailsOrder(Ordernumb:number,x:number):Observable<PaymentsDetailsI[]>{
     const httpOptions =

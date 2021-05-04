@@ -1,6 +1,6 @@
 export interface Medicos{
 
-  id:number
+  id:number;
   nombres:string;
   apellidos:string;
   rif:string;
@@ -15,14 +15,9 @@ export interface MedicosI extends Medicos{
   zona:string;
   sexo:string;
   ciudad:string;
-
+  direccion:string
 }
 
-export interface UpdateMed {
-  medico:MedicosI;
-  cedula:string;
-  password:string;
-}
 
 export interface Cobros {
   numero:number;
@@ -41,10 +36,13 @@ export interface Monedas{
   bolivar:number;
 }
 export interface OrdenMedica {
-  ordernum:number;
-  fechaEmis:string;
-  monto:number;
-  montodol:number;
+  numero:number;
+  fecha:Date;
+  factura:string;
+  montoBs:number;
+  montoDol:number;
+  paciente:string;
+  cuantas:number;
 }
 
 export interface PaymentsDetailsI{
@@ -65,6 +63,10 @@ export interface EspecialidadI{
   especialidad:string;
 }
 export interface Sedes{
+  id:number;
+  nombre:string;
+}
+export interface Meses{
   id:number;
   nombre:string;
 }

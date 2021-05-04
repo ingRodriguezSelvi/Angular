@@ -8,6 +8,7 @@ import { DetailsOrderComponent } from './details-order/details-order.component';
 import { FormControl } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserInfoComponent } from './user-info/user-info.component';
+import { HonoAgrupadosComponent } from './hono-agrupados/hono-agrupados.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { UserInfoComponent } from './user-info/user-info.component';
     OrderPaymentComponent,
     DetailsOrderComponent,
     UserInfoComponent,
+    HonoAgrupadosComponent,
 
   ],
   entryComponents:[DetailsOrderComponent],

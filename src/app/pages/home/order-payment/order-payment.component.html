@@ -1,7 +1,10 @@
 <div class="containeru">
   <div >
-    <mat-button-toggle-group name="sedes" #toggleSede="matButtonToggleGroup" class="sedes" (click)="tipoSede(toggleSede.value)" >
-      <mat-button-toggle *ngFor="let sede of sedes" class="sedes1 fontToogle" checked value={{sede.id}} >{{sede.nombre}}</mat-button-toggle>
+    <mat-button-toggle-group name="sedes" #toggleSede="matButtonToggleGroup" class="sedes" (click)="tipoSede(toggleSede.value,2021,4)" >
+      <mat-button-toggle  class="sedes1 fontToogle" checked value='1' > Clínica IDB Cabudare </mat-button-toggle>
+      <mat-button-toggle  class="sedes1 fontToogle" value="2"  >Clínica IDB Barquisimeto</mat-button-toggle>
+      <mat-button-toggle  class="sedes1 fontToogle" value="3"  >Clínica IMD San Felipe </mat-button-toggle>
+      <mat-button-toggle  class="sedes1 fontToogle" value="4" >Previmédica IDB</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
   <mat-card class="mat-card-payment">
@@ -13,23 +16,30 @@
         </mat-button-toggle-group>
       </div>
     </div>
-    <div *ngIf="!honorariosPorCancelar; else honorariosporcancelar">
+    <div >
         <div *ngIf="loadding" class="loadding">
           <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
         </div>
         <div *ngIf="!loadding">
           <mat-form-field>
-            <mat-label>Buscar por mes</mat-label>
-            <mat-select formControlName="Mes" value={{mes}}>
-              <mat-option value="masculino">Marzo</mat-option>
-              <mat-option value="femenino">Febrero</mat-option>
+            <mat-label>Selecciona el mes</mat-label>
+            <mat-select [(value)]="mes" #fecha (selectionChange)="aplyFilterDate(anoo.value,fecha.value)">
+              <mat-option *ngFor="let mes of mesesView" value={{mes.id}}>{{mes.nombre}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field>
-            <mat-label>Buscar por paciente</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Juan Perez" #input>
+          <mat-form-field hidden>
+            <mat-label>{{ano}}</mat-label>
+            <mat-select disabled=true; #anoo [(value)]="ano" (selectionChange)="aplyFilterDate(anoo.value,fecha.value)">
+              <mat-option *ngFor="let anno of anos" value={{anno}} >{{anno}}</mat-option>
+            </mat-select>
           </mat-form-field>
 
+          <mat-form-field *ngIf="honocobrados">
+            <mat-label >Buscar por paciente</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Juan Perez" #input>
+          </mat-form-field>
+          <button mat-raised-button  (click)="viewOrdenes()"><mat-icon >description</mat-icon>{{txtbtn}}</button>
+        <div *ngIf="honocobrados">
         <table mat-table [dataSource]="dataSource" >
           <ng-container matColumnDef="Numero de Factura">
             <th mat-header-cell *matHeaderCellDef> Número de Factura </th>
@@ -61,16 +71,18 @@
 
         </table>
         <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" >
-          <p style="text-align: center;">Montos netos después de retenciones ley y administrativas. Para su preguntas quedamos a la orden en el departamento
+          <p style="text-align: center;">Montos netos después de retenciones de ley y administrativas. Para su preguntas quedamos a la orden en el departamento
              de pagos. Trabajamos por su bienestar.
           </p>
         </div>
+      </div>
+
         </div>
 
     </div>
-
-    <ng-template #honorariosporcancelar>
+    <div *ngIf="honorariosPorCancelar">
       <h1>Error 404 no Data</h1>
-    </ng-template>
+    </div>
+    <div  *ngIf='honoagrupados' ><app-hono-agrupados [tiposedes]="toggleSede.value"></app-hono-agrupados></div>
   </mat-card>
 </div>

@@ -9,7 +9,7 @@ import { MedicosI } from '@app/shared/components/models/data';
 })
 export class UserInfoComponent implements OnInit {
 
-  medico:MedicosI={'celular':0,'ciudad':'','email':'','sexo':'','zona':'','apellidos':'','exId':'','id':0,'nombres':'','rif':''};
+  medico:MedicosI={'celular':0,'ciudad':'','email':'','sexo':'','zona':'','apellidos':'','exId':'','id':0,'nombres':'','rif':'','direccion':''};
   sexo='';
   date=new Date();
   constructor(private authSvc:AuthService) { }
