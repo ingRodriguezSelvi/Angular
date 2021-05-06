@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from '@app/pages/auth/auth.service';
+import { DataService } from '@app/Services/data.service';
 import { Cobros, Medicos, OrdenMedica, Sedes } from '@app/shared/components/models/data';
 import { DetailsOrderComponent } from '../details-order/details-order.component';
 import { MedDataService } from '../Services/med-data.service';
@@ -16,25 +17,25 @@ export class HonoAgrupadosComponent implements OnInit {
   honocobrados=false;
   honoagrupados=false;
   loadding=true;
-  mes="Abril";
+  msjx:string='';
+  flag:boolean=false;
   dataSource = JSON.parse(localStorage.getItem('cobros')||'{}');
   displayedColumns: string[] = [
     'Numero de Factura','Factura','Paciente','Fecha','Monto Bs','Monto USD'];
    sedes:Sedes[]=[];
-  constructor(public dialog:MatDialog,private medSrvc:MedDataService) { }
-
+  constructor(public dialog:MatDialog,private medSrvc:MedDataService,public data:DataService) { }
   @Input() tiposedes?:number;
-
+  @Input() mes?:number;
+  @Input() ano?:number;
   ngOnInit(): void {
    this.loadding=true;
+   console.log(this.data.isDetails)
     this.medSrvc.getSedes().subscribe(data=>{
-      console.log('Sedes',data);
       let dataSedes:Sedes[]=data;
       this.sedes=dataSedes;
-    //  let aux:number= dataSedes.length;
-    //  this.tipoSede(dataSedes[aux-1].id)
+      //  let aux:number= dataSedes.length;
+     //  this.tipoSede(dataSedes[aux-1].id)
      this.tipoSede(this.tiposedes!);
-     console.log(this.tiposedes)
     })
 }
 openModal(numero:number,totalBs:number,totalDol:number,x:number){
@@ -42,16 +43,20 @@ openModal(numero:number,totalBs:number,totalDol:number,x:number){
 }
 tipoSede(x:number){
   this.loadding=true;
- this.dataSource=this.medSrvc.getOrderAgrup(x,2021,4).subscribe(data=>{
+ this.dataSource=this.medSrvc.getOrderAgrup(x,Number(this.ano),Number(this.mes)).subscribe(data=>{
    let orderData:OrdenMedica[]= data;;
    this.dataSource=new MatTableDataSource(orderData);
    this.loadding=false;
-   console.log(data);
+   if(orderData.length>0){
+    this.flag=true;
+  }else{
+    this.flag=false;
+    this.msjx='El rango de fecha y sede seleccionado no tiene informacion para mostrar. Por favor seleccione otro rango de fecha';
+  }
  })
 }
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
-  console.log('filter', filterValue)
   this.dataSource.filter = filterValue.trim().toLowerCase();
 }
 viewOrdenes(){
@@ -60,12 +65,11 @@ viewOrdenes(){
     this.honocobrados=false;
     this.honorariosPorCancelar=false;
     this.txtbtn='Ordenes con Detalles';
-  }else if(this.honoagrupados==true){
+    }else if(this.honoagrupados==true){
     this.honoagrupados=false;
     this.honocobrados=true;
     this.honorariosPorCancelar=false;
     this.txtbtn='Ver Ordenes';
+    }
   }
-
-}
 }

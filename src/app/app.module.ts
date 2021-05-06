@@ -22,9 +22,6 @@ registerLocaleData(localeEsAr);
     AppComponent,
     HeaderComponent,
     FooterComponent,
-
-
-
   ],
   imports: [
     BrowserModule,

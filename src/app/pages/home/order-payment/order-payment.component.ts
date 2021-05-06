@@ -7,6 +7,7 @@ import { DetailsOrderComponent } from '../details-order/details-order.component'
 import { MedDataService } from '../Services/med-data.service';
 import { FormBuilder } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { DataService } from '@app/Services/data.service';
 @Component({
   selector: 'app-order-payment',
   templateUrl: './order-payment.component.html',
@@ -28,6 +29,8 @@ export class OrderPaymentComponent implements OnInit {
   ano=new Date().getFullYear();
   loadding=true;
   sedes:Sedes[]=[];
+  msjx:string='';
+  flag:boolean=false;
   displayedColumns: string[] = [
 
                                 'Numero de Factura','Numero de Orden','Paciente','Fecha de la Factura',
@@ -36,7 +39,7 @@ export class OrderPaymentComponent implements OnInit {
   dataSource = JSON.parse(localStorage.getItem('cobros')||'{}');
   montoBs="";
   constructor(public dialog:MatDialog,private medSrvc:MedDataService,private service:AuthService
-    ,private fr:FormBuilder) {}
+    ,private fr:FormBuilder,public data:DataService) {}
   openModal(numero:number,totalBs:number,totalDol:number,x:number){
     this.dialog.open(DetailsOrderComponent,{data:{numero,totalBs,totalDol,x}});
   }
@@ -44,21 +47,18 @@ export class OrderPaymentComponent implements OnInit {
     this.getMeses();
     this.getAnos();
     let date:Date= new Date();
-    this.mes =date.getMonth();
-    this.ano= date.getFullYear();
+    this.mes=date.getMonth()+1;
+    this.ano=date.getFullYear();
     this.honocobrados=true
     this.loadding=true;
+    this.data.isDetails=false;
     this.medSrvc.getSedes().subscribe(data=>{
-      console.log('Sedes',data);
       let dataSedes:Sedes[]=data;
       this.sedes=dataSedes;
     //  let aux:number= dataSedes.length;
     //  this.tipoSede(dataSedes[aux-1].id)
      this.tipoSede(1,this.ano,this.mes);
     })
-
-
-
   }
   tipoHono(x:string){
     if(x==='honorariosCobrados'){
@@ -78,15 +78,21 @@ export class OrderPaymentComponent implements OnInit {
  }
  applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
-  console.log('filter', filterValue)
   this.dataSource.filter = filterValue.trim().toLowerCase();
 }
  tipoSede(x:number,a:number,m:number){
-   this.loadding=true;
-  this.dataSource=this.medSrvc.getOrder(x,a,m).subscribe(data=>{
-    let orderData:Cobros[]= data;;
+    let mes= m;
+    this.loadding=true;
+    this.dataSource=this.medSrvc.getOrder(x,a,mes).subscribe(data=>{
+    let orderData:Cobros[]= data;
     this.dataSource=new MatTableDataSource(orderData);
     this.loadding=false;
+    if(orderData.length>0){
+      this.flag=true;
+    }else{
+      this.flag=false;
+      this.msjx='El rango de fecha y sede seleccionado no tiene informacion para mostrar. Por favor seleccione otro rango de fecha';
+    }
   })
  }
  viewOrdenes(){
@@ -94,11 +100,13 @@ export class OrderPaymentComponent implements OnInit {
      this.honoagrupados=true;
      this.honocobrados=false;
      this.honorariosPorCancelar=false;
+     this.data.isDetails=true;
      this.txtbtn='Ordenes con Detalles';
    }else if(this.honoagrupados==true){
      this.honoagrupados=false;
      this.honocobrados=true;
      this.honorariosPorCancelar=false;
+     this.data.isDetails=false;
      this.txtbtn='Ver Ordenes';
    }
  }
@@ -128,49 +136,52 @@ export class OrderPaymentComponent implements OnInit {
      this.anos.push(ano);
    }
    for(var x=new Date().getMonth();x>=0;x--){
-    console.log(this.meses[x].nombre);
     mesesMenos--;
-    console.log(mesesMenos)
     this.mesesView.push(this.meses[x])
-
    }
-
   if(mesesMenos>=0){
     this.ano=this.ano-1;
     let n=1;
     for(var x=mesesMenos; x>0;x--){
-      console.log(this.meses[12-n].nombre)
       this.mesesView.push(this.meses[12-n])
       n++;
-
     }
-
   }
-
-  console.log(this.mesesView);
-
-
-
  }
- aplyFilterDate(ano:number,mes:number){
+ aplyFilterDate(ano:number,mes:number,idSede:number){
   let mesActual=new Date().getMonth();
   let nuevoanio=ano;
-  console.log(mesActual)
+  this.mes=mes;
+  this.ano=ano;
+  console.log(this.data.isDetails);
+  if(this.data.isDetails==true){
+   return  this.viewOrdenes();
+  }else if(this.data.isDetails==false){
    if(mes>mesActual){
-    this.dataSource=this.medSrvc.getOrder(1,nuevoanio-1,mes).subscribe(data=>{
-      let orderData:Cobros[]= data;;
+    this.dataSource=this.medSrvc.getOrder(idSede,nuevoanio-1,mes).subscribe(data=>{
+      let orderData:Cobros[]= data;
       this.dataSource=new MatTableDataSource(orderData);
       this.loadding=false;
-
+      if(orderData.length>0){
+        this.flag=true;
+      }else{
+        this.flag=false;
+        this.msjx='El rango de fecha y sede seleccionado no tiene informacion para mostrar. Por favor seleccione otro rango de fecha';
+      }
     })
    }else if(mesActual>=mes){
-    this.dataSource=this.medSrvc.getOrder(1,nuevoanio,mes).subscribe(data=>{
+    this.dataSource=this.medSrvc.getOrder(idSede,nuevoanio,mes).subscribe(data=>{
       let orderData:Cobros[]= data;;
       this.dataSource=new MatTableDataSource(orderData);
       this.loadding=false;
+      if(orderData.length>0){
+        this.flag=true;
+      }else{
+        this.flag=false;
+        this.msjx='El rango de fecha y sede seleccionado no tiene informacion para mostrar. Por favor seleccione otro rango de fecha';
+      }
    })}
+  }
   this.loadding=true;
-  console.log(nuevoanio)
-
  }
 }

@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import{AlertasService} from '../../home/Services/alertas/alertas.service'
 import { from } from 'rxjs';
+import { DataService } from '@app/Services/data.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
   errorStatus= false;
   msj="";
   constructor(private authSvc:AuthService, private fb:FormBuilder,
-    private router:Router,public dialog:MatDialog) { }
+    private router:Router,public dialog:MatDialog,private data:DataService) { }
   ngOnInit(): void {
     this.checkToken();
   }
@@ -50,10 +51,12 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('cedula',cacheUser.cedula);
         localStorage.setItem('password',cacheUser.password);
         this.router.navigate(['register'])
+        this.data.isLogin=true;
       }
       else if(dataResponse.succeeded==true && dataResponse.statusCode===200){
         localStorage.setItem('token',data.result.token);
         this.router.navigate(['home']);
+        this.data.isLogin=true;
       }
     })
  }

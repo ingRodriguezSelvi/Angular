@@ -1,6 +1,6 @@
 <div class="containeru">
   <div >
-    <mat-button-toggle-group name="sedes" #toggleSede="matButtonToggleGroup" class="sedes" (click)="tipoSede(toggleSede.value,2021,4)" >
+    <mat-button-toggle-group name="sedes" #toggleSede="matButtonToggleGroup" class="sedes" (click)="tipoSede(toggleSede.value,this.ano,this.mes)" >
       <mat-button-toggle  class="sedes1 fontToogle" checked value='1' > Clínica IDB Cabudare </mat-button-toggle>
       <mat-button-toggle  class="sedes1 fontToogle" value="2"  >Clínica IDB Barquisimeto</mat-button-toggle>
       <mat-button-toggle  class="sedes1 fontToogle" value="3"  >Clínica IMD San Felipe </mat-button-toggle>
@@ -23,13 +23,13 @@
         <div *ngIf="!loadding">
           <mat-form-field>
             <mat-label>Selecciona el mes</mat-label>
-            <mat-select [(value)]="mes" #fecha (selectionChange)="aplyFilterDate(anoo.value,fecha.value)">
+            <mat-select [(value)]="mes" #fecha (selectionChange)="aplyFilterDate(anoo.value,fecha.value,toggleSede.value)">
               <mat-option *ngFor="let mes of mesesView" value={{mes.id}}>{{mes.nombre}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field hidden>
             <mat-label>{{ano}}</mat-label>
-            <mat-select disabled=true; #anoo [(value)]="ano" (selectionChange)="aplyFilterDate(anoo.value,fecha.value)">
+            <mat-select disabled=true; #anoo [(value)]="ano" (selectionChange)="aplyFilterDate(anoo.value,fecha.value,toggleSede.value)">
               <mat-option *ngFor="let anno of anos" value={{anno}} >{{anno}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -40,7 +40,7 @@
           </mat-form-field>
           <button mat-raised-button  (click)="viewOrdenes()"><mat-icon >description</mat-icon>{{txtbtn}}</button>
         <div *ngIf="honocobrados">
-        <table mat-table [dataSource]="dataSource" >
+        <table mat-table [dataSource]="dataSource" *ngIf="flag" >
           <ng-container matColumnDef="Numero de Factura">
             <th mat-header-cell *matHeaderCellDef> Número de Factura </th>
             <td mat-cell *matCellDef="let element"> {{element.numero_Fact}} </td>
@@ -70,7 +70,11 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
         </table>
-        <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" >
+        <div class="alert alert-danger" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag" >
+          <p style="text-align: center;">{{msjx}}
+          </p>
+        </div>
+        <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" *ngIf="flag">
           <p style="text-align: center;">Montos netos después de retenciones de ley y administrativas. Para su preguntas quedamos a la orden en el departamento
              de pagos. Trabajamos por su bienestar.
           </p>
@@ -83,6 +87,6 @@
     <div *ngIf="honorariosPorCancelar">
       <h1>Error 404 no Data</h1>
     </div>
-    <div  *ngIf='honoagrupados' ><app-hono-agrupados [tiposedes]="toggleSede.value"></app-hono-agrupados></div>
+    <div  *ngIf='honoagrupados' ><app-hono-agrupados [tiposedes]="toggleSede.value"[mes]="mes"[ano]="ano"></app-hono-agrupados></div>
   </mat-card>
 </div>

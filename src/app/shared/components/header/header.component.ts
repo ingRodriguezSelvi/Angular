@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '@app/pages/auth/auth.service';
 import { Router } from '@angular/router';
+import { DataService } from '@app/Services/data.service';
 
 
 @Component({
@@ -9,33 +10,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-isAdmin =false;
-isLogin=false;
+  isAdmin=false;
 @Output() toggleSidenav= new EventEmitter<void>();
-  constructor(private authSvc:AuthService,private router:Router) { }
-
-
-
+  constructor(private authSvc:AuthService,private router:Router,public data:DataService) { }
   ngOnInit(): void {
 
     if(localStorage.getItem('token')){
-      this.isLogin=true;
+      this.data.isLogin=true;
     }
   }
-
   onToggleSidenav():void{
     this.toggleSidenav.emit();
   }
-
   closedSesion(){
     this.authSvc.logout();
     this.router.navigate(['login']);
     if(!localStorage.getItem('token')){
-      this.isLogin=false;
+      this.data.isLogin=false;
     }
   }
-
-
-
 
 }
