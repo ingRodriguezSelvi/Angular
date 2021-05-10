@@ -4,13 +4,22 @@
 </div>
 <div *ngIf="!loadding" >
 
-  <mat-card class="tabla">
+  <div class="container">
     <mat-card class="card-user-info" >
-      <div> <a>{{sexo}} {{medico.nombres}} {{medico.apellidos}} </a> </div>
-      <div> <a>Cédula: {{medico.rif}}</a></div>
-      <div> <a >Fecha: {{date|date:'dd/MM/YYYY'}}</a> </div>
-
+      <div class="row">
+        <div class="col-6">
+          <div> <p class="texto">{{sexo}} {{medico.nombres}} {{medico.apellidos}} </p> </div>
+          <div> <p class="texto">Cédula: {{medico.rif}}</p></div>
+          <div> <p class="texto">Fecha: {{date|date:'dd/MM/YYYY'}}</p> </div>
+        </div>
+        <div class="col-6">
+          <h2 class="estado">Estado de cuenta</h2>
+        </div>
+      </div>
      </mat-card>
+  </div>
+  <mat-card class="tabla">
+
     <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" >
       <p style="text-align: center;">Montos netos después de retenciones de ley y administrativas. Para su preguntas quedamos a la orden en el departamento
         de pagos. Trabajamos por su bienestar.

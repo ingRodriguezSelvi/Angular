@@ -36,4 +36,18 @@ msjx:string='';
       }
   })
   }
+  searchDate(){
+    console.log(this.mes)
+    this.dataSource=this.orderServices.getOrderPrevi(4,this.anno,this.mes!).subscribe(data=>{
+      let orderData:Cobros[]= data;
+      this.dataSource=new MatTableDataSource(orderData);
+      this.data.isLoadding=false;
+      if(orderData.length>0){
+        this.flag=true;
+      }else{
+        this.flag=false;
+        this.msjx='El rango de fecha y sede seleccionado no tiene informacion para mostrar. Por favor seleccione otro rango de fecha o sede';
+      }
+  })
+  }
 }

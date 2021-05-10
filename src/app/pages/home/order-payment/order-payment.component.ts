@@ -8,6 +8,7 @@ import { MedDataService } from '../Services/med-data.service';
 import { FormBuilder } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { DataService } from '@app/Services/data.service';
+import {meses} from 'src/app/core/mocks/Constans/meses';
 @Component({
   selector: 'app-order-payment',
   templateUrl: './order-payment.component.html',
@@ -23,11 +24,11 @@ export class OrderPaymentComponent implements OnInit {
   honoagrupados=false;
   datee=new Date();
   mes=new Date().getMonth();
-  meses:Meses[]=[];
+  meses:Meses[]=meses;
   mesesView:Meses[]=[];
   anos:number[]=[];
   ano=new Date().getFullYear();
-
+  mesActual=new Date().getMonth();
   sedes:Sedes[]=[];
   msjx:string='';
   flag:boolean=false;
@@ -44,7 +45,7 @@ export class OrderPaymentComponent implements OnInit {
     this.dialog.open(DetailsOrderComponent,{data:{numero,totalBs,totalDol,x}});
   }
   ngOnInit(): void {
-    this.getMeses();
+    console.log(this.mesActual)
     this.getAnos();
     let date:Date= new Date();
     this.mes=date.getMonth()+1;
@@ -120,22 +121,7 @@ export class OrderPaymentComponent implements OnInit {
      this.txtbtn='Ver Ordenes';
    }
  }
- getMeses(){
-   this.meses=[
-     {'id':1,'nombre':'Enero'},
-     {'id':2,'nombre':'Febrero'},
-     {'id':3,'nombre':'Marzo'},
-     {'id':4,'nombre':'Abril'},
-     {'id':5,'nombre':'Mayo'},
-     {'id':6,'nombre':'Junio'},
-     {'id':7,'nombre':'Julio'},
-     {'id':8,'nombre':'Agosto'},
-     {'id':9,'nombre':'Septiembre'},
-     {'id':10,'nombre':'Octubre'},
-     {'id':11,'nombre':'Noviembre'},
-     {'id':12,'nombre':'Diciembre'}
-   ]
- }
+
  getAnos(){
    let fechaMax = new Date().getFullYear();
    let fechaMin= 2013;

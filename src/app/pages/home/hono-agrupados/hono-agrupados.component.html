@@ -30,12 +30,15 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
-<div class="alert alert-danger" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag" >
-  <p style="text-align: center;">{{msjx}}
-  </p>
+<div class="container">
+  <div class="alert alert-danger" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag" >
+    <p style="text-align: center;">{{msjx}}
+    </p>
+  </div>
+  <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" *ngIf="flag">
+    <p style="text-align: center;">Montos netos después de retenciones ley y administrativas. Para su preguntas quedamos a la orden en el departamento
+       de pagos. Trabajamos por su bienestar.
+    </p>
+  </div>
 </div>
-<div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" *ngIf="flag">
-  <p style="text-align: center;">Montos netos después de retenciones ley y administrativas. Para su preguntas quedamos a la orden en el departamento
-     de pagos. Trabajamos por su bienestar.
-  </p>
-</div>
+

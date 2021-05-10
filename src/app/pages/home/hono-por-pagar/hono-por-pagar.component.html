@@ -1,6 +1,6 @@
 <table mat-table [dataSource]="dataSource" *ngIf="flag && data.sede!=4" >
   <ng-container matColumnDef="numero">
-    <th mat-header-cell *matHeaderCellDef> Número de Orden </th>
+    <th mat-header-cell *matHeaderCellDef> Número de Factura </th>
     <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
   </ng-container>
   <ng-container matColumnDef="fecha">

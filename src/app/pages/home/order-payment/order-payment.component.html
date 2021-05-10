@@ -12,7 +12,7 @@
       <div>
         <mat-button-toggle-group name="TypeMoney" #toggleGroup="matButtonToggleGroup" (click)="tipoHono(toggleGroup.value)" aria-label="Type the order">
           <mat-button-toggle value="honorariosCobrados" checked class="fontToogle">Honorarios cobrados</mat-button-toggle>
-          <mat-button-toggle value="honorariosXCobrar" class="fontToogle">Honorarios por cobrar</mat-button-toggle>
+          <mat-button-toggle value="honorariosXCobrar" class="fontToogle" [disabled]="data.isPrevimedica">Honorarios por cobrar</mat-button-toggle>
         </mat-button-toggle-group>
       </div>
     </div>
@@ -22,7 +22,7 @@
         </div>
         <div *ngIf="!data.isLoadding">
           <mat-form-field>
-            <mat-label>Selecciona el mes</mat-label>
+            <mat-label>{{meses[(mesActual)].nombre}}</mat-label>
             <mat-select [(value)]="mes" #fecha (selectionChange)="aplyFilterDate(anoo.value,fecha.value,toggleSede.value)">
               <mat-option *ngFor="let mes of mesesView" value={{mes.id}}>{{mes.nombre}}</mat-option>
             </mat-select>
@@ -34,11 +34,11 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field *ngIf="honocobrados">
+          <mat-form-field *ngIf="honocobrados && !data.isPrevimedica">
             <mat-label >Buscar por paciente</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Juan Perez" #input>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Juan Perez" #input >
           </mat-form-field>
-          <button mat-raised-button  (click)="viewOrdenes()"><mat-icon >description</mat-icon>{{txtbtn}}</button>
+          <button mat-raised-button *ngIf="!honorariosPorCancelar && !data.isPrevimedica"  (click)="viewOrdenes()"><mat-icon >description</mat-icon>{{txtbtn}}</button>
         <div *ngIf="honocobrados">
         <table mat-table [dataSource]="dataSource" *ngIf="flag && data.sede!=4" >
           <ng-container matColumnDef="Numero de Factura">
@@ -70,15 +70,21 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
         </table>
-        <div class="alert alert-danger" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag && !data.isPrevimedica" >
-          <p style="text-align: center;">{{msjx}}
-          </p>
+
+        <div class="container">
+          <div class="alert alert-danger" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag && !data.isPrevimedica" >
+            <p style="text-align: center;">{{msjx}}
+            </p>
+          </div>
+
+          <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" *ngIf="flag && data.sede!=4">
+            <p style="text-align: center;">Montos netos después de retenciones de ley y administrativas. Para su preguntas quedamos a la orden en el departamento
+               de pagos. Trabajamos por su bienestar.
+            </p>
+          </div>
+
         </div>
-        <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" *ngIf="flag && data.sede!=4">
-          <p style="text-align: center;">Montos netos después de retenciones de ley y administrativas. Para su preguntas quedamos a la orden en el departamento
-             de pagos. Trabajamos por su bienestar.
-          </p>
-        </div>
+
       </div>
 
         </div>

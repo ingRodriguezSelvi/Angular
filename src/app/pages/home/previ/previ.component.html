@@ -1,3 +1,4 @@
+<button class="btn btn" (click)="searchDate()"><mat-icon>search</mat-icon>Buscar por fecha</button>
 <table mat-table [dataSource]="dataSource" *ngIf='!data.isLoadding && flag'>
   <ng-container matColumnDef="numero">
     <th mat-header-cell *matHeaderCellDef> Número de Orden </th>
@@ -15,7 +16,9 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
+<div class="container">
 <div class="alert alert-danger" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag && data.isPrevimedica" >
   <p style="text-align: center;">{{msjx}}
   </p>
+</div>
 </div>
