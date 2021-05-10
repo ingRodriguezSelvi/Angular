@@ -1,0 +1,20 @@
+table {
+  width: 101%;
+  padding-bottom: 2rem;
+  height: auto;
+  text-align: right;
+}
+th{
+  background: #0077cb;
+  color: #ffff;
+  font-size: 1rem;
+}
+td{
+  text-align: left;
+  font-size: 1rem;
+  margin: 0;
+}
+.monto{
+  font-weight: 600;
+  color: #0077cb;
+}

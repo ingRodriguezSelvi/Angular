@@ -1,0 +1,26 @@
+<table mat-table [dataSource]="dataSource" *ngIf="flag && data.sede!=4" >
+  <ng-container matColumnDef="numero">
+    <th mat-header-cell *matHeaderCellDef> Número de Orden </th>
+    <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+  </ng-container>
+  <ng-container matColumnDef="fecha">
+    <th mat-header-cell *matHeaderCellDef>Fecha</th>
+    <td mat-cell *matCellDef="let element">{{element.fecha|date:'dd/MM/YYYY'}}</td>
+  </ng-container>
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef class="font-center"> Paciente  </th>
+    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+  </ng-container>
+  <ng-container matColumnDef="montoBs">
+    <th mat-header-cell *matHeaderCellDef class="alin-regth"> Monto Bs </th>
+    <td mat-cell *matCellDef="let element" class="alin-regth monto"> {{element.montoBs|number:'1.2-2'}} </td>
+  </ng-container>
+  <ng-container matColumnDef="montoDol">
+    <th mat-header-cell *matHeaderCellDef class="alin-regth"> Monto USD </th>
+    <td mat-cell *matCellDef="let element" class="alin-regth monto"> {{element.montoDol|number:'1.2'}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>

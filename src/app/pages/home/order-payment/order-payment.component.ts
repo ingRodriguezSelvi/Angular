@@ -27,7 +27,7 @@ export class OrderPaymentComponent implements OnInit {
   mesesView:Meses[]=[];
   anos:number[]=[];
   ano=new Date().getFullYear();
-  loadding=true;
+
   sedes:Sedes[]=[];
   msjx:string='';
   flag:boolean=false;
@@ -50,7 +50,7 @@ export class OrderPaymentComponent implements OnInit {
     this.mes=date.getMonth()+1;
     this.ano=date.getFullYear();
     this.honocobrados=true
-    this.loadding=true;
+    this.data.isLoadding=true;
     this.data.isDetails=false;
     this.medSrvc.getSedes().subscribe(data=>{
       let dataSedes:Sedes[]=data;
@@ -81,19 +81,29 @@ export class OrderPaymentComponent implements OnInit {
   this.dataSource.filter = filterValue.trim().toLowerCase();
 }
  tipoSede(x:number,a:number,m:number){
+   console.log('Esta cargando la sede',x);
     let mes= m;
-    this.loadding=true;
+    this.data.isLoadding=true;
+    this.data.sede=x;
+    this.data.isPrevimedica=false;
+    if(x==4){
+      this.data.isPrevimedica=true;
+    }
+    if(this.data.isPrevimedica==true){
+      return;
+    }else if(this.data.isPrevimedica==false){
     this.dataSource=this.medSrvc.getOrder(x,a,mes).subscribe(data=>{
     let orderData:Cobros[]= data;
     this.dataSource=new MatTableDataSource(orderData);
-    this.loadding=false;
+    this.data.isLoadding=false;
+    console.log(data);
     if(orderData.length>0){
       this.flag=true;
     }else{
       this.flag=false;
       this.msjx='El rango de fecha y sede seleccionado no tiene informacion para mostrar. Por favor seleccione otro rango de fecha';
     }
-  })
+  })}
  }
  viewOrdenes(){
    if (this.honoagrupados==false){
@@ -154,6 +164,11 @@ export class OrderPaymentComponent implements OnInit {
   this.mes=mes;
   this.ano=ano;
   console.log(this.data.isDetails);
+  console.log(this.data.sede)
+  if(this.data.sede===4){
+    console.log('Aplica Filtro de fecha')
+    return;
+  }
   if(this.data.isDetails==true){
    return  this.viewOrdenes();
   }else if(this.data.isDetails==false){
@@ -161,7 +176,7 @@ export class OrderPaymentComponent implements OnInit {
     this.dataSource=this.medSrvc.getOrder(idSede,nuevoanio-1,mes).subscribe(data=>{
       let orderData:Cobros[]= data;
       this.dataSource=new MatTableDataSource(orderData);
-      this.loadding=false;
+      this.data.isLoadding
       if(orderData.length>0){
         this.flag=true;
       }else{
@@ -173,7 +188,7 @@ export class OrderPaymentComponent implements OnInit {
     this.dataSource=this.medSrvc.getOrder(idSede,nuevoanio,mes).subscribe(data=>{
       let orderData:Cobros[]= data;;
       this.dataSource=new MatTableDataSource(orderData);
-      this.loadding=false;
+      this.data.isLoadding=false;
       if(orderData.length>0){
         this.flag=true;
       }else{
@@ -182,6 +197,6 @@ export class OrderPaymentComponent implements OnInit {
       }
    })}
   }
-  this.loadding=true;
+  this.data.isLoadding
  }
 }

@@ -44,7 +44,7 @@ openModal(numero:number,totalBs:number,totalDol:number,x:number){
 tipoSede(x:number){
   this.loadding=true;
  this.dataSource=this.medSrvc.getOrderAgrup(x,Number(this.ano),Number(this.mes)).subscribe(data=>{
-   let orderData:OrdenMedica[]= data;;
+   let orderData:OrdenMedica[]= data;
    this.dataSource=new MatTableDataSource(orderData);
    this.loadding=false;
    if(orderData.length>0){

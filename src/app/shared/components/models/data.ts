@@ -70,4 +70,11 @@ export interface Meses{
   id:number;
   nombre:string;
 }
+export interface HonoXPagar{
+  numero:number;
+  fecha:Date;
+  montoBs:number;
+  montoDol:number;
+  nombre:string;
+}
 

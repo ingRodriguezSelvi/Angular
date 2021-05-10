@@ -9,6 +9,9 @@ import { FormControl } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { HonoAgrupadosComponent } from './hono-agrupados/hono-agrupados.component';
+import { PreviComponent } from './previ/previ.component';
+import { HonoPorPagarComponent } from './hono-por-pagar/hono-por-pagar.component';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +20,9 @@ import { HonoAgrupadosComponent } from './hono-agrupados/hono-agrupados.componen
     DetailsOrderComponent,
     UserInfoComponent,
     HonoAgrupadosComponent,
+    PreviComponent,
+    HonoPorPagarComponent,
+
 
   ],
   entryComponents:[DetailsOrderComponent],
