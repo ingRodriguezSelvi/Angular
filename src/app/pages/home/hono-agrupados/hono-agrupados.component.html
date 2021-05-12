@@ -1,7 +1,15 @@
 <div *ngIf="loadding" class="loadding">
   <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
 </div>
-<table mat-table [dataSource]="dataSource" *ngIf="flag">
+<div *ngIf='!loadding'>
+<mat-form-field>
+  <mat-label>{{meses[(mesActual)].nombre}}</mat-label>
+  <mat-select [(value)]="mesActual" #fecha (selectionChange)="aplyFilterDate(data.anno,fecha.value,tiposedes!)">
+    <mat-option *ngFor="let mes of data.MesesView" value={{mes.id}}>{{mes.nombre}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-raised-button *ngIf="!data.hXC && !data.isPrevimedica"  (click)="viewOrdenes()"><mat-icon >description</mat-icon>{{txtbtn}}</button>
+<table mat-table [dataSource]="dataSource" *ngIf="flag && !loadding">
   <ng-container matColumnDef="Numero de Factura">
     <th mat-header-cell *matHeaderCellDef> Número Orden </th>
     <td mat-cell *matCellDef="let element"><a (click)="openModal(element.numero,element.montoBs,element.montoDol,1)" style="cursor: pointer; color: #013476;"> {{element.numero}} </a> </td>
@@ -40,5 +48,6 @@
        de pagos. Trabajamos por su bienestar.
     </p>
   </div>
+</div>
 </div>
 

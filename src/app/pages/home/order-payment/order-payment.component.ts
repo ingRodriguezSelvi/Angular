@@ -9,6 +9,8 @@ import { FormBuilder } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { DataService } from '@app/Services/data.service';
 import {meses} from 'src/app/core/mocks/Constans/meses';
+import { FiltersDataService } from '@app/Services/filters-data.service';
+import { MatButtonToggle } from '@angular/material/button-toggle';
 @Component({
   selector: 'app-order-payment',
   templateUrl: './order-payment.component.html',
@@ -19,9 +21,6 @@ export class OrderPaymentComponent implements OnInit {
     fecha:[''],
   })
   txtbtn='Ver Ordenes';
-  honorariosPorCancelar=false;
-  honocobrados=false;
-  honoagrupados=false;
   datee=new Date();
   mes=new Date().getMonth();
   meses:Meses[]=meses;
@@ -32,6 +31,7 @@ export class OrderPaymentComponent implements OnInit {
   sedes:Sedes[]=[];
   msjx:string='';
   flag:boolean=false;
+  isLoadding=true;
   displayedColumns: string[] = [
 
                                 'Numero de Factura','Numero de Orden','Paciente','Fecha de la Factura',
@@ -40,7 +40,7 @@ export class OrderPaymentComponent implements OnInit {
   dataSource = JSON.parse(localStorage.getItem('cobros')||'{}');
   montoBs="";
   constructor(public dialog:MatDialog,private medSrvc:MedDataService,private service:AuthService
-    ,private fr:FormBuilder,public data:DataService) {}
+    ,private fr:FormBuilder,public data:DataService, private filtersData:FiltersDataService) {}
   openModal(numero:number,totalBs:number,totalDol:number,x:number){
     this.dialog.open(DetailsOrderComponent,{data:{numero,totalBs,totalDol,x}});
   }
@@ -50,8 +50,7 @@ export class OrderPaymentComponent implements OnInit {
     let date:Date= new Date();
     this.mes=date.getMonth()+1;
     this.ano=date.getFullYear();
-    this.honocobrados=true
-    this.data.isLoadding=true;
+    this.data.hC=true
     this.data.isDetails=false;
     this.medSrvc.getSedes().subscribe(data=>{
       let dataSedes:Sedes[]=data;
@@ -62,33 +61,23 @@ export class OrderPaymentComponent implements OnInit {
     })
   }
   tipoHono(x:string){
-    if(x==='honorariosCobrados'){
-      this.honocobrados=true
-      this.honoagrupados=false;
-      this.honorariosPorCancelar=false
-    }else if(x==='honorariosXCobrar'){
-      this.honorariosPorCancelar=true;
-      this.honocobrados=false
-      this.honoagrupados=false;
-    }
-    else if(x==='honorariosagrupados'){
-      this.honorariosPorCancelar=false;
-      this.honocobrados=false
-      this.honoagrupados=true;
-    }
+    this.filtersData.tipoHono(x);
  }
  applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
 }
- tipoSede(x:number,a:number,m:number){
-   console.log('Esta cargando la sede',x);
+ tipoSede(x:number,a:number,m:number,e?:MatButtonToggle){
+    this.data.selectedVal='option1';
+    this.tipoHono('option1');
     let mes= m;
-    this.data.isLoadding=true;
+    this.isLoadding=true;
     this.data.sede=x;
     this.data.isPrevimedica=false;
+    this.data.hXC=false;
     if(x==4){
       this.data.isPrevimedica=true;
+      this.isLoadding=false;
     }
     if(this.data.isPrevimedica==true){
       return;
@@ -96,7 +85,7 @@ export class OrderPaymentComponent implements OnInit {
     this.dataSource=this.medSrvc.getOrder(x,a,mes).subscribe(data=>{
     let orderData:Cobros[]= data;
     this.dataSource=new MatTableDataSource(orderData);
-    this.data.isLoadding=false;
+    this.isLoadding=false;
     console.log(data);
     if(orderData.length>0){
       this.flag=true;
@@ -107,62 +96,23 @@ export class OrderPaymentComponent implements OnInit {
   })}
  }
  viewOrdenes(){
-   if (this.honoagrupados==false){
-     this.honoagrupados=true;
-     this.honocobrados=false;
-     this.honorariosPorCancelar=false;
-     this.data.isDetails=true;
-     this.txtbtn='Ordenes con Detalles';
-   }else if(this.honoagrupados==true){
-     this.honoagrupados=false;
-     this.honocobrados=true;
-     this.honorariosPorCancelar=false;
-     this.data.isDetails=false;
-     this.txtbtn='Ver Ordenes';
-   }
+  this.filtersData.viewOrdenes();
+  this.txtbtn=this.data.txtBtnDetails;
  }
-
  getAnos(){
-   let fechaMax = new Date().getFullYear();
-   let fechaMin= 2013;
-   let mesesMenos=12;
-
-   for(var i=fechaMax; i!=fechaMin; i--){
-     var ano=i;
-     this.anos.push(ano);
-   }
-   for(var x=new Date().getMonth();x>=0;x--){
-    mesesMenos--;
-    this.mesesView.push(this.meses[x])
-   }
-  if(mesesMenos>=0){
-    this.ano=this.ano-1;
-    let n=1;
-    for(var x=mesesMenos; x>0;x--){
-      this.mesesView.push(this.meses[12-n])
-      n++;
-    }
-  }
+  this.filtersData.getAnos();
  }
  aplyFilterDate(ano:number,mes:number,idSede:number){
-  let mesActual=new Date().getMonth();
-  let nuevoanio=ano;
-  this.mes=mes;
-  this.ano=ano;
-  console.log(this.data.isDetails);
-  console.log(this.data.sede)
-  if(this.data.sede===4){
-    console.log('Aplica Filtro de fecha')
-    return;
-  }
-  if(this.data.isDetails==true){
-   return  this.viewOrdenes();
-  }else if(this.data.isDetails==false){
-   if(mes>mesActual){
-    this.dataSource=this.medSrvc.getOrder(idSede,nuevoanio-1,mes).subscribe(data=>{
+   this.isLoadding=true;
+   this.flag=false;
+   let mA=new Date().getMonth()+1
+  console.log('Año',ano,'Mes',mes,'Sede',idSede,'Mes Actual',mA)
+   if(mes>mA){
+    console.log('Año',(ano-1),'Mes',mes,'Sede',idSede)
+    this.dataSource=this.medSrvc.getOrder(idSede,ano-1,mes).subscribe(data=>{
       let orderData:Cobros[]= data;
       this.dataSource=new MatTableDataSource(orderData);
-      this.data.isLoadding
+      this.isLoadding=false;
       if(orderData.length>0){
         this.flag=true;
       }else{
@@ -170,11 +120,11 @@ export class OrderPaymentComponent implements OnInit {
         this.msjx='El rango de fecha y sede seleccionado no tiene informacion para mostrar. Por favor seleccione otro rango de fecha';
       }
     })
-   }else if(mesActual>=mes){
-    this.dataSource=this.medSrvc.getOrder(idSede,nuevoanio,mes).subscribe(data=>{
+   }else if(mA>=mes){
+    this.dataSource=this.medSrvc.getOrder(idSede,ano,mes).subscribe(data=>{
       let orderData:Cobros[]= data;;
       this.dataSource=new MatTableDataSource(orderData);
-      this.data.isLoadding=false;
+      this.isLoadding=false;
       if(orderData.length>0){
         this.flag=true;
       }else{
@@ -182,7 +132,5 @@ export class OrderPaymentComponent implements OnInit {
         this.msjx='El rango de fecha y sede seleccionado no tiene informacion para mostrar. Por favor seleccione otro rango de fecha';
       }
    })}
-  }
-  this.data.isLoadding
  }
 }

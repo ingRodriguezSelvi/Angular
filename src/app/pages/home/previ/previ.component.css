@@ -26,3 +26,12 @@ td{
   display:flex ;
   margin-bottom: 1vh;
 }
+mat-form-field{
+  width: 12%;
+  padding: 1.5%;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 0;
+  height: auto;
+  font-size: medium;
+}

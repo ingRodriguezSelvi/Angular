@@ -1,4 +1,13 @@
-<table mat-table [dataSource]="dataSource" *ngIf="flag && data.sede!=4" >
+<mat-form-field class="mat-form">
+  <mat-label>{{meses[(mesActual)].nombre}}</mat-label>
+  <mat-select [(value)]="mesActual" #fecha (selectionChange)="aplyFilterDate(data.anno,fecha.value,tiposedes!)">
+    <mat-option *ngFor="let mes of data.MesesView" value={{mes.id}}>{{mes.nombre}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<div *ngIf='isLoadding' class="loadding">
+  <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
+</div>
+<table mat-table [dataSource]="dataSource" *ngIf="flag && data.sede!=4 && !isLoadding" >
   <ng-container matColumnDef="numero">
     <th mat-header-cell *matHeaderCellDef> Número de Factura </th>
     <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
@@ -7,7 +16,7 @@
     <th mat-header-cell *matHeaderCellDef>Fecha</th>
     <td mat-cell *matCellDef="let element">{{element.fecha|date:'dd/MM/YYYY'}}</td>
   </ng-container>
-  <ng-container matColumnDef="nombre">
+  <ng-container matColumnDef="paciente">
     <th mat-header-cell *matHeaderCellDef class="font-center"> Paciente  </th>
     <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
   </ng-container>
@@ -19,8 +28,17 @@
     <th mat-header-cell *matHeaderCellDef class="alin-regth"> Monto USD </th>
     <td mat-cell *matCellDef="let element" class="alin-regth monto"> {{element.montoDol|number:'1.2'}} </td>
   </ng-container>
-
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
 </table>
+<div class="container" *ngIf='isLoadding'>
+  <div class="alert alert-danger" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag && !data.isPrevimedica" >
+    <p style="text-align: center;">{{msjx}}
+    </p>
+  </div>
+  <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" *ngIf="flag && data.sede!=4">
+    <p style="text-align: center;">Montos netos después de retenciones de ley y administrativas. Para su preguntas quedamos a la orden en el departamento
+       de pagos. Trabajamos por su bienestar.
+    </p>
+  </div>
+</div>

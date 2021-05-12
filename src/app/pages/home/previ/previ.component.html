@@ -1,4 +1,9 @@
-<button class="btn btn" (click)="searchDate()"><mat-icon>search</mat-icon>Buscar por fecha</button>
+<mat-form-field>
+  <mat-label>{{meses[(mesActual)].nombre}}</mat-label>
+  <mat-select [(value)]="mesActual" #fecha (selectionChange)="aplyFilterDate(data.anno,fecha.value,4)">
+    <mat-option *ngFor="let mes of data.MesesView" value={{mes.id}}>{{mes.nombre}}</mat-option>
+  </mat-select>
+</mat-form-field>
 <table mat-table [dataSource]="dataSource" *ngIf='!data.isLoadding && flag'>
   <ng-container matColumnDef="numero">
     <th mat-header-cell *matHeaderCellDef> Número de Orden </th>
@@ -20,5 +25,5 @@
 <div class="alert alert-danger" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag && data.isPrevimedica" >
   <p style="text-align: center;">{{msjx}}
   </p>
-</div>
+  </div>
 </div>

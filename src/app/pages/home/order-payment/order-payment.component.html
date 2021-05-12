@@ -1,6 +1,6 @@
 <div class="containeru">
   <div >
-    <mat-button-toggle-group name="sedes" #toggleSede="matButtonToggleGroup" class="sedes" [disabled]="data.isLoadding" (click)="tipoSede(toggleSede.value,this.ano,this.mes)" >
+    <mat-button-toggle-group name="sedes" #toggleSede="matButtonToggleGroup" class="sedes" [disabled]="isLoadding" (click)="tipoSede(toggleSede.value,this.ano,this.mes)" >
       <mat-button-toggle  class="sedes1 fontToogle" checked value='1' >Clínica IDB Cabudare </mat-button-toggle>
       <mat-button-toggle  class="sedes1 fontToogle" value="2"  >Clínica IDB Barquisimeto</mat-button-toggle>
       <mat-button-toggle  class="sedes1 fontToogle" value="3"  >Clínica IMD San Felipe </mat-button-toggle>
@@ -10,36 +10,30 @@
   <mat-card class="mat-card-payment">
     <div>
       <div>
-        <mat-button-toggle-group name="TypeMoney" #toggleGroup="matButtonToggleGroup" (click)="tipoHono(toggleGroup.value)" aria-label="Type the order">
-          <mat-button-toggle value="honorariosCobrados" checked class="fontToogle">Honorarios cobrados</mat-button-toggle>
-          <mat-button-toggle value="honorariosXCobrar" class="fontToogle" [disabled]="data.isPrevimedica">Honorarios por cobrar</mat-button-toggle>
+        <mat-button-toggle-group name="TypeMoney" #toggleGroup="matButtonToggleGroup" (click)="tipoHono(toggleGroup.value)" [(value)]="data.selectedVal" aria-label="Type the order">
+          <mat-button-toggle value="option1"  class="fontToogle">Honorarios cobrados</mat-button-toggle>
+          <mat-button-toggle value="option2" class="fontToogle"  [disabled]="data.isPrevimedica">Honorarios por cobrar</mat-button-toggle>
         </mat-button-toggle-group>
       </div>
     </div>
     <div >
-        <div *ngIf="data.isLoadding" class="loadding">
+        <div *ngIf='isLoadding' class="loadding">
           <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
         </div>
-        <div *ngIf="!data.isLoadding">
+       <div *ngIf='data.hC && !data.isPrevimedica'>
+        <div *ngIf="!isLoadding">
           <mat-form-field>
             <mat-label>{{meses[(mesActual)].nombre}}</mat-label>
-            <mat-select [(value)]="mes" #fecha (selectionChange)="aplyFilterDate(anoo.value,fecha.value,toggleSede.value)">
-              <mat-option *ngFor="let mes of mesesView" value={{mes.id}}>{{mes.nombre}}</mat-option>
+            <mat-select [(value)]="mes" #fecha (selectionChange)="aplyFilterDate(data.anno,fecha.value,toggleSede.value)">
+              <mat-option *ngFor="let mes of data.MesesView" value={{mes.id}}>{{mes.nombre}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field hidden>
-            <mat-label>{{ano}}</mat-label>
-            <mat-select disabled=true; #anoo [(value)]="ano" (selectionChange)="aplyFilterDate(anoo.value,fecha.value,toggleSede.value)">
-              <mat-option *ngFor="let anno of anos" value={{anno}} >{{anno}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field *ngIf="honocobrados && !data.isPrevimedica">
+          <mat-form-field *ngIf="data.hC && !data.isPrevimedica">
             <mat-label >Buscar por paciente</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Juan Perez" #input >
           </mat-form-field>
-          <button mat-raised-button *ngIf="!honorariosPorCancelar && !data.isPrevimedica"  (click)="viewOrdenes()"><mat-icon >description</mat-icon>{{txtbtn}}</button>
-        <div *ngIf="honocobrados">
+          <button mat-raised-button *ngIf="!data.hXC && !data.isPrevimedica"  (click)="viewOrdenes()"><mat-icon >description</mat-icon>{{txtbtn}}</button>
+        <div *ngIf="data.hC">
         <table mat-table [dataSource]="dataSource" *ngIf="flag && data.sede!=4" >
           <ng-container matColumnDef="Numero de Factura">
             <th mat-header-cell *matHeaderCellDef> Número de Factura </th>
@@ -70,8 +64,8 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
         </table>
-
-        <div class="container">
+      </div >
+        <div class="container" *ngIf="!isLoadding">
           <div class="alert alert-danger" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag && !data.isPrevimedica" >
             <p style="text-align: center;">{{msjx}}
             </p>
@@ -90,10 +84,10 @@
         </div>
 
     </div>
-    <div *ngIf="honorariosPorCancelar">
+    <div *ngIf="data.hXC">
       <h1><app-hono-por-pagar [tiposedes]="toggleSede.value"[mes]="mes"[ano]="ano" ></app-hono-por-pagar></h1>
     </div>
-    <div  *ngIf='honoagrupados' ><app-hono-agrupados [tiposedes]="toggleSede.value"[mes]="mes"[ano]="ano"></app-hono-agrupados></div>
+    <div  *ngIf='data.hA' ><app-hono-agrupados [tiposedes]="toggleSede.value"[mes]="mes"[ano]="ano"></app-hono-agrupados></div>
     <div *ngIf='data.isPrevimedica'><app-previ [mes]='mes'></app-previ></div>
   </mat-card>
     </div>

@@ -1,0 +1,13 @@
+
+.bgprimary{
+  background-color: blue;
+}
+#sidebar-container{
+  min-height: 100%;
+}
+#sidebar-container .logo{
+  padding: 0875rem 1.25rem;
+}
+#sidebar-container .menu{
+  width: 18rem;
+}

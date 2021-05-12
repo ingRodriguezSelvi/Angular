@@ -1,11 +1,11 @@
 <mat-toolbar class="color-IDB">
   <ng-container *ngIf="!isAdmin; else vieAdmin" class="color-IDB">
-  <img src="https://idbclinicas.com/wp-content/uploads/2017/09/baja.png" alt="">
+  <img src="https://idbclinicas.com/wp-content/uploads/2017/09/grupo-de-clinicas-diapo.png" alt="80px" width="250px">
   <span class="spacer"></span>
   <div>
     <a mat-button [routerLink]="'/login'" *ngIf="!data.isLogin"><mat-icon>login</mat-icon>Ingresar</a>
     <a mat-button (click)='closedSesion()' *ngIf="data.isLogin"  ><mat-icon>logout</mat-icon>Cerrar sesión</a>
-    <a mat-button [routerLink]="'/admin'"*ngIf="isAdmin">Administrador</a>
+    <a mat-button [routerLink]="'/admin'">Administrador</a>
   </div>
 </ng-container>
 </mat-toolbar>

@@ -82,6 +82,8 @@ mat-form-field{
   flex-direction: row;
   align-items: center;
   margin: 0 0;
+  height: auto;
+  font-size: medium;
 }
 .mat-raised-button{
   background: #0077cb;
