@@ -9,24 +9,23 @@ import { AuthService } from '@app/pages/auth/auth.service';
   styleUrls: ['./details-order.component.css']
 })
 export class DetailsOrderComponent implements OnInit {
-  displayedColumns: string[] = ['Numero de factura', 'Paciente','Fecha','Monto Honorario Bs','Monto Honorario USD',
-                                '% de Comisión'];
+  displayedColumns: string[] = ['Numero de factura', 'Paciente','Fecha','Monto Honorario Bs','Monto Honorario USD'];
   dataSource = JSON.parse(sessionStorage.getItem('cobros')||'{}');
   totales= [{}];
   loadding=false;
   medico:MedicosI={'celular':0,'ciudad':'','email':'','sexo':'','zona':'','apellidos':'','exId':'','id':0,'nombres':'','rif':'','direccion':''};
   sexo='';
   date=new Date();
+  ordersDetails?:PaymentsDetailsI[];
   constructor(@Inject(MAT_DIALOG_DATA) public data:{numero:number,totalBs:number,totalDol:number,x:number},private oshvc:MedDataService ,private authSvc:AuthService) { }
   ngOnInit(): void {
-    this.loadding=true
-    this.dataSource=this.oshvc.getDetailsOrder(this.data.numero,this.data.x).subscribe(res=>{
+      this.loadding=true
+      this.oshvc.getDetailsOrder(this.data.numero,this.data.x).subscribe(res=>{
       let orderDara:PaymentsDetailsI[]=res;
-      this.dataSource=orderDara;
-
+      this.ordersDetails=orderDara;
       this.loadding=false;
     })
-    this.authSvc.saveMedico().subscribe(res=>{
+      this.authSvc.saveMedico().subscribe(res=>{
       let medico:MedicosI= res;
       this.medico=medico;
       if(medico.sexo==='F'){

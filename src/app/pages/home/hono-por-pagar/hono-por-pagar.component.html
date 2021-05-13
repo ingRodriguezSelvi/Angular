@@ -1,5 +1,5 @@
 <mat-form-field class="mat-form">
-  <mat-label>{{meses[(mesActual)].nombre}}</mat-label>
+  <mat-label>Mes</mat-label>
   <mat-select [(value)]="mesActual" #fecha (selectionChange)="aplyFilterDate(data.anno,fecha.value,tiposedes!)">
     <mat-option *ngFor="let mes of data.MesesView" value={{mes.id}}>{{mes.nombre}}</mat-option>
   </mat-select>
@@ -31,12 +31,12 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<div class="container" *ngIf='isLoadding'>
-  <div class="alert alert-danger" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag && !data.isPrevimedica" >
-    <p style="text-align: center;">{{msjx}}
+<div class="container" *ngIf='!isLoadding'>
+  <div class="alert alert-secondary" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag && !data.isPrevimedica" >
+    <p style="text-align: center;font-size: medium;">{{msjx}}
     </p>
   </div>
-  <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" *ngIf="flag && data.sede!=4">
+  <div class="alert alert-secondary" style="margin-top: 1.5rem;text-align: left;" *ngIf="flag && data.sede!=4">
     <p style="text-align: center;">Montos netos después de retenciones de ley y administrativas. Para su preguntas quedamos a la orden en el departamento
        de pagos. Trabajamos por su bienestar.
     </p>

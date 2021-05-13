@@ -3,12 +3,12 @@
 </div>
 <div *ngIf='!loadding'>
 <mat-form-field>
-  <mat-label>{{meses[(mesActual)].nombre}}</mat-label>
+  <mat-label>Mes</mat-label>
   <mat-select [(value)]="mesActual" #fecha (selectionChange)="aplyFilterDate(data.anno,fecha.value,tiposedes!)">
     <mat-option *ngFor="let mes of data.MesesView" value={{mes.id}}>{{mes.nombre}}</mat-option>
   </mat-select>
 </mat-form-field>
-<button mat-raised-button *ngIf="!data.hXC && !data.isPrevimedica"  (click)="viewOrdenes()"><mat-icon >description</mat-icon>{{txtbtn}}</button>
+<button mat-raised-button *ngIf="!data.hXC && !data.isPrevimedica"  (click)="viewOrdenes()"><mat-icon style="margin-right: 10px;">description</mat-icon >Volver</button>
 <table mat-table [dataSource]="dataSource" *ngIf="flag && !loadding">
   <ng-container matColumnDef="Numero de Factura">
     <th mat-header-cell *matHeaderCellDef> Número Orden </th>
@@ -39,11 +39,11 @@
 
 </table>
 <div class="container">
-  <div class="alert alert-danger" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag" >
+  <div class="alert alert-secondary" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag" >
     <p style="text-align: center;">{{msjx}}
     </p>
   </div>
-  <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" *ngIf="flag">
+  <div class="alert alert-secondary" style="margin-top: 1.5rem;text-align: left;" *ngIf="flag">
     <p style="text-align: center;">Montos netos después de retenciones ley y administrativas. Para su preguntas quedamos a la orden en el departamento
        de pagos. Trabajamos por su bienestar.
     </p>

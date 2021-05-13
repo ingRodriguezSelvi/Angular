@@ -60,7 +60,7 @@ export class FiltersDataService {
       this.data.hC=false;
       this.data.hXC=false;
        this.data.isDetails=true;
-       this.data.txtBtnDetails='Ordenes con Detalles';
+       this.data.txtBtnDetails='Volver';
      }else if(this.data.hA==true){
       this.data.hA=false;
       this.data.hC=true;
@@ -68,5 +68,6 @@ export class FiltersDataService {
        this.data.isDetails=false;
        this.data.txtBtnDetails='Ver Ordenes';
      }
+     console.log(this.data.txtBtnDetails)
   }
 }

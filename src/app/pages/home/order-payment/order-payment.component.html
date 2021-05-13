@@ -1,6 +1,6 @@
 <div class="containeru">
   <div >
-    <mat-button-toggle-group name="sedes" #toggleSede="matButtonToggleGroup" class="sedes" [disabled]="isLoadding" (click)="tipoSede(toggleSede.value,this.ano,this.mes)" >
+    <mat-button-toggle-group name="sedes" style="font-size: larger;" #toggleSede="matButtonToggleGroup" class="sedes" [disabled]="isLoadding" (click)="tipoSede(toggleSede.value,this.ano,this.mes)" >
       <mat-button-toggle  class="sedes1 fontToogle" checked value='1' >Clínica IDB Cabudare </mat-button-toggle>
       <mat-button-toggle  class="sedes1 fontToogle" value="2"  >Clínica IDB Barquisimeto</mat-button-toggle>
       <mat-button-toggle  class="sedes1 fontToogle" value="3"  >Clínica IMD San Felipe </mat-button-toggle>
@@ -10,8 +10,8 @@
   <mat-card class="mat-card-payment">
     <div>
       <div>
-        <button class="text" [id]="active" #btn1 value="option1" (click)="expression(btn1.value)"><p>Honorarios por Cobrar</p></button>
-        <button class="text" [id]='active1' #btn2 value="option2"(click)="expression1(btn2.value)" [hidden]='data.isPrevimedica'><p>Honorarios Cobrados</p></button>
+        <button class="text" [id]="active" #btn1 value="option1" (click)="expression(btn1.value)"><p>Honorarios Cobrados </p></button>
+        <button class="text" [id]='active1' #btn2 value="option2"(click)="expression1(btn2.value)" [hidden]='data.isPrevimedica'><p>Honorarios por Cobrar</p></button>
       </div>
     </div>
     <div >
@@ -21,7 +21,7 @@
        <div *ngIf='data.hC && !data.isPrevimedica'>
         <div *ngIf="!isLoadding">
           <mat-form-field>
-            <mat-label>{{meses[(mesActual)].nombre}}</mat-label>
+            <mat-label>Mes</mat-label>
             <mat-select [(value)]="mes" #fecha (selectionChange)="aplyFilterDate(data.anno,fecha.value,toggleSede.value)">
               <mat-option *ngFor="let mes of data.MesesView" value={{mes.id}}>{{mes.nombre}}</mat-option>
             </mat-select>
@@ -30,7 +30,7 @@
             <mat-label >Buscar por paciente</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Juan Perez" #input >
           </mat-form-field>
-          <button mat-raised-button *ngIf="!data.hXC && !data.isPrevimedica"  (click)="viewOrdenes()"><mat-icon >description</mat-icon>{{txtbtn}}</button>
+          <button mat-raised-button *ngIf="!data.hXC && !data.isPrevimedica"  (click)="viewOrdenes()"><mat-icon style="margin-right: 10px;" >description</mat-icon>Ver Órdenes</button>
         <div *ngIf="data.hC">
         <table mat-table [dataSource]="dataSource" *ngIf="flag && data.sede!=4" >
           <ng-container matColumnDef="Numero de Factura">
@@ -64,12 +64,12 @@
         </table>
       </div >
         <div class="container" *ngIf="!isLoadding">
-          <div class="alert alert-danger" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag && !data.isPrevimedica" >
+          <div class="alert alert-secondary " style="margin-top: 1.5rem;text-align: left;font-size: larger;" *ngIf="!flag && !data.isPrevimedica" >
             <p style="text-align: center;">{{msjx}}
             </p>
           </div>
 
-          <div class="alert alert-warning" style="margin-top: 1.5rem;text-align: left;" *ngIf="flag && data.sede!=4">
+          <div class="alert alert-secondary " style="margin-top: 1.5rem;text-align: left;font-size: larger;" *ngIf="flag && data.sede!=4">
             <p style="text-align: center;">Montos netos después de retenciones de ley y administrativas. Para su preguntas quedamos a la orden en el departamento
                de pagos. Trabajamos por su bienestar.
             </p>

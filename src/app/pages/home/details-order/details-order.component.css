@@ -1,5 +1,19 @@
-.tabla{
-  margin-top: 0%
+table{
+  width: 100%;
+  text-align: center;
+  height: auto;
+  font-size: medium;
+}
+thead{
+  background: #0077cb;
+}
+th{
+  background: #0077cb;
+  color: #ffff;
+  font-weight: 500;
+}
+tbody{
+  color: black;
 }
 .mat-elevation-z8{
 width: 1048px;
@@ -13,23 +27,7 @@ width: 1048px;
   font-weight: 600;
   color: #0077cb;
 }
-th{
-  background: #0077cb;
-  color: #fff;
-  font-size: 1rem;
-  text-align: center;
-}
-td{
-  font-size: 1rem;
-  text-align: center;
-}
-tr:hover{
-  background: #ffff;
-  color: #000;
-  opacity: 0.90;
-  box-shadow: 2px 2px 5px #999;
 
-}
 .alin-regth{
   text-align: right;
   font-weight: 600;
