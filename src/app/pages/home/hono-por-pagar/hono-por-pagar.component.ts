@@ -19,7 +19,7 @@ export class HonoPorPagarComponent implements OnInit {
   flag:boolean=false;
   msjx:string='';
   isLoadding=true;
-  dataSource = JSON.parse(localStorage.getItem('cobros')||'{}');
+  dataSource = JSON.parse(sessionStorage.getItem('cobros')||'{}');
   displayedColumns: string[] = [
     'numero','fecha','paciente','montoBs','montoDol',];
   constructor(private medSrvc:MedDataService,public data:DataService) { }

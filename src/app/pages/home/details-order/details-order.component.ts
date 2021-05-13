@@ -11,7 +11,7 @@ import { AuthService } from '@app/pages/auth/auth.service';
 export class DetailsOrderComponent implements OnInit {
   displayedColumns: string[] = ['Numero de factura', 'Paciente','Fecha','Monto Honorario Bs','Monto Honorario USD',
                                 '% de Comisión'];
-  dataSource = JSON.parse(localStorage.getItem('cobros')||'{}');
+  dataSource = JSON.parse(sessionStorage.getItem('cobros')||'{}');
   totales= [{}];
   loadding=false;
   medico:MedicosI={'celular':0,'ciudad':'','email':'','sexo':'','zona':'','apellidos':'','exId':'','id':0,'nombres':'','rif':'','direccion':''};

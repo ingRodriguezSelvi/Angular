@@ -51,37 +51,37 @@ private loggedIn = new BehaviorSubject<boolean>(false);
     }));
   }
   logout():void{
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     this.loggedIn.next(false);
 
     //set userIsLogged=false
   }
   checkActivy(){
 
-    if(localStorage.getItem('token')){
+    if(sessionStorage.getItem('token')){
       this.loger='true';
-      localStorage.setItem('loger',this.loger)
+      sessionStorage.setItem('loger',this.loger)
     }else{
       this.loger='false'
-      localStorage.setItem('loger',this.loger)
+      sessionStorage.setItem('loger',this.loger)
     }
   }
   private readToken():void{
-   // const userToken=localStorage.getItem('token');
+   // const userToken=sessionStorage.getItem('token');
    // const isExired = helper.isTokenExpired(userToken);
    // console.log('isExpired->',isExired);
     //set userisLogged = isExpired
     //isExpired ? this.logout():this.loggeIn.next(true);
   }
   private saveToken(token:string):void{
-    localStorage.setItem('token',token);
+    sessionStorage.setItem('token',token);
   }
   getEspecialidad():Observable<EspecialidadI[]>{
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         accept: '*/*',
-        Authorization: "Bearer "+localStorage.getItem('token')
+        Authorization: "Bearer "+sessionStorage.getItem('token')
       })
     };
     let direccion = "http://172.18.16.50:5005/"
@@ -95,7 +95,7 @@ private loggedIn = new BehaviorSubject<boolean>(false);
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         accept: '*/*',
-        Authorization: "Bearer "+localStorage.getItem('token')
+        Authorization: "Bearer "+sessionStorage.getItem('token')
       })
     };
     let direccion = "http://172.18.16.50:5005/"

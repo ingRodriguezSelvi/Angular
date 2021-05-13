@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   constructor(private authSvc:AuthService,private router:Router,public data:DataService) { }
   ngOnInit(): void {
 
-    if(localStorage.getItem('token')){
+    if(sessionStorage.getItem('token')){
       this.data.isLogin=true;
     }
   }
@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
   closedSesion(){
     this.authSvc.logout();
     this.router.navigate(['login']);
-    if(!localStorage.getItem('token')){
+    if(!sessionStorage.getItem('token')){
       this.data.isLogin=false;
     }
   }

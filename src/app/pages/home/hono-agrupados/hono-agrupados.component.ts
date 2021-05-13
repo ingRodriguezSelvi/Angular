@@ -23,7 +23,7 @@ export class HonoAgrupadosComponent implements OnInit {
   loadding=true;
   msjx:string='';
   flag:boolean=false;
-  dataSource = JSON.parse(localStorage.getItem('cobros')||'{}');
+  dataSource = JSON.parse(sessionStorage.getItem('cobros')||'{}');
   displayedColumns: string[] = [
     'Numero de Factura','Factura','Paciente','Fecha','Monto Bs','Monto USD'];
    sedes:Sedes[]=[];

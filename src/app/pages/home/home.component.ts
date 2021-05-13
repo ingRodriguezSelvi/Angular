@@ -29,11 +29,11 @@ export class HomeComponent implements OnInit {
   constructor(private authSvc:AuthService,private servicesMed:MedDataService,
     private router:Router ) { }
   ngOnInit(): void {
-    localStorage.removeItem('cedula');
-    localStorage.removeItem('password');
-    if(localStorage.getItem('token')){
+    sessionStorage.removeItem('cedula');
+    sessionStorage.removeItem('password');
+    if(sessionStorage.getItem('token')){
       this.login=true
-    }else if(!localStorage.getItem('token')){
+    }else if(!sessionStorage.getItem('token')){
       this.login=false;
     }
     if(this.login==false){

@@ -13,7 +13,7 @@ export class FiltersDataService {
   meses:Meses[]=meses;
   anos:number[]=[];
   ano=new Date().getFullYear();
-  dataSource = JSON.parse(localStorage.getItem('cobros')||'{}');
+  dataSource = JSON.parse(sessionStorage.getItem('cobros')||'{}');
   constructor(public data:DataService,public medSrvc:MedDataService) { }
 
   getAnos(){

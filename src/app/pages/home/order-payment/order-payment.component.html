@@ -10,10 +10,8 @@
   <mat-card class="mat-card-payment">
     <div>
       <div>
-        <mat-button-toggle-group name="TypeMoney" #toggleGroup="matButtonToggleGroup" (click)="tipoHono(toggleGroup.value)" [(value)]="data.selectedVal" aria-label="Type the order">
-          <mat-button-toggle value="option1"  class="fontToogle">Honorarios cobrados</mat-button-toggle>
-          <mat-button-toggle value="option2" class="fontToogle"  [disabled]="data.isPrevimedica">Honorarios por cobrar</mat-button-toggle>
-        </mat-button-toggle-group>
+        <button class="text" [id]="active" #btn1 value="option1" (click)="expression(btn1.value)"><p>Honorarios por Cobrar</p></button>
+        <button class="text" [id]='active1' #btn2 value="option2"(click)="expression1(btn2.value)" [hidden]='data.isPrevimedica'><p>Honorarios Cobrados</p></button>
       </div>
     </div>
     <div >

@@ -48,7 +48,7 @@
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="Fecha">
-      <th mat-header-cell *matHeaderCellDef> Fecha </th>
+      <th mat-header-cell *matHeaderCellDef> Fecha de la Factura </th>
       <td mat-cell *matCellDef="let element"> {{(element.fecha|date:'dd/MM/YYYY')}} </td>
     </ng-container>
     <ng-container matColumnDef="Monto Honorario Bs" >
@@ -71,8 +71,8 @@
 
     <table class="totales">
       <thead>
-        <th class="font">Total en Bs</th>
-        <th class="font">Total en USD</th>
+        <th class="font">Total Bs</th>
+        <th class="font">Total USD</th>
       </thead>
       <tbody>
         <tr>

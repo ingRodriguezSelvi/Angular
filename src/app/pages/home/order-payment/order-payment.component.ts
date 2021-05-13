@@ -32,12 +32,14 @@ export class OrderPaymentComponent implements OnInit {
   msjx:string='';
   flag:boolean=false;
   isLoadding=true;
+  active='active'
+  active1='desactive'
   displayedColumns: string[] = [
 
                                 'Numero de Factura','Numero de Orden','Paciente','Fecha de la Factura',
                                 'Monto en Bs','Monto en $'
                                ];
-  dataSource = JSON.parse(localStorage.getItem('cobros')||'{}');
+  dataSource = JSON.parse(sessionStorage.getItem('cobros')||'{}');
   montoBs="";
   constructor(public dialog:MatDialog,private medSrvc:MedDataService,private service:AuthService
     ,private fr:FormBuilder,public data:DataService, private filtersData:FiltersDataService) {}
@@ -68,7 +70,8 @@ export class OrderPaymentComponent implements OnInit {
   this.dataSource.filter = filterValue.trim().toLowerCase();
 }
  tipoSede(x:number,a:number,m:number,e?:MatButtonToggle){
-    this.data.selectedVal='option1';
+    this.active='active';
+    this.active1='desactive';
     this.tipoHono('option1');
     let mes= m;
     this.isLoadding=true;
@@ -133,4 +136,18 @@ export class OrderPaymentComponent implements OnInit {
       }
    })}
  }
+ expression(x:string){
+   this.tipoHono(x);
+   if(this.active==='desactive'){
+    this.active='active';
+    this.active1='desactive';
+  }
+ }
+ expression1(x:string){
+  this.tipoHono(x);
+  if(this.active1==='desactive'){
+   this.active1='active1';
+   this.active='desactive';
+ }
+}
 }

@@ -19,7 +19,7 @@ export class MedDataService {
     const httpOptions = {
       headers: new HttpHeaders({
         accept: '*/*',
-        Authorization: "Bearer "+localStorage.getItem('token')
+        Authorization: "Bearer "+sessionStorage.getItem('token')
       })}
     return this.http.get<Sedes[]>(this.direccion+'api/Sedes/ListarSedes',httpOptions).pipe
     (map((res:Sedes[])=>{
@@ -32,7 +32,7 @@ export class MedDataService {
     const httpOptions = {
       headers: new HttpHeaders({
         accept: '*/*',
-        Authorization: "Bearer "+localStorage.getItem('token'),
+        Authorization: "Bearer "+sessionStorage.getItem('token'),
         Sede: String(x)
       }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
      }
@@ -45,7 +45,7 @@ export class MedDataService {
     const httpOptions = {
       headers: new HttpHeaders({
         accept: '*/*',
-        Authorization: "Bearer "+localStorage.getItem('token'),
+        Authorization: "Bearer "+sessionStorage.getItem('token'),
         Sede: String(x)
       }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
      }
@@ -59,7 +59,7 @@ export class MedDataService {
     const httpOptions = {
       headers: new HttpHeaders({
         accept: '*/*',
-        Authorization: "Bearer "+localStorage.getItem('token'),
+        Authorization: "Bearer "+sessionStorage.getItem('token'),
         Sede: String(x)
       }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
      }
@@ -73,7 +73,7 @@ export class MedDataService {
     const httpOptions = {
       headers: new HttpHeaders({
         accept: '*/*',
-        Authorization: "Bearer "+localStorage.getItem('token'),
+        Authorization: "Bearer "+sessionStorage.getItem('token'),
         Sede: String(x)
       }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
      }
@@ -87,7 +87,7 @@ export class MedDataService {
       {
         headers: new HttpHeaders({
           accept: '*/*',
-          Authorization: "Bearer "+localStorage.getItem('token'),
+          Authorization: "Bearer "+sessionStorage.getItem('token'),
           Sede:String(x)
         }),
         params:new HttpParams().append('OrdNum',String(Ordernumb))

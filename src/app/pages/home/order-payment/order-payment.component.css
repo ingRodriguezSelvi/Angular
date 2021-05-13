@@ -1,8 +1,9 @@
+
 .font-center{
   text-align: center;
 }
 table {
-  width: 100%;
+  width: 101%;
   padding-bottom: 2rem;
   height: auto;
 }
@@ -41,18 +42,20 @@ tr:hover{
 .containeru{
   width: 90%;
   margin: 0.3% 5%;
+  margin-top: 0%;
 }
 .monto{
   font-weight: 600;
   color: #0077cb;
 }.mat-button-toggle-appearance-standard{
-  background: #0077cb;
-  color: #fff;
+  background: #E0E0E0;
+  color: #424242;
 
 }
 .mat-button-toggle-checked {
   background:#fff ;
   color: #000;
+
 }
 th.mat-header-cell {
   text-align: center;
@@ -92,6 +95,41 @@ mat-form-field{
   padding: 0.3rem;
   border-radius: 4px;
 }
-.mat-button-toggle-group{
-  border: 0px;
+
+#togle1.mat-button-toggle-checked {
+  border-top: 4px #0077cb solid ;
+  border-right: 4px red solid;
+  font-weight:500 ;
+  color: #000;
+}
+#togle1.mat-button-toggle-appearance-standard{
+  background: #FFFF;
+  color: #424242;
+  border-left: 0px;
+  box-shadow: 0px #ffff;
+  width: auto;
+}.text{
+  border: 0px #FFFF;
+  margin-top: 2vh;
+  background: #ffff;
+}
+ #active.text{
+  padding-top: 14px;
+  font-weight: 500;
+  border-right: 2px #BDBDBD solid;
+
+}
+#active.text p{
+  padding-top: 15px;
+  border-top:4px #0077cb solid;
+}
+#active1.text{
+  padding-top: 14px;
+  font-weight: 500;
+  border-left: 2px #BDBDBD solid;
+
+}
+#active1.text p{
+  padding-top: 15px;
+  border-top:4px #0077cb solid;
 }

@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     this.checkToken();
   }
   checkToken(){
-    if(localStorage.getItem('token')){
+    if(sessionStorage.getItem('token')){
       this,this.router.navigate(['home']);
     }
   }
@@ -47,14 +47,14 @@ export class LoginComponent implements OnInit {
         console.log(dataResponse.message);
         this.msj=dataResponse.message;
       }else if(dataResponse.succeeded==true && dataResponse.statusCode===401){
-        localStorage.setItem('token',data.result.token);
-        localStorage.setItem('cedula',cacheUser.cedula);
-        localStorage.setItem('password',cacheUser.password);
+        sessionStorage.setItem('token',data.result.token);
+        sessionStorage.setItem('cedula',cacheUser.cedula);
+        sessionStorage.setItem('password',cacheUser.password);
         this.router.navigate(['register'])
         this.data.isLogin=true;
       }
       else if(dataResponse.succeeded==true && dataResponse.statusCode===200){
-        localStorage.setItem('token',data.result.token);
+        sessionStorage.setItem('token',data.result.token);
         this.router.navigate(['home']);
         this.data.isLogin=true;
       }
