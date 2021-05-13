@@ -43,8 +43,8 @@ export class OrderPaymentComponent implements OnInit {
   montoBs="";
   constructor(public dialog:MatDialog,private medSrvc:MedDataService,private service:AuthService
     ,private fr:FormBuilder,public data:DataService, private filtersData:FiltersDataService) {}
-  openModal(numero:number,totalBs:number,totalDol:number,x:number){
-    this.dialog.open(DetailsOrderComponent,{data:{numero,totalBs,totalDol,x}});
+  openModal(numero:number,totalBs:number,totalDol:number,x:number,f:Date){
+    this.dialog.open(DetailsOrderComponent,{data:{numero,totalBs,totalDol,x,f}});
   }
   ngOnInit(): void {
     console.log(this.mesActual)

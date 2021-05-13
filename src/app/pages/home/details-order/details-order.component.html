@@ -1,66 +1,66 @@
-<div >
-<div *ngIf="loadding" class="loadding">
-  <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
-</div>
-<div *ngIf="!loadding" >
-
-  <div class="container">
-    <mat-card class="card-user-info" >
-      <div class="row">
-        <div class="col-6">
-          <div> <p class="texto">{{sexo}} {{medico.nombres}} {{medico.apellidos}} </p> </div>
-          <div> <p class="texto">Cédula: {{medico.rif}}</p></div>
-          <div> <p class="texto">Fecha: {{date|date:'dd/MM/YYYY'}}</p> </div>
-        </div>
-        <div class="col-6">
-          <h2 class="estado">Estado de cuenta</h2>
-        </div>
-      </div>
-     </mat-card>
-  </div>
-  <mat-card class="tabla">
-
-    <div class="alert alert-secondary" style="margin-top: 1.5rem;text-align: left;font-size: larger;" >
-      <p style="text-align: center;">Montos netos después de retenciones de ley y administrativas. Para su preguntas quedamos a la orden en el departamento
-        de pagos. Trabajamos por su bienestar.
-      </p>
+<div class="container" >
+    <div *ngIf="loadding" class="loadding">
+      <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
     </div>
-  <h2 mat-dialog-title>Detalle de Orden de Pago {{data.numero}}</h2>
+    <div *ngIf="!loadding" >
 
-   <table class="table">
-     <thead>
-       <tr>
-        <th>Factura</th>
-        <th>Paciente</th>
-        <th>Fecha de la Factura</th>
-        <th>Monto  Bs</th>
-        <th>Monto USD</th>
-      </tr>
-     </thead>
-     <tbody>
-       <tr *ngFor="let order of ordersDetails">
-         <td>{{order.numero}}</td>
-         <td>{{order.nombre}}</td>
-         <td>{{order.fecha|date:'dd/MM/YYYY'}}</td>
-         <td class="alin-regth monto">{{order.montoBs|number:'1.2-2'}}</td>
-         <td class="alin-regth monto">{{order.montoDol|number:'1.2-2'}}</td>
-       </tr>
-       <tr>
-         <td></td>
-         <td></td>
-         <td></td>
-         <th>Total Bs</th>
-         <th>Total USD</th>
-       </tr>
-       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td class="alin-regth monto">{{data.totalBs|number:'1.2-2'}}</td>
-        <td class="alin-regth monto">{{data.totalDol|number:'1.2-2'}}</td>
-       </tr>
-     </tbody>
-   </table>
-  </mat-card>
-</div>
+      <div class="container">
+        <mat-card class="card-user-info" >
+          <div class="row">
+            <div class="col-6">
+              <div> <p class="texto">{{sexo}} {{medico.nombres}} {{medico.apellidos}} </p> </div>
+              <div> <p class="texto">Cédula: {{medico.rif}}</p></div>
+              <div> <p class="texto">Fecha: {{date|date:'dd/MM/YYYY'}}</p> </div>
+            </div>
+            <div class="col-6">
+              <h2 class="estado">Estado de cuenta</h2>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+      <mat-card class="tabla">
+
+        <div class="alert alert-secondary" style="text-align: left;font-size: larger;" >
+          <p style="text-align: center;">Montos netos después de retenciones de ley y administrativas. Para su preguntas quedamos a la orden en el departamento
+            de pagos. Trabajamos por su bienestar.
+          </p>
+        </div>
+      <h2 mat-dialog-title>Detalle de Orden de Pago: {{data.numero}}, fecha: {{data.f|date:'dd/MM/YYYY'}}</h2>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Factura</th>
+            <th>Paciente</th>
+            <th>Fecha de la Factura</th>
+            <th>Monto  Bs</th>
+            <th>Monto USD</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of ordersDetails">
+            <td>{{order.numero}}</td>
+            <td>{{order.nombre}}</td>
+            <td>{{order.fecha|date:'dd/MM/YYYY'}}</td>
+            <td class="alin-regth monto">{{order.montoBs|number:'1.2-2'}}</td>
+            <td class="alin-regth monto">{{order.montoDol|number:'1.2-2'}}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>Total Bs</th>
+            <th>Total USD</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="alin-regth monto">{{data.totalBs|number:'1.2-2'}}</td>
+            <td class="alin-regth monto">{{data.totalDol|number:'1.2-2'}}</td>
+          </tr>
+        </tbody>
+      </table>
+      </mat-card>
+    </div>
 </div>

@@ -17,7 +17,7 @@ export class DetailsOrderComponent implements OnInit {
   sexo='';
   date=new Date();
   ordersDetails?:PaymentsDetailsI[];
-  constructor(@Inject(MAT_DIALOG_DATA) public data:{numero:number,totalBs:number,totalDol:number,x:number},private oshvc:MedDataService ,private authSvc:AuthService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data:{numero:number,totalBs:number,totalDol:number,x:number,f:Date},private oshvc:MedDataService ,private authSvc:AuthService) { }
   ngOnInit(): void {
       this.loadding=true
       this.oshvc.getDetailsOrder(this.data.numero,this.data.x).subscribe(res=>{
