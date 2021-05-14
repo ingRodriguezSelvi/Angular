@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row g-0">
+    <div class="col-12">
+      <h1>Editar Noticia {{data.n}}</h1>
+    </div>
+    <div class="col-12">
+      <img src={{promotion.img}} alt="50" width="100" style="margin-left:15% ;">
+    </div>
+    <div class="col-12">
+      <form [formGroup]="editNews" (ngSubmit)="edit(editNews.value)">
+        <mat-form-field class="full-width-input" hidden>
+          <input type="text" matInput placeholder="id" formControlName="id"  value={{promotion.id}}>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input type="text" matInput placeholder="img" formControlName="img" [(ngModel)]="promotion.img" value={{promotion.img}}>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input type="text" matInput placeholder="Titulo" formControlName="tittle" [(ngModel)]="promotion.tittle" value={{promotion.tittle}}>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input type="text" matInput placeholder="Contenido" formControlName="content" [(ngModel)]="promotion.content" value={{promotion.content}}>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input type="text" matInput placeholder="Link" formControlName="link" [(ngModel)]="promotion.link" value={{promotion.link}}>
+        </mat-form-field>
+        <div class="col-5">
+           <button class="btn btn-primary" mat-raised-button>Guardar</button>
+           <button class="btn btn-warning" mat-raised-button>Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

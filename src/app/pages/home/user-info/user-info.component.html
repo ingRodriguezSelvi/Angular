@@ -27,9 +27,16 @@
     <!----->
   </div>
   <mat-card class="card-user-info" >
-   <div> <a>{{sexo}} {{medico.nombres}} {{medico.apellidos}} </a> </div>
-   <div> <a>Cédula: {{medico.rif}}</a></div>
-   <div> <a >Fecha: {{date|date:'dd/MM/YYYY'}}</a> </div>
+  <div class="row g-0">
+    <div class="col-md-8">
+      <div> <a>{{sexo}} {{medico.nombres}} {{medico.apellidos}} </a> </div>
+      <div> <a>Cédula: {{medico.rif}}</a></div>
+      <div> <a >Fecha: {{date|date:'dd/MM/YYYY'}}</a> </div>
+    </div>
+    <div class="col-md-4 estado">
+      <h3>Estado de cuenta</h3>
+      <h5>por cobrar a terceros</h5>
+    </div>
+  </div>
   </mat-card>
-
 </div>

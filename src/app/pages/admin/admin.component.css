@@ -1,2 +1,40 @@
+#left-nav{
+  background: #0077cb;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x:hidden;
+  padding-top: 60px;
+}
+a{
+  color: #ffff;
+  text-align: center;
+  font-size: larger;
+  padding: 1%;
 
+}
+.nav-item:hover{
+  background: #003052;
+  border-left: #ffff 4px solid;
+}
+ul{
+  margin-top: 30%;
+}
+.users{
+  color: #ffff;
+  text-align: center;
+  font-size: larger;
+  margin-top:15% ;
+}
+.users img{
+  border-radius: 50px;
+  height: 100px;
+  width: 100px;
+  border: 2px #003052 solid;
+}
+.users h4{
+  margin-top: -5%;
+}
 

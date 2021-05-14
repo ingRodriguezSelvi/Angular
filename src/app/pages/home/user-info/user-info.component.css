@@ -1,16 +1,29 @@
 
 .card-user-info{
 margin: 1.25% 5%;
-background: url("https://idbclinicas.com/wp-content/uploads/2017/09/cintillo-3.jpg")no-repeat center center;
+background: #0077cb;
 background-size: cover  ;
 color: #fff;
 opacity: 0.95;
 width: 90%;
 font-weight: 500;
-font-size: large;
+font-size: larger;
 margin-top: 1.5%;
 margin-bottom: 0%;
 box-shadow: 2px 2px 5px #999;
+}
+.card-user-info h3{
+  color: #fff;
+  font-weight: 400;
+  font-size:3rem;
+  margin-bottom: auto;
+}
+.card-user-info h5{
+  color: #fff;
+  font-weight: 400;
+  font-size: larger;
+  margin-bottom: 1%;
+  margin-top: 2%;
 }
 
 .layaout{
@@ -27,15 +40,17 @@ box-shadow: 2px 2px 5px #999;
   margin-bottom: 0%;
   margin-top: 1%;
   box-shadow: 2px 2px 5px #999;
+  border-left: #0077cb 4px solid;
 
 }
+
 .card-title {
   font-weight: bold;
   font-size: large;
 }
 .card img {
-  width: 30%;
-  height: 150px;
+  width: 150px;
+  height: 149px;
   border-top-right-radius: 0;
   border-bottom-left-radius: calc(0.25rem - 1px);
 }

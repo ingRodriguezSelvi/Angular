@@ -1,1 +1,24 @@
-<app-sidebar></app-sidebar>
+ <div class="row g-0" >
+  <div class="col-2" id="left-nav">
+    <div class="users">
+      <img src="https://randomuser.me/api/portraits/men/79.jpg" alt="">
+      <h3>Nombre</h3>
+      <h4>rol</h4>
+    </div>
+    <ul class="nav flex-column">
+      <li class="nav-item" (click)="medico()">
+        <a class="nav-link active" aria-current="page" ><mat-icon>person</mat-icon>Medicos</a>
+      </li>
+      <li class="nav-item" (click)="promo()">
+        <a class="nav-link" ><mat-icon>article</mat-icon>Promociones</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><mat-icon>logout</mat-icon> Cerrar session</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-8" style="margin-left: 20%; margin-top: 5%;">
+    <app-promociones *ngIf="data.isMercadeo"></app-promociones>
+    <app-medicos *ngIf="data.isFinanzas"></app-medicos>
+  </div>
+ </div>

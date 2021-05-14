@@ -18,7 +18,13 @@ export interface MedicosI extends Medicos{
   direccion:string
 }
 
-
+export interface Promotion{
+  id:number;
+  img:string;
+  tittle:string;
+  content:string;
+  link:string;
+}
 export interface Cobros {
   numero:number;
   fecha:Date;

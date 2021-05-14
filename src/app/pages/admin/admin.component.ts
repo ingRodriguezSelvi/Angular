@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '@app/Services/data.service';
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(public data:DataService) { }
 
   ngOnInit(): void {
+
+  }
+  promo(){
+    this.data.isMercadeo=true;
+    this.data.isFinanzas=false;
+  }
+  medico(){
+    this.data.isMercadeo=false;
+    this.data.isFinanzas=true;
   }
 
 }

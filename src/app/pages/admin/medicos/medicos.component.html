@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <mat-card class="card">
+        <mat-form-field class="full-width-input">
+          <label for="" style="padding-bottom: 1.5rem;"><mat-icon>search</mat-icon> Buscar Medico</label>
+          <input matInput required  type="text"
+          formControlName="cedula" >
+        </mat-form-field>
+        <button class="btn btn-primary">Añadir nuevo medico</button>
+      </mat-card>
+    </div>
+    <div class="col-12">
+      <mat-card>
+        <table class="table">
+          <thead>
+            <th>Nombre</th>
+            <th>Cedula</th>
+            <th>Estado</th>
+            <th>Direccion</th>
+            <th>Acciones</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <button class="btn btn-warning" style="margin: 1rem;"><mat-icon >edit</mat-icon></button>
+                <button class="btn btn-danger"style="margin: 1rem;"><mat-icon>delete</mat-icon></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card>
+    </div>
+  </div>
+</div>

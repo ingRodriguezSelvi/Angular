@@ -24,5 +24,7 @@ selectedVal:string='option1'
 txtBtnDetails:string="Ver Ordenes";
 anno:number=new Date().getFullYear()
 mes:number=new Date().getMonth();
+isMercadeo:boolean=false;
+isFinanzas:boolean=false;
   constructor() { }
 }

@@ -1,0 +1,17 @@
+table{
+  width: 100%;
+  text-align: center;
+  height: auto;
+  font-size: medium;
+}
+thead{
+  background: #0077cb;
+}
+th{
+  background: #0077cb;
+  color: #ffff;
+  font-weight: 500;
+}
+tbody{
+  color: black;
+}
