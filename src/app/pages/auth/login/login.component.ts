@@ -46,17 +46,23 @@ export class LoginComponent implements OnInit {
         this.errorStatus=true;
         console.log(dataResponse.message);
         this.msj=dataResponse.message;
-      }else if(dataResponse.succeeded==true && dataResponse.statusCode===401){
+      }else if(dataResponse.succeeded==true && dataResponse.statusCode===401 && dataResponse.result.rol=='MEDICO'){
         sessionStorage.setItem('token',data.result.token);
         sessionStorage.setItem('cedula',cacheUser.cedula);
         sessionStorage.setItem('password',cacheUser.password);
         this.router.navigate(['register'])
         this.data.isLogin=true;
       }
-      else if(dataResponse.succeeded==true && dataResponse.statusCode===200){
+      else if(dataResponse.succeeded==true && dataResponse.statusCode===200 && dataResponse.result.rol=='MEDICO'){
         sessionStorage.setItem('token',data.result.token);
         this.router.navigate(['home']);
         this.data.isLogin=true;
+      }
+      else if(dataResponse.result.rol==='USUARIO'){
+        sessionStorage.setItem('token',data.result.token);
+        this.router.navigate(['admin']);
+        this.data.isLogin=true;
+        this.data.isFinanzas=true;
       }
     })
  }
