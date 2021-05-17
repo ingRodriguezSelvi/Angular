@@ -12,7 +12,7 @@
       <div>
         <button class="text" [id]="active" #btn1 value="option1" (click)="expression(btn1.value)"><p>Honorarios Cobrados </p></button>
         <button class="text" [id]='active1' #btn2 value="option2"(click)="expression1(btn2.value)" [hidden]='data.isPrevimedica'><p>Honorarios por Cobrar</p></button>
-        <button class="text" [id]='active1' *ngIf="!data.hXC && !data.isPrevimedica"(click)="viewOrdenes()" [hidden]='data.isPrevimedica'><p>Honorarios por Cobrar</p></button>
+        <button class="text" [id]='active1' #btn3 value="option3"(click)="viewOrdenes(btn3.value)" [hidden]='data.isPrevimedica'><p>Ver Ordenes</p></button>
       </div>
     </div>
     <div>
@@ -31,7 +31,7 @@
             <mat-label >Buscar por paciente</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Juan Perez" #input >
           </mat-form-field>
-          <button mat-raised-button *ngIf="!data.hXC && !data.isPrevimedica"  (click)="viewOrdenes()"><mat-icon style="margin-right: 10px;" >description</mat-icon>Ver Órdenes</button>
+        <!--  <button mat-raised-button *ngIf="!data.hXC && !data.isPrevimedica"  (click)="viewOrdenes()"><mat-icon style="margin-right: 10px;" >description</mat-icon>Ver Órdenes</button> -->
         <div *ngIf="data.hC">
         <table mat-table [dataSource]="dataSource" *ngIf="flag && data.sede!=4" >
           <ng-container matColumnDef="Numero de Factura">

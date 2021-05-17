@@ -34,6 +34,7 @@ export class OrderPaymentComponent implements OnInit {
   isLoadding=true;
   active='active'
   active1='desactive'
+  active2='desactive'
   displayedColumns: string[] = [
 
                                 'Numero de Factura','Numero de Orden','Paciente','Fecha de la Factura',
@@ -98,7 +99,8 @@ export class OrderPaymentComponent implements OnInit {
     }
   })}
  }
- viewOrdenes(){
+ viewOrdenes(x:string){
+
   this.filtersData.viewOrdenes();
   this.txtbtn=this.data.txtBtnDetails;
  }
