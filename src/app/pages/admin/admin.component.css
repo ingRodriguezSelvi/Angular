@@ -10,8 +10,9 @@
 }
 a{
   color: #ffff;
-  text-align: center;
+  text-align: left;
   font-size: larger;
+  margin-left: 20%;
   padding: 1%;
 
 }
@@ -36,5 +37,8 @@ ul{
 }
 .users h4{
   margin-top: -5%;
+}
+body{
+  height: auto;
 }
 

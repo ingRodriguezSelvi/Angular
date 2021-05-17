@@ -17,6 +17,10 @@ export interface MedicosI extends Medicos{
   ciudad:string;
   direccion:string
 }
+export interface F_MedicosI extends MedicosI{
+  full_Name:string
+  activo:boolean;
+}
 
 export interface Promotion{
   id:number;

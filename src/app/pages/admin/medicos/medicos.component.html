@@ -21,13 +21,14 @@
             <th>Acciones</th>
           </thead>
           <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+            <tr *ngFor="let medico of medicos">
+              <td  style="vertical-align:middle;">{{medico.full_Name}}</td>
+              <td  style="vertical-align:middle;">{{medico.rif}}</td>
+              <td  style="vertical-align:middle;">{{medico.activo}}</td>
+              <td  style="vertical-align:middle;">{{medico.direccion}}</td>
               <td>
-                <button class="btn btn-warning" style="margin: 1rem;"><mat-icon >edit</mat-icon></button>
+                <button class="btn btn-primary"style="margin: 1rem;"><mat-icon>library_books</mat-icon></button>
+                <button class="btn btn-warning" style="margin: 1rem;"><mat-icon>edit</mat-icon></button>
                 <button class="btn btn-danger"style="margin: 1rem;"><mat-icon>delete</mat-icon></button>
               </td>
             </tr>

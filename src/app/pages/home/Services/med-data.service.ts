@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Cobros, HonoXPagar, OrdenMedica, PaymentsDetailsI, Sedes } from '@app/shared/components/models/data';
+import { Cobros, F_MedicosI, HonoXPagar, OrdenMedica, PaymentsDetailsI, Sedes } from '@app/shared/components/models/data';
 import { Observable } from 'rxjs';
 import { catchError,map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
@@ -79,6 +79,18 @@ export class MedDataService {
      }
      return this.http.get<OrdenMedica[]>(this.direccion+'api/Data/OrdenesData',httpOptions).
      pipe(map((res:OrdenMedica[])=>{
+       return res;
+     }))
+  }
+  getListMed():Observable<F_MedicosI[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        accept: '*/*',
+        Authorization: "Bearer "+sessionStorage.getItem('token')
+      })
+     }
+     return this.http.get<F_MedicosI[]>(this.direccion+'api/Medicos/DoctorList',httpOptions).pipe
+     (map((res:F_MedicosI[])=>{
        return res;
      }))
   }

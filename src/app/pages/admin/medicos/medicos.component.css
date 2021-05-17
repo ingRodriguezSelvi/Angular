@@ -3,6 +3,7 @@ table{
   text-align: center;
   height: auto;
   font-size: medium;
+  margin-bottom: 4rem;
 }
 thead{
   background: #0077cb;

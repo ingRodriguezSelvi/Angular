@@ -31,7 +31,7 @@ private loggedIn = new BehaviorSubject<boolean>(false);
         accept: '*/*'
       })
     };
-    let direccion= this.url+"api/Account/Login";
+    let direccion= this.url+"api/Login";
     return this.http.post<UserResponse>(direccion,authData,httpOptions).pipe(map((res:UserResponse)=>{
       return res;
     }
@@ -44,7 +44,7 @@ private loggedIn = new BehaviorSubject<boolean>(false);
         accept: '*/*'
       })
     };
-    let direccion= this.url+"api/Account/RegistrarMedico";
+    let direccion= this.url+"api/Medicos/RegistrarMedico";
     return this.http.post<UserResponse>(direccion,updData,httpOptions).pipe(map((res:UserResponse)=>{
       console.log(res)
       return res;
@@ -85,7 +85,7 @@ private loggedIn = new BehaviorSubject<boolean>(false);
       })
     };
     let direccion = "http://172.18.16.50:5005/"
-    return this.http.get<EspecialidadI[]>(direccion+'api/Data/Especialidades',httpOptions).
+    return this.http.get<EspecialidadI[]>(direccion+'api/Info/Especialidades',httpOptions).
       pipe(map((res:EspecialidadI[])=>{
      return res;
     }));
@@ -99,7 +99,7 @@ private loggedIn = new BehaviorSubject<boolean>(false);
       })
     };
     let direccion = "http://172.18.16.50:5005/"
-    return this.http.get<MedicosI>(direccion+'api/Data/DoctorData',httpOptions).
+    return this.http.get<MedicosI>(direccion+'api/Medicos/DoctorData',httpOptions).
       pipe(map((res:MedicosI)=>{
      return res;
     }));

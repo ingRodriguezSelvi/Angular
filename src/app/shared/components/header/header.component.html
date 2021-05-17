@@ -4,7 +4,7 @@
   <span class="spacer"></span>
   <div>
     <a mat-button (click)='closedSesion()' *ngIf="data.isLogin"  ><mat-icon>logout</mat-icon>Cerrar sesión</a>
-    <a mat-button [routerLink]="'/admin'" *ngIf="data.isFinanzas">Administrador</a>
+    <a mat-button [routerLink]="'/admin'" >Administrador</a>
   </div>
 </ng-container>
 </mat-toolbar>

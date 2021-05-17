@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MedDataService } from '@app/pages/home/Services/med-data.service';
+import { F_MedicosI } from '@app/shared/components/models/data';
 import { CreateMedComponent } from '../create-med/create-med.component';
 
 @Component({
@@ -8,10 +10,17 @@ import { CreateMedComponent } from '../create-med/create-med.component';
   styleUrls: ['./medicos.component.css']
 })
 export class MedicosComponent implements OnInit {
-  constructor(public dialog:MatDialog) { }
+  medicos:F_MedicosI[]=[];
+  constructor(public dialog:MatDialog,private dataService:MedDataService) { }
   ngOnInit(): void {
+    this.getListMed();
   }
   addMed(){
     this.dialog.open(CreateMedComponent);
+  }
+  getListMed(){
+    this.dataService.getListMed().subscribe(data=>{
+      this.medicos=data;
+    })
   }
 }
