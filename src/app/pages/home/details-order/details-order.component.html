@@ -1,3 +1,4 @@
+<mat-dialog-content class="mat-typography">
 <div class="container" >
     <div *ngIf="loadding" class="loadding">
       <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
@@ -14,13 +15,14 @@
             </div>
             <div class="col-6">
               <h2 class="estado">Estado de cuenta</h2>
+              <h4 style="font-size: 23px;margin-top: 1rem;text-align: left; font-weight: 400; margin-left: 13%;">por cobrar a terceros</h4>
             </div>
           </div>
         </mat-card>
       </div>
       <mat-card class="tabla">
 
-        <div class="alert alert-secondary" style="text-align: left;font-size: larger;" >
+        <div class="alert alert-secondary card-message" style="text-align: left;font-size: larger;" >
           <p style="text-align: center;">Montos netos después de retenciones de ley y administrativas. Para su preguntas quedamos a la orden en el departamento
             de pagos. Trabajamos por su bienestar.
           </p>
@@ -64,3 +66,8 @@
       </mat-card>
     </div>
 </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Imprimir</button>
+  <button mat-button mat-dialog-close>Atras</button>
+</mat-dialog-actions>

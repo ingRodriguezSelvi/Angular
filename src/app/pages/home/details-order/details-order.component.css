@@ -52,7 +52,9 @@ mat-card{
   margin-top: 1.5rem;
   color: #fff;
 
-
+}
+.card-message{
+  margin-top: -3%;
 }
 .totales{
   width: 25%;
