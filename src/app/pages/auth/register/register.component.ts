@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
     ciudad:[''],
     direccion:[''],
   })
-  medico:MedicosI={'id':0,'nombres':'','apellidos':'','celular':0,'ciudad':'','email':'','exId':'','rif':'','sexo':'','zona':'','direccion':''};
+  medico:MedicosI={'id':0,'nombres':'','apellidos':'','celular':0,'ciudad':'','email':'','rif':'','sexo':'','zona':'','direccion':''};
   constructor(private fr:FormBuilder, private authserv:AuthService,
     private router:Router,public dialog:MatDialog) { }
   ngOnInit(): void {

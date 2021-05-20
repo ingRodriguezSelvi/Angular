@@ -13,7 +13,7 @@ export class DetailsOrderComponent implements OnInit {
   dataSource = JSON.parse(sessionStorage.getItem('cobros')||'{}');
   totales= [{}];
   loadding=false;
-  medico:MedicosI={'celular':0,'ciudad':'','email':'','sexo':'','zona':'','apellidos':'','exId':'','id':0,'nombres':'','rif':'','direccion':''};
+  medico:MedicosI={'celular':0,'ciudad':'','email':'','sexo':'','zona':'','apellidos':'','id':0,'nombres':'','rif':'','direccion':''};
   sexo='';
   date=new Date();
   ordersDetails?:PaymentsDetailsI[];

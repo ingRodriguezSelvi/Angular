@@ -4,8 +4,6 @@ export interface Medicos{
   nombres:string;
   apellidos:string;
   rif:string;
-  exId:string;
-
 }
 
 export interface MedicosI extends Medicos{
@@ -18,14 +16,16 @@ export interface MedicosI extends Medicos{
   direccion:string
 }
 export interface F_MedicosI extends MedicosI{
-  full_Name:string
+  full_Name:string;
+  extId:string;
+  especialidad?:number
   activo:boolean;
 }
 
 export interface Promotion{
   id:number;
-  img:string;
-  tittle:string;
+  imageUrl:string;
+  title:string;
   content:string;
   link:string;
 }
@@ -39,6 +39,7 @@ export interface Cobros {
   fecha_Fact:Date;
   monto_Bruto_Bs:number;
   monto_Bruto_Dol:number;
+  factura?:number;
 }
 
 export interface Monedas{
@@ -54,6 +55,11 @@ export interface OrdenMedica {
   paciente:string;
   cuantas:number;
 }
+export interface RegisterMedI{
+  medico:F_MedicosI;
+  username:string;
+  password:string;
+}
 
 export interface PaymentsDetailsI{
   numero:number;
@@ -66,6 +72,11 @@ export interface PaymentsDetailsI{
   monto_Comis_Bs:number;
   monto_Comis_Dol:number;
   porc_Comis:number;
+}
+
+export interface DesactiveMedResponseI{
+id:number;
+enable:boolean;
 }
 
 export interface EspecialidadI{

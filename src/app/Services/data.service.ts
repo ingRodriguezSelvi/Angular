@@ -1,10 +1,14 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Cobros, Meses } from '@app/shared/components/models/data';
+import { Cobros, F_MedicosI, Meses } from '@app/shared/components/models/data';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+direccion:string='http://172.18.16.50:5005/';
 isLogin=false;
 isAdmin1=false;
 isDetails=false;
@@ -26,5 +30,22 @@ anno:number=new Date().getFullYear()
 mes:number=new Date().getMonth();
 isMercadeo:boolean=false;
 isFinanzas:boolean=false;
-  constructor() { }
+isCobroMed:boolean=false;
+  constructor(private http:HttpClient) { }
+
+getMedicoEdit(c:string):Observable<F_MedicosI>{
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      accept: '*/*',
+      Authorization: "Bearer "+sessionStorage.getItem('token'),
+      cedula:c
+    })
+  };
+  let direccion = "http://172.18.16.50:5005/"
+  return this.http.get<F_MedicosI>(direccion+'api/Medicos/DoctorData',httpOptions).
+    pipe(map((res:F_MedicosI)=>{
+   return res;
+  }));
+}
 }

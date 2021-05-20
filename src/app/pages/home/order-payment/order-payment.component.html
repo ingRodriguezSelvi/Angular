@@ -26,7 +26,7 @@
               <mat-option *ngFor="let mes of data.MesesView" value={{mes.id}}>{{mes.nombre}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field *ngIf="data.hC && !data.isPrevimedica">
+          <mat-form-field style="width: 20%;" *ngIf="data.hC && !data.isPrevimedica">
             <mat-label >Buscar por paciente</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Juan Perez" #input >
           </mat-form-field>
@@ -70,7 +70,7 @@
           </div>
 
           <div class="alert alert-secondary " style="margin-top: 1.5rem;text-align: left;font-size: medium;" *ngIf="flag && data.sede!=4">
-            <p style="text-align: center;">Montos netos después de retenciones administrativas. Para su preguntas quedamos a la orden en el departamento
+            <p style="text-align: center;">Montos después de retenciones administrativas y de Ley. Los totales incluyen el sustraendo de Ley. Para su preguntas quedamos a la orden en el departamento
                de pagos. Trabajamos por su bienestar.
             </p>
           </div>

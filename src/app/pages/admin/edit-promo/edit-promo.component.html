@@ -4,18 +4,18 @@
       <h1>Editar Noticia {{data.n}}</h1>
     </div>
     <div class="col-12">
-      <img src={{promotion.img}} alt="50" width="100" style="margin-left:15% ;">
+      <img src={{promotion.imageUrl}} alt="50" width="100" style="margin-left:15% ;">
     </div>
     <div class="col-12">
-      <form [formGroup]="editNews" (ngSubmit)="edit(editNews.value)">
-        <mat-form-field class="full-width-input" hidden>
-          <input type="text" matInput placeholder="id" formControlName="id"  value={{promotion.id}}>
+      <form [formGroup]="editNews" (ngSubmit)="edit()">
+        <mat-form-field class="full-width-input" >
+          <input type="text" matInput placeholder="id" formControlName="id" [(ngModel)]='promotion.id'  value={{promotion.id}}>
         </mat-form-field>
         <mat-form-field class="full-width-input">
-          <input type="text" matInput placeholder="img (150X150px)" formControlName="img" [(ngModel)]="promotion.img" value={{promotion.img}}>
+          <input type="text" matInput placeholder="img (150X150px)" formControlName="imageUrl" [(ngModel)]="promotion.imageUrl" value={{promotion.imageUrl}}>
         </mat-form-field>
         <mat-form-field class="full-width-input">
-          <input type="text" matInput placeholder="Titulo" formControlName="tittle" [(ngModel)]="promotion.tittle" value={{promotion.tittle}}>
+          <input type="text" matInput placeholder="Titulo" formControlName="title" [(ngModel)]="promotion.title" value={{promotion.title}}>
         </mat-form-field>
         <mat-form-field class="full-width-input">
           <input type="text" matInput placeholder="Contenido" formControlName="content" [(ngModel)]="promotion.content" value={{promotion.content}}>
@@ -23,11 +23,13 @@
         <mat-form-field class="full-width-input">
           <input type="text" matInput placeholder="Link" formControlName="link" [(ngModel)]="promotion.link" value={{promotion.link}}>
         </mat-form-field>
-        <div class="col-5">
-           <button class="btn btn-primary" mat-raised-button>Guardar</button>
-           <button class="btn btn-warning" mat-raised-button>Cancelar</button>
-        </div>
+        <br>
+         <button mat-button mat-dialog-close (click)="edit()">Aceptar</button>
+         <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Cancelar</button>
       </form>
     </div>
   </div>
 </div>
+<mat-dialog-actions align="end">
+
+</mat-dialog-actions>

@@ -10,6 +10,7 @@ import { EditMedComponent } from './edit-med/edit-med.component';
 import { CreatePromoComponent } from './create-promo/create-promo.component';
 import { CreateMedComponent } from './create-med/create-med.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CobrosMedComponent } from './medicos/cobros-med/cobros-med.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     EditMedComponent,
     CreatePromoComponent,
     CreateMedComponent,
+    CobrosMedComponent,
   ],
   imports: [
     CommonModule,

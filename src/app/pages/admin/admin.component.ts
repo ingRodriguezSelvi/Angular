@@ -18,6 +18,7 @@ export class AdminComponent implements OnInit {
     this.data.isFinanzas=false;
   }
   medico(){
+    this.data.isCobroMed=false;
     this.data.isMercadeo=false;
     this.data.isFinanzas=true;
   }

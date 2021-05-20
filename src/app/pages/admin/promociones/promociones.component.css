@@ -68,4 +68,19 @@ td{
     width: 40%;
   }
 }
+mat-icon{
+  color: #0077cb;
+}
+.btn{
+  background: transparent;
+  border: 0px;
+  color: #0077cb;
+}
+.btn:hover mat-icon{
+  background: #0077cb;
+  color: #ffff;
+}
+.btn:hover{
+  background: #0077cb;
+}
 

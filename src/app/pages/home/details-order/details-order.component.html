@@ -1,74 +1,70 @@
 <mat-dialog-content class="mat-typography">
-<div class="container" >
-    <div *ngIf="loadding" class="loadding">
-      <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
-    </div>
-    <div *ngIf="!loadding" >
-
-      <div class="container">
-        <mat-card class="card-user-info" >
-          <div class="row">
-            <div class="col-6">
-              <div> <p class="texto">{{sexo}} {{medico.nombres}} {{medico.apellidos}} </p> </div>
-              <div> <p class="texto">Cédula: {{medico.rif}}</p></div>
-              <div> <p class="texto">Fecha: {{date|date:'dd/MM/YYYY'}}</p> </div>
-            </div>
-            <div class="col-6">
-              <h2 class="estado">Estado de cuenta</h2>
-              <h4 style="font-size: 23px;margin-top: 1rem;text-align: left; font-weight: 400; margin-left: 20%;">por cobrar a terceros</h4>
-            </div>
-          </div>
-        </mat-card>
+  <div class="container" >
+      <div *ngIf="loadding" class="loadding">
+        <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
       </div>
-      <div class="container">
-      <mat-card class="tabla">
-        <div class="alert alert-secondary card-message" style="text-align: left;font-size: larger;" >
-          <p style="text-align: center;">Monto total neto después de retenciones de ley y administrativas. Para su preguntas quedamos a la orden en el departamento
-            de pagos. Trabajamos por su bienestar.
-          </p>
+      <div *ngIf="!loadding" >
+        <div class="container">
+          <mat-card class="card-user-info" >
+            <div class="row g-0">
+              <div class="col-md-7">
+                <div> <p class="texto">{{sexo}} {{medico.nombres}} {{medico.apellidos}} </p> </div>
+                <div> <p class="texto">Cédula: {{medico.rif}}</p></div>
+                <div> <p class="texto">Fecha: {{date|date:'dd/MM/YYYY'}}</p> </div>
+              </div>
+              <div class="col-md-5">
+                <h3 class="estado">Estado de cuenta</h3>
+                <h5 style="font-size: 23px;margin-top: 1rem;text-align: left; font-weight: 400;">por cobrar a médicos</h5>
+              </div>
+            </div>
+          </mat-card>
         </div>
-      <h2 mat-dialog-title>Detalle de Orden de Pago: {{data.numero}}, fecha: {{data.f|date:'dd/MM/YYYY'}}</h2>
-
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Factura</th>
-            <th>Paciente</th>
-            <th>Fecha de la Factura</th>
-            <th>Monto  Bs</th>
-            <th>Monto USD</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let order of ordersDetails">
-            <td>{{order.numero}}</td>
-            <td>{{order.nombre}}</td>
-            <td>{{order.fecha|date:'dd/MM/YYYY'}}</td>
-            <td class="alin-regth monto">{{order.montoBs|number:'1.2-2'}}</td>
-            <td class="alin-regth monto">{{order.montoDol|number:'1.2-2'}}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <th>Total Bs</th>
-            <th>Total USD</th>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="alin-regth monto">{{data.totalBs|number:'1.2-2'}}</td>
-            <td class="alin-regth monto">{{data.totalDol|number:'1.2-2'}}</td>
-          </tr>
-        </tbody>
-      </table>
-      </mat-card>
-    </div>
-    </div>
-</div>
+          <div class="container">
+          <div class="alert alert-secondary card-message" style="text-align: left;font-size: larger;" >
+            <p style="text-align: center;">Monto total después de retenciones administrativas y de Ley. No incluye sustraendo de Ley. Para su preguntas quedamos a la orden en el departamento
+              de pagos. Trabajamos por su bienestar.
+            </p>
+          </div>
+        </div>
+        <div class="container">
+          <h2 mat-dialog-title>Detalle de Orden de Pago: {{data.numero}}, fecha: {{data.f|date:'dd/MM/YYYY'}}</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Factura</th>
+                <th>Paciente</th>
+                <th>Fecha de la Factura</th>
+                <th>Monto  Bs</th>
+                <th>Monto USD</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of ordersDetails">
+                <td>{{order.numero}}</td>
+                <td>{{order.nombre}}</td>
+                <td>{{order.fecha|date:'dd/MM/YYYY'}}</td>
+                <td class="alin-regth monto">{{order.montoBs|number:'1.2-2'}}</td>
+                <td class="alin-regth monto">{{order.montoDol|number:'1.2-2'}}</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th>Total Bs</th>
+                <th>Total USD</th>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="alin-regth monto">{{data.totalBs|number:'1.2-2'}}</td>
+                <td class="alin-regth monto">{{data.totalDol|number:'1.2-2'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </div>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Imprimir</button>
-  <button mat-button mat-dialog-close>Atras</button>
-</mat-dialog-actions>
+
+

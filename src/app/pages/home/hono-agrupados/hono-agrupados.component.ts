@@ -90,7 +90,7 @@ aplyFilterDate(a:number,m:number,s:number){
           this.msjx='El rango de fecha y sede seleccionado no tiene informacion para mostrar. Por favor seleccione otro rango de fecha';
         }
       })
-    }else if(mA>m){
+    }else if(mA>=m){
       this.dataSource=this.medSrvc.getOrderAgrup(s,a,m)
       .subscribe(data=>{
         let orderData:OrdenMedica[]=data;

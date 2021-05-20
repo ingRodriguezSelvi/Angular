@@ -9,6 +9,10 @@
     <th mat-header-cell *matHeaderCellDef> Número de Orden </th>
     <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
   </ng-container>
+  <ng-container matColumnDef="numfac">
+    <th mat-header-cell *matHeaderCellDef> Número de Factura </th>
+    <td mat-cell *matCellDef="let element"> {{element.factura}} </td>
+  </ng-container>
   <ng-container matColumnDef="fecha">
     <th mat-header-cell *matHeaderCellDef>Fecha de la Orden</th>
     <td mat-cell *matCellDef="let element"> {{element.fecha|date:'dd/MM/YYYY'}} </td>

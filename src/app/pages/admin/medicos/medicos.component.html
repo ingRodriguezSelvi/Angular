@@ -1,40 +1,39 @@
 <div class="container">
-  <div class="row">
+  <div class="row" *ngIf="!this.data.isCobroMed">
     <div class="col-12">
       <mat-card class="card">
         <mat-form-field class="full-width-input">
           <label for="" style="padding-bottom: 1.5rem;"><mat-icon>search</mat-icon> Buscar Medico</label>
           <input matInput required  type="text"
-          formControlName="cedula" >
+           >
         </mat-form-field>
-        <button class="btn btn-primary" (click)="addMed()">Añadir nuevo medico</button>
+        <button mat-button (click)="addMed()"><mat-icon>add</mat-icon> Añadir nuevo médico</button>
       </mat-card>
     </div>
     <div class="col-12">
-      <mat-card>
         <table class="table">
           <thead>
             <th>Nombre</th>
-            <th>Cedula</th>
-            <th>Estado</th>
-            <th>Direccion</th>
+            <th>Cédula</th>
+            <th>Dirección</th>
             <th>Acciones</th>
           </thead>
           <tbody>
             <tr *ngFor="let medico of medicos">
-              <td  style="vertical-align:middle;">{{medico.full_Name}}</td>
-              <td  style="vertical-align:middle;">{{medico.rif}}</td>
-              <td  style="vertical-align:middle;">{{medico.activo}}</td>
+              <td  style="vertical-align:middle;" style='width: 30%;'>{{medico.full_Name}}</td>
+              <td  style="vertical-align:middle;">{{medico.extId}}</td>
               <td  style="vertical-align:middle;">{{medico.direccion}}</td>
-              <td>
-                <button class="btn btn-primary"style="margin: 1rem;"><mat-icon>library_books</mat-icon></button>
-                <button class="btn btn-warning" style="margin: 1rem;"><mat-icon>edit</mat-icon></button>
-                <button class="btn btn-danger"style="margin: 1rem;"><mat-icon>delete</mat-icon></button>
+              <td style="width: 30%;">
+                <button class="btn btn-primary"style="margin: 1px;" (click)="getCobro(medico.extId)"><mat-icon>library_books</mat-icon></button>
+                <button class="btn btn-warning" style="margin: 1px;" (click)="editMed(medico.extId)"><mat-icon>edit</mat-icon></button>
+                <button class="btn btn-danger"style="margin: 1px;" (click)="deleteMed(medico.id)"><mat-icon>do_not_disturb_on</mat-icon></button>
               </td>
             </tr>
           </tbody>
         </table>
-      </mat-card>
     </div>
+  </div>
+  <div *ngIf="this.data.isCobroMed">
+    <app-cobros-med [cedula]='cedula'></app-cobros-med>
   </div>
 </div>

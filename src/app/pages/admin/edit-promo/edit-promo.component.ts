@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AdminMedService } from '@app/Services/admin-med.service';
 import { PromotionService } from '@app/Services/promotion.service';
 import { Promotion } from '@app/shared/components/models/data';
 
@@ -13,27 +14,28 @@ export class EditPromoComponent implements OnInit {
 
   editNews=this.fb.group({
     id:[''],
-    img:[''],
-    tittle:[''],
+    imageUrl:[''],
+    title:[''],
     content:[''],
     link:['']
   });
-  promotion:Promotion={'id':0,'tittle':'','content':'','img':'','link':''}
-  constructor(@Inject(MAT_DIALOG_DATA) public data:{n:number},private fb:FormBuilder,public dataPromotion:PromotionService) { }
+  promotion:Promotion={'id':0,'title':'','content':'','imageUrl':'','link':''}
+  constructor(@Inject(MAT_DIALOG_DATA) public data:{n:number},public date:AdminMedService,private fb:FormBuilder,public dataPromotion:PromotionService) { }
 
   ngOnInit(): void {
-    this.promotion=this.dataPromotion._Promociones[this.data.n];
+    this.getPromo();
   }
-  edit(x:Promotion){
-    this.dataPromotion._Promociones.splice(this.data.n,1,{
-      'id':this.data.n,
-      'img':x.img,
-      'tittle':x.tittle,
-      'content':x.content,
-      'link':x.link
+  edit(){
+    const formValue=this.editNews.value
+    this.date.editPromo(formValue).subscribe(res=>{
+      console.log(res);
     })
-    console.log(this.data.n)
-    console.log(this.dataPromotion._Promociones[this.data.n])
+  }
+  getPromo(){
+    this.dataPromotion.getPromotions().subscribe(data=>{
+      let orderData:Promotion[]=data;
+      this.promotion=orderData[this.data.n-1];
+    })
   }
 
 }

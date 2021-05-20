@@ -1,51 +1,59 @@
-<div class="container">
-  <div class="row g-0">
-    <div class="col-12">
-      <mat-card>
-        <div class="row g-0">
-          <form [formGroup]="registerMedForms">
-            <mat-form-field class="full-width-input" hidden>
-              <input type="text" matInput placeholder="id" formControlName="id" [(ngModel)]="medico.id" value={{medico.id}}>
-            </mat-form-field>
-            <mat-form-field class="full-width-input">
-              <input type="text" matInput placeholder="Cedula" formControlName="rif" [(ngModel)]="medico.rif" value={{medico.rif}}>
-            </mat-form-field>
-            <mat-form-field class="full-width-input">
-              <input type="text" matInput placeholder="Nombre" formControlName="nombres" [(ngModel)]="medico.nombres" value={{medico.nombres}}>
-            </mat-form-field>
-            <mat-form-field class="full-width-input">
-              <input type="text" matInput placeholder="Apellido" formControlName="apellidos" [(ngModel)]="medico.apellidos" value={{medico.apellidos}}>
-            </mat-form-field>
-            <mat-form-field class="full-width-input" >
-              <mat-label>Sexo</mat-label>
-              <mat-select formControlName="sexo" [(ngModel)]="medico.sexo" value={{medico.sexo}} required>
-                <mat-option value="M">Masculino</mat-option>
-                <mat-option value="F">Femenino</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="full-width-input">
-              <input type="email" matInput placeholder="Email" [(ngModel)]="medico.email" formControlName="email" value={{medico.email}}>
-            </mat-form-field>
-            <mat-form-field class="full-width-input">
-              <input type="tel" matInput placeholder="Celular" [(ngModel)]="medico.celular" formControlName="celular" value={{medico.celular}}>
-            </mat-form-field>
-            <mat-form-field class="full-width-input" >
-              <mat-label  >Especialidad</mat-label>
-              <mat-select formControlName="especialidad" required  >
-                <mat-option *ngFor="let especialidad of especialidades" value={{especialidad.id}}>{{especialidad.especialidad}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="full-width-input">
-              <input type="text" matInput placeholder="Zona de residencia" [(ngModel)]="medico.zona" formControlName="zona" value={{medico.zona}}>
-            </mat-form-field>
-            <mat-form-field class="full-width-input" style="width: 100%;">
-              <input type="text" matInput placeholder="Ciudad" formControlName="ciudad" [(ngModel)]="medico.ciudad" value={{medico.ciudad}}>
-            </mat-form-field>
-            <button type="submit"mat-raised-button class="btn btn-primary">Crear</button>
-            <button type="submit"mat-raised-button class="btn btn-danger">Cancelar</button>
-        </form>
-        </div>
-      </mat-card>
+<h2 mat-dialog-title>Añadir nuevo médico</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="container">
+    <div class="row g-0">
+      <div class="col-12">
+        <mat-card>
+          <div class="row g-0">
+            <form [formGroup]="createdMed">
+              <mat-form-field class="full-width-input" hidden>
+                <input type="text"  matInput placeholder="id" formControlName="id" [(ngModel)]="_medico.id" value={{_medico.id}} >
+              </mat-form-field>
+              <mat-form-field class="full-width-input">
+                <input type="text" matInput placeholder="Cedula" #cedula formControlName="rif" [(ngModel)]="_medico.rif" value={{_medico.rif}} (keydown.enter)="getDataProfit(cedula.value)">
+              </mat-form-field>
+              <mat-form-field class="full-width-input">
+                <input type="text" matInput placeholder="Nombre" formControlName="nombres" [(ngModel)]="_medico.nombres" value={{_medico.nombres}}>
+              </mat-form-field>
+              <mat-form-field class="full-width-input">
+                <input type="text" matInput placeholder="Apellido" formControlName="apellidos" [(ngModel)]="_medico.apellidos" value={{_medico.apellidos}}>
+              </mat-form-field>
+              <mat-form-field class="full-width-input" >
+                <mat-label>Sexo</mat-label>
+                <mat-select formControlName="sexo" [(ngModel)]="_medico.sexo" value={{_medico.sexo}} required>
+                  <mat-option value="M">Masculino</mat-option>
+                  <mat-option value="F">Femenino</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="full-width-input">
+                <input type="email" matInput placeholder="Email" [(ngModel)]="_medico.email" formControlName="email" value={{_medico.email}}>
+              </mat-form-field>
+              <mat-form-field class="full-width-input">
+                <input type="tel" matInput placeholder="Celular" [(ngModel)]="_medico.celular" formControlName="celular" value={{_medico.celular}}>
+              </mat-form-field>
+              <mat-form-field class="full-width-input" >
+                <mat-label  >Especialidad</mat-label>
+                <mat-select formControlName="especialidad" required  >
+                  <mat-option *ngFor="let especialidad of especialidades" value={{especialidad.id}}>{{especialidad.especialidad}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="full-width-input">
+                <input type="text" matInput placeholder="Zona de residencia" [(ngModel)]="_medico.zona" formControlName="zona" value={{_medico.zona}}>
+              </mat-form-field>
+              <mat-form-field class="full-width-input" style="width: 100%;">
+                <input type="text" matInput placeholder="Ciudad" formControlName="ciudad" [(ngModel)]="_medico.ciudad" value={{_medico.ciudad}}>
+              </mat-form-field>
+              <mat-form-field class="full-width-input" style="width: 100%;" hidden>
+                <input type="text" matInput placeholder="activo" formControlName="activo" [(ngModel)]="_medico.activo" [value]='true'>
+              </mat-form-field>
+              <br>
+              <button mat-button [mat-dialog-close]="true" (click)="registrar()"><mat-icon>add</mat-icon> Añadir</button>
+              <button mat-button mat-dialog-close> <mat-icon>reply</mat-icon>Cancelar</button>
+          </form>
+          </div>
+        </mat-card>
+      </div>
     </div>
   </div>
-</div>
+</mat-dialog-content>
+

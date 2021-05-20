@@ -13,7 +13,7 @@ import { MedDataService } from '../Services/med-data.service';
 export class PreviComponent implements OnInit {
 @Input() mes?:number
 anno= new Date().getFullYear();
-displayedColumns: string[] = ['numero','fecha','montoBs'];
+displayedColumns: string[] = ['numero','numfac','fecha','montoBs'];
 dataSource = JSON.parse(sessionStorage.getItem('cobros')||'{}');
 meses:Meses[]=meses;
 mesActual=new Date().getMonth();

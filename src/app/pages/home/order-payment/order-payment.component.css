@@ -54,7 +54,8 @@ tr:hover{
 }
 .mat-button-toggle-checked {
   background:#fff ;
-  color: #000;
+  color: #0077cb;
+  font-weight: 550;
 
 }
 th.mat-header-cell {

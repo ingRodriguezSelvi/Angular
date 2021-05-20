@@ -45,7 +45,8 @@ private loggedIn = new BehaviorSubject<boolean>(false);
       })
     };
     let direccion= this.url+"api/Medicos/RegistrarMedico";
-    return this.http.post<UserResponse>(direccion,updData,httpOptions).pipe(map((res:UserResponse)=>{
+    return this.http.post<UserResponse>(direccion,updData,httpOptions).
+      pipe(map((res:UserResponse)=>{
       console.log(res)
       return res;
     }));

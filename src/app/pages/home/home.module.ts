@@ -11,6 +11,7 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import { HonoAgrupadosComponent } from './hono-agrupados/hono-agrupados.component';
 import { PreviComponent } from './previ/previ.component';
 import { HonoPorPagarComponent } from './hono-por-pagar/hono-por-pagar.component';
+import { DetailsNewsComponent } from './details-news/details-news.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { HonoPorPagarComponent } from './hono-por-pagar/hono-por-pagar.component
     HonoAgrupadosComponent,
     PreviComponent,
     HonoPorPagarComponent,
+    DetailsNewsComponent,
 
 
   ],

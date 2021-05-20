@@ -15,6 +15,9 @@ th{
 tbody{
   color: black;
 }
+.tabla{
+  margin-top:-1%;
+}
 .mat-elevation-z8{
 width: 1048px;
 }
@@ -54,7 +57,7 @@ mat-card{
 
 }
 .card-message{
-  margin-top: -3%;
+  margin-top: 5px;
 }
 .totales{
   width: 25%;
@@ -72,16 +75,17 @@ mat-card{
   border-radius: 8px;
   padding-bottom: -5%;
   box-shadow: 2px 2px 5px #999;
+  height: 90px;
 }
 .estado{
   color: #fff;
   font-weight: 400;
   font-size: 40px;
-  margin-top: 5.8%;
   margin-bottom: auto;
 }
 .texto{
   font-weight: 500;
-  font-size: large;
+  font-size: medium;
   color: #fff;
+  margin: 0%;
 }

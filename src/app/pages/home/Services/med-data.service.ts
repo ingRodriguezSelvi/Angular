@@ -27,57 +27,122 @@ export class MedDataService {
     }))
   }
 
-  getOrder(x:number,a:number,m:number):Observable<Cobros[]>{
+  getOrder(x:number,a:number,m:number,c?:string):Observable<Cobros[]>{
+    let httpOptionss
+   if(c){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        accept: '*/*',
+        Authorization: "Bearer "+sessionStorage.getItem('token'),
+        Sede: String(x),
+        cedula:c!
+      }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
+     }
+     httpOptionss=httpOptions;
+   }
+   else if(!c){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        accept: '*/*',
+        Authorization: "Bearer "+sessionStorage.getItem('token'),
+        Sede: String(x),
+      }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
+     }
+     httpOptionss=httpOptions;
+   }
+        return this.http.get<Cobros[]>(this.direccion+'api/Data/OrdenesConDetalle',httpOptionss).
+        pipe(map((res:Cobros[])=>{
+          return res;
+        }))
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        accept: '*/*',
-        Authorization: "Bearer "+sessionStorage.getItem('token'),
-        Sede: String(x)
-      }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
-     }
-      return this.http.get<Cobros[]>(this.direccion+'api/Data/OrdenesConDetalle',httpOptions).
-      pipe(map((res:Cobros[])=>{
-        return res;
-      }))
+
   }
-  getOrderXPagar(x:number,a:number,m:number):Observable<HonoXPagar[]>{
-    const httpOptions = {
-      headers: new HttpHeaders({
-        accept: '*/*',
-        Authorization: "Bearer "+sessionStorage.getItem('token'),
-        Sede: String(x)
-      }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
+  getOrderXPagar(x:number,a:number,m:number,c?:string):Observable<HonoXPagar[]>{
+    let httpOptionss;
+    if(c){
+      const httpOptions = {
+        headers: new HttpHeaders({
+          accept: '*/*',
+          Authorization: "Bearer "+sessionStorage.getItem('token'),
+          Sede: String(x),
+          cedula:c!
+        }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
+       }
+       httpOptionss=httpOptions;
+    }else if(!c){
+      const httpOptions = {
+        headers: new HttpHeaders({
+          accept: '*/*',
+          Authorization: "Bearer "+sessionStorage.getItem('token'),
+          Sede: String(x)
+        }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
+      }
+      httpOptionss=httpOptions;
      }
-     return this.http.get<HonoXPagar[]>(this.direccion+'api/data/HonorariosPorPagar',httpOptions).
+     return this.http.get<HonoXPagar[]>(this.direccion+'api/data/HonorariosPorPagar',httpOptionss).
       pipe(map((res:HonoXPagar[])=>{
         console.log(res)
         return res;
       }))
   }
-  getOrderPrevi(x:number,a:number,m:number):Observable<Cobros[]>{
-    const httpOptions = {
-      headers: new HttpHeaders({
-        accept: '*/*',
-        Authorization: "Bearer "+sessionStorage.getItem('token'),
-        Sede: String(x)
-      }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
-     }
-     return this.http.get<Cobros[]>(this.direccion+'api/Data/PagosData',httpOptions).
+
+
+  getOrderPrevi(x:number,a:number,m:number,c?:string):Observable<Cobros[]>{
+    let httpOptionss;
+    if(c){
+      const httpOptions = {
+        headers: new HttpHeaders({
+          accept: '*/*',
+          Authorization: "Bearer "+sessionStorage.getItem('token'),
+          Sede: String(x),
+          cedula:c!
+        }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
+       }
+       httpOptionss=httpOptions;
+    }
+    else if(!c){
+      const httpOptions = {
+        headers: new HttpHeaders({
+          accept: '*/*',
+          Authorization: "Bearer "+sessionStorage.getItem('token'),
+          Sede: String(x)
+        }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
+       }
+       httpOptionss=httpOptions;
+    }
+
+     return this.http.get<Cobros[]>(this.direccion+'api/Data/PagosData',httpOptionss).
       pipe(map((res:Cobros[])=>{
         console.log(res)
         return res;
       }))
   }
-  getOrderAgrup(x:number,a:number,m:number):Observable<OrdenMedica[]>{
-    const httpOptions = {
-      headers: new HttpHeaders({
-        accept: '*/*',
-        Authorization: "Bearer "+sessionStorage.getItem('token'),
-        Sede: String(x)
-      }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
-     }
-     return this.http.get<OrdenMedica[]>(this.direccion+'api/Data/OrdenesData',httpOptions).
+  getOrderAgrup(x:number,a:number,m:number,c?:string):Observable<OrdenMedica[]>{
+    let httpOptionss;
+    if(c){
+
+      const httpOptions = {
+        headers: new HttpHeaders({
+          accept: '*/*',
+          Authorization: "Bearer "+sessionStorage.getItem('token'),
+          Sede: String(x),
+          cedula:c!
+        }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
+       }
+       httpOptionss=httpOptions;
+
+    }else if(!c){
+      const httpOptions = {
+        headers: new HttpHeaders({
+          accept: '*/*',
+          Authorization: "Bearer "+sessionStorage.getItem('token'),
+          Sede: String(x)
+        }),params:new HttpParams().append('ano',String(a)).append('mes',String(m))
+       }
+       httpOptionss=httpOptions;
+    }
+
+     return this.http.get<OrdenMedica[]>(this.direccion+'api/Data/OrdenesData',httpOptionss).
      pipe(map((res:OrdenMedica[])=>{
        return res;
      }))
@@ -94,8 +159,23 @@ export class MedDataService {
        return res;
      }))
   }
-  getDetailsOrder(Ordernumb:number,x:number):Observable<PaymentsDetailsI[]>{
-    const httpOptions =
+  getDetailsOrder(Ordernumb:number,x:number,c?:string):Observable<PaymentsDetailsI[]>{
+    let httpOptionss;
+    if(c){
+      const httpOptions =
+      {
+        headers: new HttpHeaders({
+          accept: '*/*',
+          Authorization: "Bearer "+sessionStorage.getItem('token'),
+          Sede:String(x),
+          cedula:c!
+        }),
+        params:new HttpParams().append('OrdNum',String(Ordernumb))
+      }
+      httpOptionss=httpOptions;
+    }
+    else if(!c){
+      const httpOptions =
       {
         headers: new HttpHeaders({
           accept: '*/*',
@@ -104,8 +184,11 @@ export class MedDataService {
         }),
         params:new HttpParams().append('OrdNum',String(Ordernumb))
       }
+      httpOptionss=httpOptions;
+    }
 
-      return this.http.get<PaymentsDetailsI[]>(this.direccion+'api/Data/HonorariosData',httpOptions)
+
+      return this.http.get<PaymentsDetailsI[]>(this.direccion+'api/Data/HonorariosData',httpOptionss)
       .pipe(map((res:PaymentsDetailsI[])=>{
         console.log(res);
         return res;
