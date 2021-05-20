@@ -8,7 +8,7 @@ th{
   color: #ffff;
   text-align: center;
   font-size: 1rem;
-
+  font-weight: 500;
 }
 td{
   text-align:center;
@@ -18,20 +18,3 @@ td{
 th.mat-header-cell{
   text-align: center;
 }
-mat-icon{
-  color: #0077cb;
-}
-.btn{
-  background: transparent;
-  border: 0px;
-  color: #0077cb;
-}
-.btn:hover mat-icon{
-  background: #0077cb;
-  color: #ffff;
-}
-.btn:hover{
-  background: #0077cb;
-}
-
-

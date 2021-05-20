@@ -5,10 +5,10 @@
       <img src={{promotion.imageUrl}} />
       <div class="card-body">
         <h5 class="card-title">{{promotion.title}}</h5>
-        <p class="card-text">
+        <p class="card-text" style="display:block;text-overflow: ellipsis;width: 200px;overflow: hidden; white-space: nowrap;">
           {{promotion.content}}
         </p>
-        <a href="#" >Leer más</a>
+        <a (click)="getDetailNews(promotion.id)" style="color: #0077cb;cursor: pointer;" >Leer más</a>
       </div>
     </div>
 
@@ -23,8 +23,8 @@
       <div> <a >Fecha: {{date|date:'dd/MM/YYYY'}}</a> </div>
     </div>
     <div class="col-md-4 estado">
-      <h3>Estado de cuenta</h3>
-      <h5>por cobrar a médicos</h5>
+      <h3 style="text-align: center;">Estado de Cuenta</h3>
+      <h5 style="text-align: center;">Cobro en Nombre de Médicos</h5>
     </div>
   </div>
   </mat-card>

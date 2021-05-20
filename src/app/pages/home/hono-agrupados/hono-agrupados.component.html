@@ -27,11 +27,11 @@
     <td mat-cell *matCellDef="let element"> {{element.fecha|date:'dd/MM/YYYY'}} </td>
   </ng-container>
   <ng-container matColumnDef="Monto Bs">
-    <th mat-header-cell *matHeaderCellDef class="font-center"> Monto Bs </th>
+    <th mat-header-cell *matHeaderCellDef class="font-center"> *Monto Bs </th>
     <td mat-cell *matCellDef="let element" class="alin-regth monto"> {{element.montoBs|number:'1.2-2'}} </td>
   </ng-container>
   <ng-container matColumnDef="Monto USD">
-    <th mat-header-cell *matHeaderCellDef> Monto USD </th>
+    <th mat-header-cell *matHeaderCellDef> *Monto USD </th>
     <td mat-cell *matCellDef="let element" class="alin-regth monto"> {{element.montoDol|number:'1.2-2'}} </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -44,8 +44,8 @@
     </p>
   </div>
   <div class="alert alert-secondary" style="margin-top: 1.5rem;text-align: left;" *ngIf="flag">
-    <p style="text-align: center;">Montos netos después administrativas. Para su preguntas quedamos a la orden en el departamento
-       de pagos. Trabajamos por su bienestar.
+    <p style="text-align: center;">*Montos después de retenciones administrativas y de Ley. Los montos no incluyen el sustraendo de Ley. Para su preguntas quedamos a la orden en el departamento
+      de pagos. Trabajamos por su bienestar.
     </p>
   </div>
 </div>

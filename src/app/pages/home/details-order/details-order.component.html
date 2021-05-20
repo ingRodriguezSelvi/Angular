@@ -13,19 +13,13 @@
                 <div> <p class="texto">Fecha: {{date|date:'dd/MM/YYYY'}}</p> </div>
               </div>
               <div class="col-md-5">
-                <h3 class="estado">Estado de cuenta</h3>
-                <h5 style="font-size: 23px;margin-top: 1rem;text-align: left; font-weight: 400;">por cobrar a médicos</h5>
+                <h3 class="estado" style="text-align: center;">Estado de Cuenta</h3>
+                <h5 style="font-size: 23px;margin-top: 1rem;text-align: left; font-weight: 400; text-align: center;">Cobro en Nombre de Médicos</h5>
               </div>
             </div>
           </mat-card>
         </div>
-          <div class="container">
-          <div class="alert alert-secondary card-message" style="text-align: left;font-size: larger;" >
-            <p style="text-align: center;">Monto total después de retenciones administrativas y de Ley. No incluye sustraendo de Ley. Para su preguntas quedamos a la orden en el departamento
-              de pagos. Trabajamos por su bienestar.
-            </p>
-          </div>
-        </div>
+
         <div class="container">
           <h2 mat-dialog-title>Detalle de Orden de Pago: {{data.numero}}, fecha: {{data.f|date:'dd/MM/YYYY'}}</h2>
           <table class="table">
@@ -34,8 +28,8 @@
                 <th>Factura</th>
                 <th>Paciente</th>
                 <th>Fecha de la Factura</th>
-                <th>Monto  Bs</th>
-                <th>Monto USD</th>
+                <th>*Monto  Bs</th>
+                <th>*Monto USD</th>
               </tr>
             </thead>
             <tbody>
@@ -50,8 +44,8 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <th>Total Bs</th>
-                <th>Total USD</th>
+                <th>*Total Bs</th>
+                <th>*Total USD</th>
               </tr>
               <tr>
                 <td></td>
@@ -62,7 +56,15 @@
               </tr>
             </tbody>
           </table>
+
         </div>
+        <div class="container">
+          <div class="alert alert-secondary card-message" style="text-align: left;font-size: larger;" >
+          <p style="text-align: center;">*Montos después de retenciones administrativas y de Ley. Los totales incluyen el sustraendo de Ley. Para su preguntas quedamos a la orden en el departamento
+            de pagos. Trabajamos por su bienestar.
+          </p>
+        </div>
+      </div>
       </div>
   </div>
 </mat-dialog-content>

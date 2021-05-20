@@ -23,6 +23,7 @@ export class DetailsOrderComponent implements OnInit {
       this.oshvc.getDetailsOrder(this.data.numero,this.data.x).subscribe(res=>{
       let orderDara:PaymentsDetailsI[]=res;
       this.ordersDetails=orderDara;
+      console.log(this.ordersDetails)
       this.loadding=false;
     })
       this.authSvc.saveMedico().subscribe(res=>{

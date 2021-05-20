@@ -1,5 +1,5 @@
 <mat-toolbar class="color-IDB">
-  <ng-container *ngIf="!isAdmin; else vieAdmin" class="color-IDB">
+  <ng-container *ngIf="!isAdmin" class="color-IDB">
   <img src="https://idbclinicas.com/wp-content/uploads/2017/09/grupo-de-clinicas-diapo.png" alt="80px" width="250px">
   <span class="spacer"></span>
   <div>
@@ -8,7 +8,7 @@
   </div>
 </ng-container>
 </mat-toolbar>
-<ng-template #vieAdmin>
+<ng-template *ngIf="data.isAdmin1">
 <button mat-icon-button (click)="onToggleSidenav()">
   <mat-icon>
     menu

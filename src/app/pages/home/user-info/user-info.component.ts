@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '@app/pages/auth/auth.service';
 import { PromotionService } from '@app/Services/promotion.service';
 import { MedicosI, Promotion } from '@app/shared/components/models/data';
+import { DetailsNewsComponent } from '../details-news/details-news.component';
 
 @Component({
   selector: 'app-user-info',
@@ -14,7 +16,7 @@ export class UserInfoComponent implements OnInit {
   sexo='';
   date=new Date();
   promotions:Promotion[]=[];
-  constructor(private authSvc:AuthService,public dataPromotions:PromotionService) { }
+  constructor(private authSvc:AuthService,public dataPromotions:PromotionService,public dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.getPromotions();
@@ -34,6 +36,9 @@ export class UserInfoComponent implements OnInit {
      this.promotions=orderData;
       console.log(data)
     })
+  }
+  getDetailNews(x:number){
+    this.dialog.open(DetailsNewsComponent,{data:{x}});
   }
 
 }

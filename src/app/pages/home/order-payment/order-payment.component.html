@@ -30,7 +30,7 @@
             <mat-label >Buscar por paciente</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Juan Perez" #input >
           </mat-form-field>
-          <button mat-raised-button *ngIf="!data.hXC && !data.isPrevimedica"  (click)="viewOrdenes()"><mat-icon style="margin-right: 10px;" >description</mat-icon>Ver Órdenes</button>
+          <button mat-raised-button *ngIf="!data.hXC && !data.isPrevimedica"  (click)="viewOrdenes()" style="margin-left: 10%;"><mat-icon style="margin-right: 10px;" >description</mat-icon>Ver Órdenes</button>
         <div *ngIf="data.hC">
         <table mat-table [dataSource]="dataSource" *ngIf="flag && data.sede!=4" >
           <ng-container matColumnDef="Numero de Factura">
@@ -50,11 +50,11 @@
             <td mat-cell *matCellDef="let element"> {{element.fecha_Fact|date:'dd/MM/YYYY'}} </td>
           </ng-container>
           <ng-container matColumnDef="Monto en Bs">
-            <th mat-header-cell *matHeaderCellDef class="alin-regth"> Monto Bs </th>
+            <th mat-header-cell *matHeaderCellDef class="alin-regth"> *Monto Bs </th>
             <td mat-cell *matCellDef="let element" class="alin-regth monto"> {{element.monto_Bruto_Bs|number:'1.2-2'}} </td>
           </ng-container>
           <ng-container matColumnDef="Monto en $">
-            <th mat-header-cell *matHeaderCellDef class="alin-regth"> Monto USD </th>
+            <th mat-header-cell *matHeaderCellDef class="alin-regth"> *Monto USD </th>
             <td mat-cell *matCellDef="let element" class="alin-regth monto"> {{element.monto_Bruto_Dol|number:'1.2'}} </td>
           </ng-container>
 
@@ -70,7 +70,7 @@
           </div>
 
           <div class="alert alert-secondary " style="margin-top: 1.5rem;text-align: left;font-size: medium;" *ngIf="flag && data.sede!=4">
-            <p style="text-align: center;">Montos después de retenciones administrativas y de Ley. Los totales incluyen el sustraendo de Ley. Para su preguntas quedamos a la orden en el departamento
+            <p style="text-align: center;">*Montos después de retenciones administrativas y de Ley. Los montos no incluyen el sustraendo de Ley. Para su preguntas quedamos a la orden en el departamento
                de pagos. Trabajamos por su bienestar.
             </p>
           </div>

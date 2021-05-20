@@ -65,6 +65,10 @@
             <td class="alin-regth monto">{{cobroPrevi.montoBs |number:'1.2-2'}}</td>
           </tbody>
         </table>
+        <div class="alert alert-secondary" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag" >
+          <p style="text-align: center;">{{msjx}}
+          </p>
+        </div>
       </div>
       <div class="col-sm-12" *ngIf="isCobrosCobrar">
         <table>
@@ -78,13 +82,17 @@
           </thead>
           <tbody *ngFor="let cobroCobrar of cobrosCobrar">
             <td>{{cobroCobrar.numero_Fact}}</td>
-            <td><a style="cursor: pointer; color: #013476;">{{cobroCobrar.numero}}</a></td>
+            <td><a (click)="openModal(cobroCobrar.numero,cobroCobrar.montoBs,cobroCobrar.montoDol,sede.value,cobroCobrar.fecha)" style="cursor: pointer; color: #013476;">{{cobroCobrar.numero}}</a></td>
             <td>{{cobroCobrar.nombre}}</td>
             <td>{{cobroCobrar.fecha_Fact|date:'dd/MM/YYYY'}}</td>
             <td class="alin-regth monto">{{cobroCobrar.monto_Bruto_Bs|number:'1.2-2'}}</td>
             <td class="alin-regth monto">{{cobroCobrar.monto_Bruto_Dol|number:'1.2'}}</td>
           </tbody>
         </table>
+        <div class="alert alert-secondary" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag" >
+          <p style="text-align: center;">{{msjx}}
+          </p>
+        </div>
       </div>
       <div class="col-sm-12" *ngIf="isXcobrar">
         <table>
@@ -103,6 +111,10 @@
             <td class="alin-regth monto">{{xc.montoDol|number:'1.2'}}</td>
           </tbody>
         </table>
+        <div class="alert alert-secondary" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag" >
+          <p style="text-align: center;">{{msjx}}
+          </p>
+        </div>
       </div>
       <div class="col-sm-12" *ngIf="isAgrup">
         <table>
@@ -123,6 +135,10 @@
             <td class="alin-regth monto">{{agropu.montoDol|number:'1.2-2'}}</td>
           </tbody>
         </table>
+        <div class="alert alert-secondary" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag" >
+          <p style="text-align: center;">{{msjx}}
+          </p>
+        </div>
       </div>
     </mat-card>
   </div>

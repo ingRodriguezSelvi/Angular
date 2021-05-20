@@ -14,8 +14,9 @@ export class PromocionesComponent implements OnInit {
   dataSource = JSON.parse(sessionStorage.getItem('cobros')||'{}');
   displayedColumns: string[] = ['id','imgUrl','title','content','link','acciones'];
   constructor(public dataPromotions:PromotionService,public dialog:MatDialog) { }
-
+  loadding=true;
   ngOnInit(): void {
+    this.loadding=true;
     this.getPromotion();
 
   }
@@ -34,6 +35,7 @@ export class PromocionesComponent implements OnInit {
       let orderData:Promotion[]=data;
       this.dataSource=new MatTableDataSource(orderData);
       console.log(data)
+      this.loadding=false;
     })
   }
 

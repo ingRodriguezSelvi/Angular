@@ -1,10 +1,12 @@
 import { Component, OnInit,Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { meses } from '@app/core/mocks/Constans/meses';
 import { MedDataService } from '@app/pages/home/Services/med-data.service';
 import { DataService } from '@app/Services/data.service';
 import { FiltersDataService } from '@app/Services/filters-data.service';
 import { Cobros, HonoXPagar, Meses, OrdenMedica, Sedes } from '@app/shared/components/models/data';
+import { DetailsPaymentsComponent } from '../details-payments/details-payments.component';
 
 @Component({
   selector: 'app-cobros-med',
@@ -29,7 +31,7 @@ export class CobrosMedComponent implements OnInit {
   isXcobrar=false;
   isAgrup=false;
   constructor(public medServices:MedDataService, public data:DataService,
-    private filtersData:FiltersDataService) { }
+    private filtersData:FiltersDataService, public dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.getSedes();
@@ -39,6 +41,9 @@ export class CobrosMedComponent implements OnInit {
     this.medServices.getSedes().subscribe(data=>{
       this.sedes=data;
     })
+  }
+  openModal(numero:number,totalBs:number,totalDol:number,x:number,f:Date){
+    this.dialog.open(DetailsPaymentsComponent,{data:{numero,totalBs,totalDol,f,x}});
   }
   getAnnos(){
     this.filtersData.getAnos();

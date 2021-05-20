@@ -11,6 +11,7 @@ import { CreatePromoComponent } from './create-promo/create-promo.component';
 import { CreateMedComponent } from './create-med/create-med.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CobrosMedComponent } from './medicos/cobros-med/cobros-med.component';
+import { DetailsPaymentsComponent } from './medicos/details-payments/details-payments.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { CobrosMedComponent } from './medicos/cobros-med/cobros-med.component';
     CreatePromoComponent,
     CreateMedComponent,
     CobrosMedComponent,
+    DetailsPaymentsComponent,
   ],
   imports: [
     CommonModule,
