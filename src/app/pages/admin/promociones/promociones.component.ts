@@ -22,7 +22,9 @@ export class PromocionesComponent implements OnInit {
   }
   openEdit(n:number){
     console.log(n)
-    this.dialog.open(EditPromoComponent,{data:{n}});
+    this.dialog.open(EditPromoComponent,{data:{n}}).afterClosed().subscribe(()=>{
+      this.getPromotion();
+    });
   }
   openCreate(){
 

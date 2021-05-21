@@ -48,7 +48,10 @@ export class MedicosComponent implements OnInit {
     this.data.isCobroMed=true;
   }
   editMed(c:string){
-    this.dialog.open(EditMedComponent,{data:{c}})
+    this.dialog.open(EditMedComponent,{data:{c}}).afterClosed().subscribe(()=>{
+      this.getListMed();
+    })
+
   }
   deleteMed(x:number){
     this.desactive.id=x;
