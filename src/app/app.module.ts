@@ -12,6 +12,7 @@ import {ReactiveFormsModule,FormsModule} from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { registerLocaleData } from '@angular/common';
 import localeEsAr from '@angular/common/locales/es-AR';
+import { ContactComponent } from './shared/components/contact/contact.component';
 
 registerLocaleData(localeEsAr);
 
@@ -22,6 +23,7 @@ registerLocaleData(localeEsAr);
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,

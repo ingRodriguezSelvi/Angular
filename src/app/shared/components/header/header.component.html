@@ -3,6 +3,7 @@
   <img src="https://idbclinicas.com/wp-content/uploads/2017/09/grupo-de-clinicas-diapo.png" alt="80px" width="250px">
   <span class="spacer"></span>
   <div>
+    <a mat-button (click)="openContact()" *ngIf="data.isLogin"><mat-icon>perm_contact_calendar</mat-icon>Contactos</a>
     <a mat-button (click)='closedSesion()' *ngIf="data.isLogin"  ><mat-icon>logout</mat-icon>Cerrar sesión</a>
     <a mat-button [routerLink]="'/admin'" *ngIf="data.isAdmin1" >Administrador</a>
   </div>

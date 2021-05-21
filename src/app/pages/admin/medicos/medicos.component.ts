@@ -32,7 +32,9 @@ export class MedicosComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   addMed(){
-    this.dialog.open(CreateMedComponent);
+    this.dialog.open(CreateMedComponent).afterClosed().subscribe(()=>{
+      this.getListMed();
+    });
   }
   getListMed(){
    this.dataSource=this.dataService.getListMed().subscribe(data=>{

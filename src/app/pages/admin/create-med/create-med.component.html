@@ -6,15 +6,23 @@
         <mat-card>
           <div class="row g-0">
             <form [formGroup]="createdMed" *ngIf="!_flag">
-              <mat-form-field class="full-width-input" hidden>
+
+                <h4>Datos de cuenta</h4>
+                <mat-form-field class="full-width-input">
+                  <input type="text" matInput placeholder="Usuario" #user formControlName="username" [(ngModel)]="_medico.username" value={{_medico.username}} >
+                </mat-form-field>
+                <mat-form-field class="full-width-input">
+                  <input type="text" matInput placeholder="Contraseña" #password formControlName="password" [(ngModel)]="_medico.password" value={{_medico.password}} >
+                </mat-form-field>
+               <mat-checkbox formControlName="contrato" style="padding: 1rem; width: 40%;">Contrato</mat-checkbox>
+               <mat-checkbox formControlName="cortesia" style="padding: 1rem; width: 40%;">Cortesia</mat-checkbox>
+                <button mat-button style="justify-content: center;width: 20%;margin-left: 40%;margin-right: 40%;" (click)="getDataProfit(user.value)">Cargar datos de Profit</button>
+                <!--Datos del medico-->
+                <h4>Datos del Medico</h4>
+               <mat-form-field class="full-width-input" hidden>
                 <input type="text"  matInput placeholder="id" formControlName="id" [(ngModel)]="_medico.medico.id" value={{_medico.medico.id}} >
               </mat-form-field>
-              <mat-form-field class="full-width-input">
-                <input type="text" matInput placeholder="Usuario" #user formControlName="usuario" [(ngModel)]="_medico.username" value={{_medico.username}} (keydown.enter)="getDataProfit(user.value)">
-              </mat-form-field>
-              <mat-form-field class="full-width-input">
-                <input type="text" matInput placeholder="Contraseña" #password formControlName="password" [(ngModel)]="_medico.password" value={{_medico.password}} >
-              </mat-form-field>
+
               <mat-form-field class="full-width-input">
                 <input type="text" matInput placeholder="Cedula" #cedula formControlName="rif" [(ngModel)]="_medico.medico.rif" value={{_medico.medico.rif}} >
               </mat-form-field>
@@ -56,10 +64,9 @@
                 <input type="text" matInput placeholder="activo" formControlName="activo" [(ngModel)]="_medico.medico.activo" [value]='_medico.medico.activo'>
               </mat-form-field>
               <br>
-
           </form>
           <div class="col-sm-12"*ngIf="!_flag">
-            <button mat-button  (click)="registrar()"><mat-icon>add</mat-icon> Añadir</button>
+            <button mat-button  (click)="registrar()" style="margin: 1%;width: 45%;"><mat-icon>add</mat-icon> Añadir</button>
             <button mat-button mat-dialog-close> <mat-icon>reply</mat-icon>Cancelar</button>
           </div>
 

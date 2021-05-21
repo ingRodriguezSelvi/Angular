@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '@app/pages/auth/auth.service';
 import { Router } from '@angular/router';
 import { DataService } from '@app/Services/data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ContactComponent } from '../contact/contact.component';
 
 
 @Component({
@@ -12,7 +14,7 @@ import { DataService } from '@app/Services/data.service';
 export class HeaderComponent implements OnInit {
   isAdmin=false;
 @Output() toggleSidenav= new EventEmitter<void>();
-  constructor(private authSvc:AuthService,private router:Router,public data:DataService) { }
+  constructor(private authSvc:AuthService,private router:Router,public data:DataService,public dialog:MatDialog) { }
   ngOnInit(): void {
 
     if(sessionStorage.getItem('token')){
@@ -28,6 +30,9 @@ export class HeaderComponent implements OnInit {
     if(!sessionStorage.getItem('token')){
       this.data.isLogin=false;
     }
+  }
+  openContact(){
+    this.dialog.open(ContactComponent)
   }
 
 }

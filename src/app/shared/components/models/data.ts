@@ -59,6 +59,8 @@ export interface RegisterMedI{
   medico:F_MedicosI;
   username:string;
   password:string;
+  contrato:boolean;
+  cortesia:boolean
 }
 
 export interface PaymentsDetailsI{

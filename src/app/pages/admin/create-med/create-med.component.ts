@@ -28,9 +28,12 @@ _medico:RegisterMedI={'medico':{
   'rif':'',
   'sexo':'',
   'zona':'',
-  'extId':''
+  'extId':'',
+  'especialidad':0
 },'username':'',
-  'password':''
+  'password':'',
+  'contrato':true,
+  'cortesia':true
 }
 createdMed=this.fr.group({
   id:[''],
@@ -47,8 +50,16 @@ createdMed=this.fr.group({
   ciudad: [''],
   especialidad: [''],
   activo: [''],
-  usuario:[''],
-  password:['']
+  username:[''],
+  password:[''],
+  contrato:[''],
+  cortesia:['']
+})
+userAcountMed=this.fr.group({
+  username:[''],
+  password:[''],
+  contrato:[''],
+  cortesia:['']
 })
 
 dateRegister:RegisterMedI={'medico':{
@@ -62,12 +73,13 @@ dateRegister:RegisterMedI={'medico':{
   'full_Name':'',
   'id':0,
   'nombres':'',
+  'especialidad':0,
   'rif':'',
   'sexo':'',
   'zona':'',
   'extId':''
 
-},'password':'','username':''}
+},'password':'','username':'','contrato':true,'cortesia':true}
   constructor(private fr:FormBuilder,private authserv:AuthService,public dialog:MatDialog,private  adminService:AdminMedService) { }
 
   ngOnInit(): void {
@@ -79,9 +91,24 @@ dateRegister:RegisterMedI={'medico':{
 
   }
   registrar(){
-    this.dateRegister.medico=this.createdMed.value;
-    this.dateRegister.password='Idb.1234';
-    this.dateRegister.username='13262468';
+    this.dateRegister.medico.activo=this.createdMed.value.activo;
+    this.dateRegister.medico.apellidos=this.createdMed.value.apellidos;
+    this.dateRegister.medico.celular=this.createdMed.value.celular;
+    this.dateRegister.medico.ciudad=this.createdMed.value.ciudad;
+    this.dateRegister.medico.direccion=this.createdMed.value.direccion;
+    this.dateRegister.medico.email=this.createdMed.value.email;
+    this.dateRegister.medico.especialidad=this.createdMed.value.especialidad;
+    this.dateRegister.medico.extId=this.createdMed.value.username;
+    this.dateRegister.medico.full_Name=this.createdMed.value.full_Name;
+    this.dateRegister.medico.id=this.createdMed.value.id;
+    this.dateRegister.medico.nombres=this.createdMed.value.nombres;
+    this.dateRegister.medico.rif=this.createdMed.value.rif;
+    this.dateRegister.medico.sexo=this.createdMed.value.sexo;
+    this.dateRegister.medico.zona=this.createdMed.value.zona;
+    this.dateRegister.contrato=this.createdMed.value.contrato;
+    this.dateRegister.cortesia=this.createdMed.value.cortesia;
+    this.dateRegister.password=this.createdMed.value.password;
+    this.dateRegister.username=this.createdMed.value.username;
     console.log(this.dateRegister)
     this.adminService.registerMed(this.dateRegister).subscribe(res=>{
       console.log(res);
@@ -91,6 +118,7 @@ dateRegister:RegisterMedI={'medico':{
     }))
   }
   getDataProfit(c:string){
+    console.log(this.createdMed.value.cortesia)
     this.adminService.dataProfit(c).subscribe(res=>{
       console.log(c)
       this._medico.medico=res;
