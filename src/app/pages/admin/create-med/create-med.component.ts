@@ -13,7 +13,9 @@ import { EspecialidadI, F_MedicosI, MedicosI, RegisterMedI } from '@app/shared/c
 })
 export class CreateMedComponent implements OnInit {
   especialidades:EspecialidadI[]=[{'especialidad':' ' ,'id': 0}]
-_medico:F_MedicosI={
+  _flag=false;
+  messageErr:string='';
+_medico:RegisterMedI={'medico':{
   'activo':false,
   'apellidos':'',
   'celular':0,
@@ -27,6 +29,8 @@ _medico:F_MedicosI={
   'sexo':'',
   'zona':'',
   'extId':''
+},'username':'',
+  'password':''
 }
 createdMed=this.fr.group({
   id:[''],
@@ -42,7 +46,9 @@ createdMed=this.fr.group({
   zona: [''],
   ciudad: [''],
   especialidad: [''],
-  activo: ['']
+  activo: [''],
+  usuario:[''],
+  password:['']
 })
 
 dateRegister:RegisterMedI={'medico':{
@@ -75,16 +81,19 @@ dateRegister:RegisterMedI={'medico':{
   registrar(){
     this.dateRegister.medico=this.createdMed.value;
     this.dateRegister.password='Idb.1234';
-    this.dateRegister.username='26641227';
+    this.dateRegister.username='13262468';
     console.log(this.dateRegister)
     this.adminService.registerMed(this.dateRegister).subscribe(res=>{
       console.log(res);
-    })
+    },(err=>{
+      this._flag=true;
+      this.messageErr=err.error;
+    }))
   }
   getDataProfit(c:string){
     this.adminService.dataProfit(c).subscribe(res=>{
       console.log(c)
-      this._medico=res;
+      this._medico.medico=res;
       console.log(this._medico)
     })
   }
@@ -92,6 +101,9 @@ dateRegister:RegisterMedI={'medico':{
     if (event.key === "Enter") {
       console.log(event);
     }
+  }
+  reload(){
+    this._flag=false;
   }
 
 }
