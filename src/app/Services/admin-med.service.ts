@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DesactiveMedResponseI, F_MedicosI, Promotion, RegisterMedI } from '@app/shared/components/models/data';
+import { IMedFull, IMedUp } from '@app/shared/components/models/dataResponseMed';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -40,7 +41,7 @@ dataProfit(c:string):Observable<F_MedicosI>{
   }))
 }
 
-updateMed(med:F_MedicosI):Observable<F_MedicosI>{
+updateMed(med:IMedUp):Observable<IMedFull>{
   const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
@@ -49,8 +50,8 @@ updateMed(med:F_MedicosI):Observable<F_MedicosI>{
     })
   };
   let direccion= this.url+"api/Medicos/UpdateDoctor";
-  return this.http.post<F_MedicosI>(direccion,med,httpOptions).
-  pipe(map((res:F_MedicosI)=>{
+  return this.http.post<IMedFull>(direccion,med,httpOptions).
+  pipe(map((res:IMedFull)=>{
     return res;
   }));
 }

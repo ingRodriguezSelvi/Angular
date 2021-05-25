@@ -5,6 +5,7 @@ import { AuthService } from '@app/pages/auth/auth.service';
 import { AdminMedService } from '@app/Services/admin-med.service';
 import { DataService } from '@app/Services/data.service';
 import { EspecialidadI, F_MedicosI } from '@app/shared/components/models/data';
+import { IMedFull, IMedUp } from '@app/shared/components/models/dataResponseMed';
 
 @Component({
   selector: 'app-edit-med',
@@ -14,10 +15,10 @@ import { EspecialidadI, F_MedicosI } from '@app/shared/components/models/data';
 export class EditMedComponent implements OnInit {
   flag=false;
 especialidades:EspecialidadI[]=[{'especialidad':' ' ,'id': 0}]
-_medico:F_MedicosI={
+_medico:IMedFull={
   'activo':false,
   'apellidos':'',
-  'celular':0,
+  'celular':'',
   'ciudad':'',
   'direccion':'',
   'email':'',
@@ -27,7 +28,8 @@ _medico:F_MedicosI={
   'rif':'',
   'sexo':'',
   'zona':'',
-  'extId':''
+  'extId':'',
+  'especialidad':0
 }
 updateMed=this.fr.group({
   id:[''],
@@ -43,7 +45,12 @@ updateMed=this.fr.group({
   zona: [''],
   ciudad: [''],
   especialidad: [''],
-  activo: ['']
+  activo: [''],
+
+})
+especiales=this.fr.group({
+  contrato:[false],
+  cortesia:[false]
 })
   constructor(@Inject(MAT_DIALOG_DATA) public data:{c:string},private fr:FormBuilder,public med:AuthService,private date:DataService,private  adminService:AdminMedService) { }
 
@@ -62,11 +69,13 @@ updateMed=this.fr.group({
       })
   }
   updateMedi(){
-    console.log(this.updateMed.value)
+
+   const dataUp:IMedUp={'contrato':this.especiales.value.contrato,'cortesia':this.especiales.value.cortesia,'medico':this.updateMed.value}
+   console.log('ESTOS SON LOS DATOS PARA ACTUALIZAR',dataUp)
     const formValue=this.updateMed.value
-    this.adminService.updateMed(formValue).subscribe(data=>{
-      console.log(data);
-    })
+    //this.adminService.updateMed(formValue).subscribe(data=>{
+    //  console.log(data);
+  //  })
   }
 
 }

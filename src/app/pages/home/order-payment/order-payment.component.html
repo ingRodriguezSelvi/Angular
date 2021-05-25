@@ -30,7 +30,7 @@
             <mat-label >Buscar por paciente</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Juan Perez" #input >
           </mat-form-field>
-          <button mat-raised-button (click)="downloadPDF()" *ngIf="flag"><mat-icon>print</mat-icon> Imprimir</button>
+          <button mat-raised-button (click)="downloadPDF()" *ngIf="flag"><mat-icon>print</mat-icon>Descargar</button>
           <button mat-raised-button *ngIf="!data.hXC && !data.isPrevimedica"  (click)="viewOrdenes()" style=""><mat-icon style="margin-right: 10px;" >description</mat-icon>Ver Pagos</button>
         <div *ngIf="data.hC" id='htmlData'>
           <table mat-table [dataSource]="dataSource" *ngIf="flag && data.sede!=4" >

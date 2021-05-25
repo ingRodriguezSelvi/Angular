@@ -100,4 +100,3 @@ export interface HonoXPagar{
   montoDol:number;
   nombre:string;
 }
-

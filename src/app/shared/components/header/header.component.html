@@ -4,8 +4,20 @@
   <span class="spacer"></span>
   <div>
     <a mat-button (click)="openContact()" *ngIf="data.isLogin"><mat-icon>perm_contact_calendar</mat-icon>Contactos</a>
-    <a mat-button (click)='closedSesion()' *ngIf="data.isLogin"  ><mat-icon>logout</mat-icon>Cerrar sesión</a>
     <a mat-button [routerLink]="'/admin'" *ngIf="data.isAdmin1" >Administrador</a>
+    <a mat-button [matMenuTriggerFor]="menu" *ngIf="data.isLogin" aria-label="Example icon-button with a menu">
+      <mat-icon style="color: #FFFF;">person</mat-icon>Cuenta
+    </a>
+    <mat-menu #menu="matMenu"  >
+      <button mat-menu-item >
+        <mat-icon style="color: #0077cb;">lock</mat-icon>
+        <span style="color: #0077cb;"style="color: #0077cb;">Cambiar Contraseña</span>
+      </button>
+      <button mat-menu-item  (click)='closedSesion()'>
+        <mat-icon style="color: #0077cb;">logout</mat-icon>
+        <span style="color: #0077cb;" >Cerrar Sesion</span>
+      </button>
+    </mat-menu>
   </div>
 </ng-container>
 </mat-toolbar>

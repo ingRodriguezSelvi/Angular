@@ -7,7 +7,7 @@
 <div *ngIf='isLoadding' class="loadding">
   <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
 </div>
-<button mat-raised-button (click)="downloadPDF()" *ngIf="flag"><mat-icon>print</mat-icon> Imprimir</button>
+<button mat-raised-button (click)="downloadPDF()" *ngIf="flag"><mat-icon>print</mat-icon>Descargar</button>
 <div id="htmlDataXpagar">
   <table mat-table [dataSource]="dataSource" *ngIf="flag && data.sede!=4 && !isLoadding" >
   <ng-container matColumnDef="numero">

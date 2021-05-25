@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Cobros, F_MedicosI, Meses } from '@app/shared/components/models/data';
+import { IMedFull } from '@app/shared/components/models/dataResponseMed';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -31,9 +32,10 @@ mes:number=new Date().getMonth();
 isMercadeo:boolean=false;
 isFinanzas:boolean=false;
 isCobroMed:boolean=false;
+forgotCedula:string='';
   constructor(private http:HttpClient) { }
 
-getMedicoEdit(c:string):Observable<F_MedicosI>{
+getMedicoEdit(c:string):Observable<IMedFull>{
   const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
@@ -43,8 +45,8 @@ getMedicoEdit(c:string):Observable<F_MedicosI>{
     })
   };
   let direccion = "http://172.18.16.50:5005/"
-  return this.http.get<F_MedicosI>(direccion+'api/Medicos/DoctorData',httpOptions).
-    pipe(map((res:F_MedicosI)=>{
+  return this.http.get<IMedFull>(direccion+'api/Medicos/DoctorData',httpOptions).
+    pipe(map((res:IMedFull)=>{
    return res;
   }));
 }
