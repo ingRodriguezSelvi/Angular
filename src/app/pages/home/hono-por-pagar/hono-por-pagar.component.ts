@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { meses } from '@app/core/mocks/Constans/meses';
 import { DataService } from '@app/Services/data.service';
+import { PdfService } from '@app/Services/pdf.service';
 import { HonoXPagar, Meses } from '@app/shared/components/models/data';
 import { MedDataService } from '../Services/med-data.service';
 
@@ -22,10 +23,15 @@ export class HonoPorPagarComponent implements OnInit {
   dataSource = JSON.parse(sessionStorage.getItem('cobros')||'{}');
   displayedColumns: string[] = [
     'numero','fecha','paciente','montoBs','montoDol',];
-  constructor(private medSrvc:MedDataService,public data:DataService) { }
+  constructor(private medSrvc:MedDataService,public data:DataService,public pdf:PdfService) { }
 
   ngOnInit(): void {
     this.getOrder();
+  }
+  downloadPDF(): void {
+    const DATA = document.getElementById('htmlDataXpagar')
+    console.log(DATA);
+    this.pdf.downloadPDF(DATA!);
   }
   getOrder(){
     this.isLoadding=true

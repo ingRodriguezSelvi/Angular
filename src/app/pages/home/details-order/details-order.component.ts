@@ -3,6 +3,7 @@ import { Cobros, MedicosI, PaymentsDetailsI } from '@app/shared/components/model
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MedDataService } from '../Services/med-data.service';
 import { AuthService } from '@app/pages/auth/auth.service';
+import { PdfService } from '@app/Services/pdf.service';
 @Component({
   selector: 'app-details-order',
   templateUrl: './details-order.component.html',
@@ -17,7 +18,9 @@ export class DetailsOrderComponent implements OnInit {
   sexo='';
   date=new Date();
   ordersDetails?:PaymentsDetailsI[];
-  constructor(@Inject(MAT_DIALOG_DATA) public data:{numero:number,totalBs:number,totalDol:number,x:number,f:Date},private oshvc:MedDataService ,private authSvc:AuthService) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data:{numero:number,totalBs:number,totalDol:number,x:number,f:Date},private oshvc:MedDataService ,private authSvc:AuthService
+    ,public pdf:PdfService) { }
   ngOnInit(): void {
       this.loadding=true
       this.oshvc.getDetailsOrder(this.data.numero,this.data.x).subscribe(res=>{
@@ -35,5 +38,11 @@ export class DetailsOrderComponent implements OnInit {
         this.sexo='Dr.'
       }
     })
+
+  }
+  downloadPDF(): void {
+    const DATA = document.getElementById('htmlDataa')
+    console.log(DATA);
+    this.pdf.downloadPDF(DATA!);
   }
 }

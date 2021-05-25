@@ -5,6 +5,7 @@ import { meses } from '@app/core/mocks/Constans/meses';
 import { AuthService } from '@app/pages/auth/auth.service';
 import { DataService } from '@app/Services/data.service';
 import { FiltersDataService } from '@app/Services/filters-data.service';
+import { PdfService } from '@app/Services/pdf.service';
 import { Cobros, Medicos, Meses, OrdenMedica, Sedes } from '@app/shared/components/models/data';
 import { DetailsOrderComponent } from '../details-order/details-order.component';
 import { MedDataService } from '../Services/med-data.service';
@@ -27,7 +28,7 @@ export class HonoAgrupadosComponent implements OnInit {
   displayedColumns: string[] = [
     'Numero de Factura','Factura','Paciente','Fecha','Monto Bs','Monto USD'];
    sedes:Sedes[]=[];
-  constructor(public dialog:MatDialog,private medSrvc:MedDataService,public data:DataService,private filters:FiltersDataService) { }
+  constructor(public dialog:MatDialog,private medSrvc:MedDataService,public data:DataService,private filters:FiltersDataService,public pdf:PdfService) { }
   @Input() tiposedes?:number;
   @Input() mes?:number;
   @Input() ano?:number;
@@ -44,6 +45,11 @@ export class HonoAgrupadosComponent implements OnInit {
 }
 openModal(numero:number,totalBs:number,totalDol:number,x:number){
   this.dialog.open(DetailsOrderComponent,{data:{numero,totalBs,totalDol,x}});
+}
+downloadPDF(): void {
+  const DATA = document.getElementById('htmlDataGroup')
+  console.log(DATA);
+  this.pdf.downloadPDF(DATA!);
 }
 tipoSede(x:number){
   this.loadding=true;

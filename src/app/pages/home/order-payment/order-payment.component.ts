@@ -11,6 +11,9 @@ import { DataService } from '@app/Services/data.service';
 import {meses} from 'src/app/core/mocks/Constans/meses';
 import { FiltersDataService } from '@app/Services/filters-data.service';
 import { MatButtonToggle } from '@angular/material/button-toggle';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { PdfService } from '@app/Services/pdf.service';
 @Component({
   selector: 'app-order-payment',
   templateUrl: './order-payment.component.html',
@@ -41,8 +44,11 @@ export class OrderPaymentComponent implements OnInit {
                                ];
   dataSource = JSON.parse(sessionStorage.getItem('cobros')||'{}');
   montoBs="";
-  constructor(public dialog:MatDialog,private medSrvc:MedDataService,private service:AuthService
-    ,private fr:FormBuilder,public data:DataService, private filtersData:FiltersDataService) {}
+  constructor(
+    public dialog:MatDialog,private medSrvc:MedDataService,private service:AuthService
+    ,private fr:FormBuilder,public data:DataService, private filtersData:FiltersDataService
+    ,public pdf:PdfService
+    ) {}
   openModal(numero:number,totalBs:number,totalDol:number,x:number,f:Date){
     this.dialog.open(DetailsOrderComponent,{data:{numero,totalBs,totalDol,x,f}});
   }
@@ -68,6 +74,11 @@ export class OrderPaymentComponent implements OnInit {
  applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
+}
+downloadPDF(): void {
+  const DATA = document.getElementById('htmlData')
+  console.log(DATA);
+  this.pdf.downloadPDF(DATA!);
 }
  tipoSede(x:number,a:number,m:number,e?:MatButtonToggle){
     this.active='active';

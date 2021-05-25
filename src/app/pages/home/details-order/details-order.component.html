@@ -1,5 +1,5 @@
 <mat-dialog-content class="mat-typography">
-  <div class="container" >
+  <div class="container" id="htmlDataa">
       <div *ngIf="loadding" class="loadding">
         <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
       </div>
@@ -68,5 +68,8 @@
       </div>
   </div>
 </mat-dialog-content>
-
+<mat-dialog-actions align="end">
+  <button mat-button (click)="downloadPDF()"[mat-dialog-close]="true" cdkFocusInitial>Imprimir</button>
+  <button mat-button mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>
 

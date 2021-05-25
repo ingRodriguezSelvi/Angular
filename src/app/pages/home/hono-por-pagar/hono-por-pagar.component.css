@@ -95,4 +95,15 @@ mat-form-field{
 .mat-button-toggle-group{
   border: 0px;
 }
+.mat-raised-button{
+  background: #e2e3e5;
+  color: #41464b;
+  font-weight: 400;
+  padding: 0.3rem;
+  border-radius: 4px;
+  margin-left: 5%;
+  width: 200px;
+  height: 50px;
+  font-size: medium;
+}
 

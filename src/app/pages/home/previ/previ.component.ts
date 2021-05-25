@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { meses } from '@app/core/mocks/Constans/meses';
 import { DataService } from '@app/Services/data.service';
+import { PdfService } from '@app/Services/pdf.service';
 import { Cobros, Meses } from '@app/shared/components/models/data';
 import { MedDataService } from '../Services/med-data.service';
 
@@ -20,7 +21,7 @@ mesActual=new Date().getMonth();
 flag:boolean=false;
 msjx:string='';
 isLoadding=false;
-  constructor(public data:DataService,private orderServices:MedDataService) { }
+  constructor(public data:DataService,private orderServices:MedDataService,public pdf:PdfService) { }
   ngOnInit(): void {
     this.data.isLoadding=false;
     this.isLoadding=true;
@@ -39,6 +40,11 @@ isLoadding=false;
         this.msjx='El rango de fecha y sede seleccionado no tiene informacion para mostrar. Por favor seleccione otro rango de fecha o sede';
       }
   })
+  }
+  downloadPDF(): void {
+    const DATA = document.getElementById('htmlDataPrevi')
+    console.log(DATA);
+    this.pdf.downloadPDF(DATA!);
   }
   aplyFilterDate(a:number,m:number,s:number){
     if(m==12){

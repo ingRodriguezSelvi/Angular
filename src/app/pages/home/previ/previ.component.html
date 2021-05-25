@@ -4,6 +4,8 @@
     <mat-option *ngFor="let mes of data.MesesView" value={{mes.id}}>{{mes.nombre}}</mat-option>
   </mat-select>
 </mat-form-field>
+<button mat-raised-button (click)="downloadPDF()" *ngIf="flag"><mat-icon>print</mat-icon> Imprimir</button>
+<div id="htmlDataPrevi">
 <table mat-table [dataSource]="dataSource" *ngIf='!data.isLoadding && flag'>
   <ng-container matColumnDef="numero">
     <th mat-header-cell *matHeaderCellDef> Número de Pago </th>
@@ -25,6 +27,8 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
+</div>
+
 <div class="container">
 <div class="alert alert-secondary" style="margin-top: 1.5rem;text-align: left;" *ngIf="!flag && data.isPrevimedica" >
   <p style="text-align: center;">{{msjx}}

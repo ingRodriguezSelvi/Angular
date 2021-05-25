@@ -7,7 +7,9 @@
 <div *ngIf='isLoadding' class="loadding">
   <img src="https://idbclinicas.com/wp-content/uploads/2017/09/loader.gif" alt="">
 </div>
-<table mat-table [dataSource]="dataSource" *ngIf="flag && data.sede!=4 && !isLoadding" >
+<button mat-raised-button (click)="downloadPDF()" *ngIf="flag"><mat-icon>print</mat-icon> Imprimir</button>
+<div id="htmlDataXpagar">
+  <table mat-table [dataSource]="dataSource" *ngIf="flag && data.sede!=4 && !isLoadding" >
   <ng-container matColumnDef="numero">
     <th mat-header-cell *matHeaderCellDef> Número de Factura </th>
     <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
@@ -41,4 +43,5 @@
        de pagos. Trabajamos por su bienestar.
     </p>
   </div>
+</div>
 </div>
