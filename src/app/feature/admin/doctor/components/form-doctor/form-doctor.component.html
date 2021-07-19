@@ -1,0 +1,88 @@
+<div class="container">
+  <form [formGroup]="doctorForm" novalidate  >
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>
+          <h3> <strong>Datos del médico</strong></h3>
+        </mat-card-title>
+      </mat-card-header> 
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Nombres" formControlName="name">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Apellidos" formControlName="lastname">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Incicial de Rif" formControlName="tiporif">
+                <mat-option *ngFor="let trif of tiporif" [value]="trif.type">
+                  {{ trif.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="doctorForm.controls['trif'].hasError('required')">
+                Tipo de rif es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Cédula" formControlName="cedula">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Numero de colegio de medicos" formControlName="colegio">
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Numoero de Sanidad" formControlName="sanidad">
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Numoero de Sanidad" formControlName="sanidad">
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Sexo" formControlName="sex">
+                <mat-option *ngFor="let trif of tiposex" [value]="trif.type">
+                  {{ trif.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="doctorForm.controls['sex'].hasError('required')">
+                Tipo de sexo  es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Especialidad" formControlName="specialities">
+                <mat-option *ngFor="let specialitie of especialiad" [value]="specialitie.id">
+                  {{ specialitie.especialidad }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="doctorForm.controls['specialities'].hasError('required')">
+                la especialidad  es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+      
+
+      </mat-card-content>     
+    </mat-card>
+  </form>   
+  </div>

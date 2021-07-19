@@ -1,0 +1,46 @@
+<div class="container">
+  <form [formGroup]="iForm" #Form="ngForm" >
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h3> <strong>Datos del área</strong></h3>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+            <input matInput required  placeholder="Nombre" type="text"
+            formControlName="name"
+            (keypress)="onChangeFocus($event,rsocial.id)"
+            #rsocial name="rsocial" id="rsocial" tabindex="0"
+            >
+            <mat-error *ngIf="iForm.controls['name'].hasError('required')">
+              El nombre es <strong>requerido</strong>
+            </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        
+        
+
+      </mat-card-content>
+      <div class="row  align-items-center">
+        <div class="col text-center">
+          <button mat-raised-button  class="color-idb" (click)="onSubmit()"
+          [disabled]="Form.form.invalid"
+          tabindex="1"
+          >
+            <mat-icon>save</mat-icon>
+            Guardar
+          </button>
+          &nbsp;&nbsp;
+          <button mat-raised-button class="idb-color" (click)="onCancel()" tabindex="2" >
+            <mat-icon>cancel</mat-icon>
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+</div>

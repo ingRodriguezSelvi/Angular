@@ -1,0 +1,534 @@
+<div class="container">
+  <form [formGroup]="patientForm"  #Form="ngForm">
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h3> <strong>Datos del paciente</strong></h3>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Incicial de Rif" formControlName="tiporif" autofocus
+                (valueChange)="onChangeFocusOption($event,ced.id)"
+                #primero name="primer" id="primer" tabindex="0"
+                >
+                <mat-option *ngFor="let trif of tiporif" [value]="trif.type">
+                  {{ trif.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="patientForm.controls['trif'].hasError('required')">
+                Tipo de rif es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Cédula"
+              formControlName="cedula" type="number"
+              minlength="6" maxlength="10"
+              (keypress)="onChangeFocus($event,nom.id)"
+              #ced name="ced" id="ced" tabindex="1"
+                >
+              <mat-error autofocus *ngIf="patientForm.controls['cedula'].hasError('required')">
+                Cédula es <strong>requerido</strong> </mat-error>
+              <mat-error *ngIf="patientForm.controls['cedula'].hasError('minLength')">
+                Se requiere <strong> 6 minimo de caracteres</strong>
+              </mat-error>
+              <mat-error *ngIf="patientForm.controls['cedula'].hasError('maxlength')">
+                Se requiere <strong> maximo de 10 de caracteres</strong>
+              </mat-error>
+              <mat-error *ngIf="patientForm.controls['cedula'].hasError('rifTaken')">
+                La cédula ya <strong> existe</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Nombres"
+              formControlName="name"
+              (keypress)="onChangeFocus($event,ape.id)"
+              #nom name="nom" id="nom" tabindex="2"
+              >
+              <mat-error *ngIf="patientForm.controls['name'].hasError('required')">
+                Nombres es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Apellidos"
+              formControlName="lastname"
+              (keypress)="onChangeFocus($event,nace.id)"
+              #ape name="ape" id="ape" tabindex="3"
+              >
+              <mat-error *ngIf="patientForm.controls['lastname'].hasError('required')">
+                Apellidos es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Lugar de nacimiento"
+              formControlName="Placeofbirth"
+              (keypress)="onChangeFocus($event,birt.id)"
+              #nace name="nace" id="nace" tabindex="4"
+              >
+              <mat-error *ngIf="patientForm.controls['Placeofbirth'].hasError('required')">
+                Lugar de nacimiento es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+                <input matInput
+
+                  [matDatepicker]="StartDate"
+                  placeholder="Fecha de naciemiento"
+                  formControlName="Dateofbirth"
+                  (dateChange)="onChange($event,ced.id)"
+                  #birt name="birt" id="birt" tabindex="5"
+                  (dateInput)="addEvent('input', $event)"
+                >
+
+                <!-- <input matInput
+                  type="datetime"
+                formControlName="Dateofbirth"
+                [textMask]="{mask: datemask}"
+                [ngModel]="dateModel"
+                placeholder="Fecha de naciemiento"
+                (keypress)="onChange($event,se.id)"
+
+                #birt name="birt" id="birt" tabindex="5"
+                > -->
+
+
+              <mat-label>Fecha de naciemiento</mat-label>
+              <mat-datepicker-toggle matSuffix [for]="StartDate"></mat-datepicker-toggle>
+              <mat-datepicker #StartDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Edad" formControlName="age"
+              type="number" readonly tabindex="6">
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Sexo" formControlName="sex"
+              (valueChange)="onChangeFocusOption($event,pai.id)"
+              #se name="se" id="se" tabindex="7"
+              >
+                <mat-option *ngFor="let trif of tiposex" [value]="trif.type">
+                  {{ trif.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="patientForm.controls['trif'].hasError('required')">
+                Tipo de sexo es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Pais"
+              formControlName="country"
+              (selectionChange)='onChangeCountry($event)'
+              (valueChange)="onChangeFocusOption($event,esta.id)"
+              #pai name="pai" id="pai" tabindex="8"
+
+              >
+                <mat-option *ngFor="let trif of country" [value]="trif.id_pais">
+                  {{ trif.nombre }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="patientForm.controls['trif'].hasError('required')">
+                Pais es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Estado"
+              formControlName="state"
+              (selectionChange)='onChangeState($event)'
+              (valueChange)="onChangeFocusOption($event,ciu.id)"
+              #esta name="esta" id="esta" tabindex="9"
+              >
+                <mat-option *ngFor="let trif of state" [value]="trif.id_estado">
+                  {{ trif.estado }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="patientForm.controls['trif'].hasError('required')">
+                Estado es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Ciudad"
+              formControlName="cities"
+              (valueChange)="onChangeFocusOption($event,munic.id)"
+              #ciu name="ciu" id="ciu" tabindex="10"
+              >
+                <mat-option *ngFor="let trif of cities" [value]="trif.id_ciudad">
+                  {{ trif.ciudad }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="patientForm.controls['trif'].hasError('required')">
+                Ciudad es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Municipio"
+              formControlName="municipality"
+              (valueChange)="onChangeFocusOption($event,zreci.id)"
+              #munic name="munic" id="munic" tabindex="11"
+              >
+                <mat-option *ngFor="let trif of municipality" [value]="trif.id_municipio">
+                  {{ trif.municipio }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="patientForm.controls['trif'].hasError('required')">
+                Municipio es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Zona residencial"
+                formControlName="residentialarea"
+                (keypress)="onChangeFocus($event,tlfm.id)"
+                #zreci name="zreci" id="zreci" tabindex="12">
+              <mat-error *ngIf="patientForm.controls['residentialarea'].hasError('required')">
+                Zona residencial es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput
+              placeholder="Teléfono Movil 0411-555-5555"
+              formControlName="tlfcel"
+              (keypress)="onChangeFocus($event,tlfh.id)"
+              #tlfm name="tlfm" id="tlfm" tabindex="13"
+              matTooltip="0411-555-5555"
+              [textMask]="{mask: tlfmask}"
+              [ngModel]="tlfModel"
+              >
+              <mat-error *ngIf="patientForm.controls['tlfcel'].hasError('required')">
+                Teléfono Movil es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput
+              placeholder="Teléfono de habitación (0251)555-5555"
+              formControlName="tlfhab"
+              (keypress)="onChangeFocus($event,wmail.id)"
+              #tlfh name="tlfh" id="tlfh" tabindex="14"
+              matTooltip="(0251)555-5555"
+              [textMask]="{mask: tlfmask}"
+              [ngModel]="tlfhabModel"
+              >
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput
+              placeholder="Correo eléctronico"
+              type="email" formControlName="mail"
+              (keypress)="onChangeFocus($event,segpar.id)"
+              #wmail name="wmail" id="wmail" tabindex="15"
+              >
+            </mat-form-field>
+            <!-- <mat-error *ngIf="patientForm.controls['amail'].hasError('required')">
+              Correo eléctronico es <strong>requerido</strong>
+            </mat-error> -->
+            <mat-error *ngIf="patientForm.controls['mail'].hasError('email')">
+              Coloque un Correo eléctronico <strong>valido</strong>
+            </mat-error>
+          </div>
+          <div class="col">
+            <!-- <mat-form-field  class="full-width">
+              <ng-autocomplete 
+                [data]="data" 
+                [searchKeyword]="keyword" 
+                [itemTemplate]="itemTemplate"
+                placeholder="Seguro / Particular"
+                [notFoundTemplate]="notFoundTemplate"
+                
+
+                formControlName="typeofpatient0"
+                
+                >
+              </ng-autocomplete>
+
+              <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.name" ></a>
+              </ng-template>
+
+              <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+              </ng-template>
+            </mat-form-field> -->
+
+            <mat-form-field class="full-width">
+              <mat-label>Seguro / Particular</mat-label>
+              <input matInput type="text"
+                placeholder="Seguro / Particular"
+                formControlName="typeofpatient"
+                (keypress)="onChangeFocus($event,edciv.id)"
+                #segpar name="segpar" id="segpar" tabindex="16" readonly
+              >
+              <button matSuffix mat-icon-button
+                (click)="onSearchSeguro()"
+              >
+                <mat-icon>search</mat-icon>
+              </button>
+            </mat-form-field>
+
+          </div>
+
+          <div class="col">
+            <mat-slide-toggle
+            formControlName="responsable"
+            [(ngModel)]="isChecked"
+              (click)="responsableShow(isChecked)"
+              #sable name="sable" id="sable" tabindex="17"
+              >Responsable</mat-slide-toggle>
+          </div>
+
+        </div>
+
+        <div *ngIf="isChecked!=true">
+          <h3><strong>Datos del Representante</strong></h3>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Incicial de Rif"
+                formControlName="repreTiporif"
+                (valueChange)="onChangeFocusOption($event,cedsable.id)"
+                #tercero name="tercero" id="tercero" tabindex="18"
+                >
+                  <mat-option *ngFor="let trif of tiporif" [value]="trif.type">
+                    {{ trif.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-label>Cédula</mat-label>
+                <input matInput type="number"
+                placeholder="Cédula"
+                formControlName="repreCedula"
+                (keypress)="onChangeFocus($event,rrespon.id)"
+                #cedsable name="cedsable" id="cedsable" tabindex="19"
+                >
+                <button matSuffix mat-icon-button (click)="onSearchRif()">
+                  <mat-icon>search</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Nombres"
+                formControlName="repreName" readonly
+                tabindex="20"
+                >
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Apellidos"
+                formControlName="repreLastname" readonly
+                tabindex="21"
+                >
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Parentesco"
+                formControlName="repreRelationship"
+                (valueChange)="onChangeFocusOption($event,edciv.id)"
+                #rrespon name="rrespon" id="rrespon" tabindex="20"
+                >
+                  <mat-option *ngFor="let trif of Relationship" [value]="trif.id">
+                    {{ trif.nombre }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <h3><strong>Ficha Social</strong></h3>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Estado civil" required
+              formControlName="edocivil"
+              (valueChange)="onChangeFocusOption($event,nedu.id)"
+              #edciv name="edciv" id="edciv" tabindex="21"
+              >
+                <mat-option *ngFor="let trif of edocivil" [value]="trif.id_civil">
+                  {{ trif.nombre }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="patientForm.controls['edocivil'].hasError('required')">
+                "Estado civil es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Nivel de educación"
+              formControlName="academiclevels"
+              (valueChange)="onChangeFocusOption($event,profe.id)"
+              #nedu name="nedu" id="nedu" tabindex="22"
+              >
+                <mat-option *ngFor="let trif of Academiclevels" [value]="trif.id">
+                  {{ trif.nombre }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="patientForm.controls['academiclevels'].hasError('required')">
+                Tipo de rif es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Profesión"
+              formControlName="profession"
+              (keypress)="onChangeFocus($event,ocupa.id)"
+              #profe name="profe" id="profe" tabindex="23"
+              >
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Ocupación"
+              formControlName="occupation"
+              (keypress)="onChangeFocus($event,addr.id)"
+              #ocupa name="ocupa" id="ocupa" tabindex="24"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput required placeholder="Dirección"
+              formControlName="address"
+              (keypress)="onChangeFocus($event,nemer.id)"
+              #addr name="addr" id="addr" tabindex="25"
+              >
+              <mat-error *ngIf="patientForm.controls['address'].hasError('required')">
+                La dirección es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <h3><strong>En caso de emergencia contactar a </strong></h3>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Nombres"
+              formControlName="namecontact"
+              (keypress)="onChangeFocus($event,aemer.id)"
+              #nemer name="nemer" id="nemer" tabindex="26"
+              >
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Apellidos"
+              formControlName="lastnameconact"
+              (keypress)="onChangeFocus($event,tlcon.id)"
+              #aemer name="aemer" id="aemer" tabindex="27"
+              >
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Teléfono (0251)555-5555"
+              formControlName="tlfcontact"
+              (keypress)="onChangeFocus($event,relaemer.id)"
+              #tlcon name="tlcon" id="tlcon" tabindex="28"
+              matTooltip="(0251)555-5555"
+              [textMask]="{mask: tlfmask}"
+              [ngModel]="tlfconactModel"
+              >
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Parentesco"
+              formControlName="relationship"
+              (valueChange)="onChangeFocusOption($event,dieremer.id)"
+              #relaemer name="relaemer" id="relaemer" tabindex="29"
+              >
+                <mat-option *ngFor="let trif of Relationship" [value]="trif.id">
+                  {{ trif.nombre }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="patientForm.controls['trif'].hasError('required')">
+                Parentesco es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Dirección"
+              formControlName="addresscontact"
+              (keypress)="onChangeFocus($event,dieremer.id)"
+              #dieremer name="dieremer" id="dieremer" tabindex="30"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <div class="row  align-items-center">
+        <div class="col text-center">
+          <button mat-raised-button type="submit" class="color-idb" (click)="onSubmit()"
+          [disabled]="Form.form.invalid"
+          >
+            <mat-icon>save</mat-icon>
+            Guardar
+          </button>
+          &nbsp;&nbsp;
+          <button mat-raised-button class="idb-color" (click)="onCancel()">
+            <mat-icon>cancel</mat-icon>
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+</div>

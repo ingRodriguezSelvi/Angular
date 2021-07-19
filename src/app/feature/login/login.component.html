@@ -1,0 +1,38 @@
+<div class="card-login" style="margin-top: 15%;" *ngIf="dataService.thisIsLoggin || this.thisislogginglocal">
+<div class="container-fluid">
+  <div class="row main-content bg-success text-center">
+    <div class="col-md-4 text-center company__info">
+      <span class="company__logo"><h2><span class="fa fa-android"></span></h2></span>
+    </div>
+    <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+      <div class="container-fluid">
+        <div class="row">
+          <h2 style="padding: 5%;font-size: x-large;">Sistema de Información Hospitalaria</h2>
+        </div>
+        <div class="row">
+          <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="form-group">
+            <div class="row">
+              <mat-form-field >
+                <input matInput required (keypress)="save($event,segundo.id)" #primero name="primer" id="primer"   placeholder="Usuario" type="text"
+                formControlName="cedula" >
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field>
+                <input matInput required (keypress)="save($event,primero.id)" #segundo id="segundo"  placeholder="Contraseña" type="password"
+                formControlName="password" >
+              </mat-form-field >
+            </div>
+            <div class="row" style="padding-top: 2%;">
+              <button type="submit" mat-raised-button class="btn" [disabled]="loginForm.invalid" >Ingresar</button>
+            </div>
+          </form>
+          <div class="row" style="">
+            <button mat-button (click)="onResetPassword()">¿Olvidaste la contraseña?</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,14 @@
+export * from './academiclevelModel';
+export * from './citiesModel';
+export * from './coutryModel';
+export * from './doctorModel';
+export * from './edocivilModel';
+export * from './insiranceModel';
+export * from './interfaceAdmin';
+export * from './municipalityModel';
+export * from './patientModel';
+export * from './relationshipModel';
+export * from './stateModel';
+export * from './usersModel';
+// export * from './rolesModel';
+export * from './areaModel';

@@ -1,0 +1,88 @@
+.sidenav-container {
+  height: 100%;
+
+}
+
+.sidenav {
+  width: 200px;
+  background-color: #0077bc;
+  color:#fff;
+}
+.userstyle{
+  color: #0077bc;
+  position: relative;
+  padding-top: 0.9%;
+  font-size: medium;
+}
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar{
+  background-color: #fff;
+  color:#fff;
+  .a{
+    color: #fff;
+  }
+  .mat-list-item-content{
+    color:#fff !important;
+  }
+  .p{
+    color: #0077bc;
+  }
+}
+.mat-toolbar img{
+  vertical-align: middle;
+    text-align: center;
+    // padding-left: 35%;
+    margin-left: 25%;
+}
+
+.logo-img{
+  vertical-align: middle;
+    text-align: center;
+    // padding-left: 35%;
+    margin-left: 25%;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #fff;
+  border-bottom: #CDCDCD solid 1px;
+  color:0077bc;
+}
+.mat-toolbar .mat-list-item-content .a{
+
+  color:#fff !important;
+}
+.logo {
+  width: 100px;
+  margin: auto;
+  margin-top: 10px;
+}
+.mat-icon-button{
+  color: #0077bc;
+}
+.idb-color{
+  a{color:#fff;
+   }
+  background-color: #0077bc;
+  color:#fff;
+}
+img{
+  width: 70px;
+}
+.user-login{
+  padding-top: 25px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.mat-nav-list .mat-icon{
+  margin-right: 10%;
+}
+
+
+

@@ -1,0 +1,214 @@
+<div class="container">
+  <form [formGroup]="iForm" #Form="ngForm" >
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h3> <strong>Datos {{title}}</strong></h3>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select autofocus required placeholder="Tipo de institución"
+              formControlName="tname"
+              (valueChange)="onChangeFocusOption($event,segundo.id)"
+              #primero name="primer" id="primer" tabindex="0"
+              >
+                <mat-option *ngFor="let trif of typeins" [value]="trif.type">
+                  {{ trif.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="iForm.controls['tname'].hasError('required')">
+                El tipo es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select required required placeholder="Tipo de seguro"
+              formControlName="type"
+              (valueChange)="onChangeFocusOption($event,tiposrif.id)"
+              #segundo name="segundo" id="segundo" tabindex="1"
+              >
+                <mat-option *ngFor="let trif of typeinst" [value]="trif.type">
+                  {{ trif.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="iForm.controls['type'].hasError('required')">
+                El tipo es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select required placeholder="Incicial de RIF"
+              formControlName="tiporif"
+              (valueChange)="onChangeFocusOption($event,rifs.id)"
+              #tiposrif name="tiposrif" id="tiposrif" tabindex="2"
+              >
+                <mat-option *ngFor="let trif of tiporif" [value]="trif.type">
+                  {{ trif.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="iForm.controls['tiporif'].hasError('required')">
+                Incicial de RIF es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="RIF"
+              formControlName="rif" type="number" minlength="6" maxlength="10" required
+              (keypress)="onChangeFocus($event,rsocial.id)"
+              #rifs name="rifs" id="rifs" tabindex="3"
+              >
+              <mat-error *ngIf="iForm.controls['rif'].hasError('required')">
+                RIF es <strong>requerido</strong> </mat-error>
+              <mat-error *ngIf="iForm.controls['rif'].hasError('minLength')">
+                Se requiere <strong> 6 minimo de caracteres</strong>
+              </mat-error>
+              <mat-error *ngIf="iForm.controls['rif'].hasError('maxlength')">
+                Se requiere <strong> maximo de 10 de caracteres</strong>
+              </mat-error>
+              <mat-error *ngIf="iForm.controls['rif'].hasError('rifTaken')">
+                La RIF ya <strong> existe</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+            <input matInput required  placeholder="Razón social" type="text"
+            formControlName="name"
+            (keypress)="onChangeFocus($event,tlfrsocial.id)"
+            #rsocial name="rsocial" id="rsocial" tabindex="4"
+            >
+            <mat-error *ngIf="iForm.controls['name'].hasError('required')">
+              El nombre es <strong>requerido</strong>
+            </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <!-- <mat-form-field class="full-width">
+              <input matInput
+              [textMask]="{mask: datemask}"
+              [ngModel]="datemask"
+              placeholder="Type a date"
+              value="01/07/2021">
+            </mat-form-field> -->
+
+            <mat-form-field class="full-width">
+              <input matInput
+              [ngModel]="tlfModel"
+              placeholder="Teléfono"
+              [textMask]="{mask: tlfmask}"
+              formControlName="tlf"
+
+              (keypress)="onChangeFocus($event,mailrsocial.id)"
+              #tlfrsocial name="tlfrsocial" id="tlfrsocial" tabindex="5"
+              >
+              <mat-error *ngIf="iForm.controls['tlf'].hasError('required')">
+                Teléfono es <strong>requerido</strong>
+              </mat-error>
+              <mat-error *ngIf="iForm.controls['tlf'].hasError('minlength')">
+                Teléfono debe contener <strong> Minimo de 7 Cataácteres</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Correo eléctronico"
+              formControlName="amail" type="mail"
+              (keypress)="onChangeFocus($event,dirrsocial.id)"
+              #mailrsocial name="mailrsocial" id="mailrsocial" tabindex="6"
+              >
+              <mat-error *ngIf="iForm.controls['amail'].hasError('required')">
+                Correo eléctronico es <strong>requerido</strong> </mat-error>
+                <mat-error *ngIf="iForm.controls['amail'].hasError('email')">
+                  Coloque un Correo eléctronico <strong>valido</strong>
+                </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Dirección"
+              formControlName="address" type="text"
+              (keypress)="onChangeFocus($event,contactrsocial.id)"
+              #dirrsocial name="dirrsocial" id="dirrsocial" tabindex="7"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+        <h3><strong>Datos persona contacto</strong></h3>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Nombres" formControlName="namecontact" type="text"
+              (keypress)="onChangeFocus($event,lastcontactrsocial.id)"
+              #contactrsocial name="contactrsocial" id="contactrsocial" tabindex="8"
+              >
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Apellidos"
+              formControlName="lastnameconact" type="text"
+              (keypress)="onChangeFocus($event,tlfcontactrsocial.id)"
+              #lastcontactrsocial name="lastcontactrsocial" id="lastcontactrsocial" tabindex="9"
+              >
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput
+              type="nu"
+              placeholder="Teléfono"
+
+              formControlName="tlfcontact"
+              (keypress)="onChangeFocus($event,mailcontactrsocial.id)"
+              #tlfcontactrsocial name="tlfcontactrsocial" id="tlfcontactrsocial" tabindex="10"
+              >
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Correo eléctronico"
+              formControlName="mailcontact"
+              type="mail"
+              #mailcontactrsocial name="mailcontactrsocial" id="mailcontactrsocial"
+              tabindex="11"
+              >
+              <mat-error *ngIf="iForm.controls['mailcontact'].hasError('email')">
+                Coloque un Correo eléctronico <strong>valido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+      </mat-card-content>
+      <div class="row  align-items-center">
+        <div class="col text-center">
+          <button mat-raised-button  class="color-idb" (click)="onSubmit()"
+          [disabled]="Form.form.invalid"
+          tabindex="12"
+          >
+            <mat-icon>save</mat-icon>
+            Guardar
+          </button>
+          &nbsp;&nbsp;
+          <button mat-raised-button class="idb-color" (click)="onCancel()" tabindex="13" >
+            <mat-icon>cancel</mat-icon>
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+</div>

@@ -1,0 +1,209 @@
+<div class="container">
+    <form [formGroup]="insiranceForm"  *ngIf="this.insiranceForm"  novalidate ngNativeValidate>
+      <mat-card class="shipping-card">
+        <mat-card-header>
+          <mat-card-title>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h3> <strong>Datos del seguro</strong></h3>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-select required required placeholder="Tipo de Institución" formControlName="tname">
+                  <mat-option *ngFor="let trif of typeins" [value]="trif.type">
+                    {{ trif.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="insiranceForm.controls['tname'].hasError('required')">
+                  El tipo es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-select required required placeholder="Tipo de Institución" formControlName="type">
+                  <mat-option *ngFor="let trif of typeinst" [value]="trif.type">
+                    {{ trif.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="insiranceForm.controls['type'].hasError('required')">
+                  El tipo es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">         
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-select required placeholder="Incicial de Rif" formControlName="tiporif">
+                  <mat-option *ngFor="let trif of tiporif" [value]="trif.type">
+                    {{ trif.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="insiranceForm.controls['trif'].hasError('required')">
+                  Tipo de rif es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="RIF" formControlName="rif" type="text" minlength="6" maxlength="10" required>
+                <mat-error *ngIf="insiranceForm.controls['rif'].hasError('rif')">
+                  Cédula es <strong>requerido</strong> </mat-error>
+                <mat-error *ngIf="insiranceForm.controls['rif'].hasError('minLength')">
+                  Se requiere <strong> 6 minimo de caracteres</strong>
+                </mat-error>
+                <mat-error *ngIf="insiranceForm.controls['rif'].hasError('maxlength')">
+                  Se requiere <strong> maximo de 10 de caracteres</strong>
+                </mat-error>
+                <mat-error *ngIf="insiranceForm.controls['rif'].hasError('rifTaken')">
+                  La cédula ya <strong> existe</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+              <input matInput required placeholder="Razón social" formControlName="name">
+              <mat-error *ngIf="insiranceForm.controls['name'].hasError('required')">
+                El nombre es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Pais" formControlName="country" (selectionChange)='onChangeCountry($event)'>
+                  <mat-option *ngFor="let trif of country" [value]="trif.id_pais">
+                    {{ trif.nombre }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="insiranceForm.controls['country'].hasError('required')">
+                  Pais es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Estado" formControlName="state" (selectionChange)='onChangeState($event)'>
+                  <mat-option *ngFor="let trif of state" [value]="trif.id_estado">
+                    {{ trif.estado }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="insiranceForm.controls['state'].hasError('required')">
+                  Estado es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Ciudad" formControlName="cities">
+                  <mat-option *ngFor="let trif of cities" [value]="trif.id_ciudad">
+                    {{ trif.ciudad }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="insiranceForm.controls['cities'].hasError('required')">
+                  Ciudad es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Municipio" formControlName="municipality">
+                  <mat-option *ngFor="let trif of municipality" [value]="trif.id_municipio">
+                    {{ trif.municipio }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="insiranceForm.controls['municipality'].hasError('required')">
+                  Municipio es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div> -->
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput  
+                formControlName="tlf"
+                [ngModel]="tlfModel"
+                placeholder="Teléfono" 
+                [textMask]="{mask: tlfmask}" 
+                >
+                <mat-error *ngIf="insiranceForm.controls['tlf'].hasError('required')">
+                  Teléfono es <strong>requerido</strong>
+                </mat-error>
+                <mat-error *ngIf="insiranceForm.controls['tlf'].hasError('minlength')">
+                  Teléfono debe contener <strong> Minimo de 7 Cataácteres</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Correo eléctronico" type="email"   formControlName="mail">
+              </mat-form-field>
+              <mat-error *ngIf="insiranceForm.controls['mail'].hasError('required')">
+                Correo eléctronico es <strong>requerido</strong>
+              </mat-error>
+              <mat-error *ngIf="insiranceForm.controls['mail'].hasError('email')">
+                Coloque un Correo eléctronico <strong>valido</strong>
+              </mat-error>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Dirección" formControlName="address">
+              </mat-form-field>
+            </div>
+          </div>
+          <h3><strong>Datos persona contacto</strong></h3>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Nombres" formControlName="namecontact">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Apellidos" formControlName="lastnameconact">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput  formControlName="tlfcontact" 
+                [ngModel]="tlfContactModel"
+                placeholder="Teléfono" 
+                [textMask]="{mask: tlfmask}" 
+                >
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Correo eléctronico" formControlName="mailcontact"  type="mail">
+                <mat-error *ngIf="insiranceForm.controls['mailcontact'].hasError('email')">
+                  Coloque un Correo eléctronico <strong>valido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+  
+        </mat-card-content>
+        <div class="row  align-items-center">
+          <div class="col text-center">
+            <button mat-raised-button type="submit" class="color-idb" (click)="onSubmit()">
+              <mat-icon>save</mat-icon>
+              Guardar
+            </button>
+            &nbsp;&nbsp;
+            <button mat-raised-button class="idb-color" (click)="onCancel()">
+              <mat-icon>cancel</mat-icon>
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </form>
+  </div>
+  

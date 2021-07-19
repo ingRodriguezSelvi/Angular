@@ -1,0 +1,181 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '~@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$simmaterial-primary: mat.define-palette(mat.$indigo-palette);
+$simmaterial-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$simmaterial-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$simmaterial-theme: mat.define-light-theme((
+  color: (
+    primary: $simmaterial-primary,
+    accent: $simmaterial-accent,
+    warn: $simmaterial-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($simmaterial-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: small;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+.idb-color{
+  a{color:#fff;}
+  background-color: #0077bc;
+  color:#fff;
+}
+.color-idb{
+  background-color: #0077bc;
+  color:#fff;
+}
+
+.btn-color-idb:hover {
+  // padding: 0 !important;
+  // margin: auto !important;
+  background-color: #0077bc;
+  color:#fff;
+}
+.btn-color-idb:before {
+  // padding: 0 !important;
+  // margin: auto !important;
+  background-color: #007bff;
+  color:#fff;
+}
+.btn-color-idb::after {
+  // padding: 0 !important;
+  // margin: auto !important;
+  background-color: #007bff;
+  color:#fff;
+}
+table th{
+  background-color: #0077bc;
+  color: #fff;
+}
+.btn {
+  font-size: 14px;
+}
+.mat-table {
+  font-size: 14px;
+}
+
+.mat-sort-header-container {
+  font-size: 14px;
+}
+// .mat-button  {
+//   color:#0077bc;
+// }
+
+.icon-home-user {
+  font-size: 20px;
+}
+
+tr.mat-header-row {
+   height: 18px !important;
+}
+
+.btn-acciones {
+  padding: 0 !important;
+  margin: auto !important;
+  color: #0077bc;
+}
+.btn-acciones:hover {
+  padding: 0 !important;
+  margin: auto !important;
+  color: #0077bc;
+}
+.btn-acciones:before {
+  padding: 0 !important;
+  margin: auto !important;
+  color: #007bff;
+  // content:"ಕನ್ನಡ";
+}
+
+.mat-snack-bar-container{
+  background-color: #0077bc;
+  color: #fff;
+}
+
+.mat-simple-snackbar-action {
+  color:#fff !important; ;
+}
+
+
+//snackbar
+.success-snackbar {
+  background: #008b17;
+}
+.danger-snackbar {
+  background: #e0120b;
+}
+.alert-snackbar {
+  background: #d4eb05;
+
+  color:#0077bc;
+}
+//icon
+.done {
+  color: #008b17;
+  font-size: 42px;
+  margin-right: 15px;
+}
+.dangerous {
+  color: #e0120b;
+  font-size: 42px;
+  margin-right: 15px;
+}
+.warning {
+  color:#f79b24;
+  font-size: 42px;
+  margin-right: 15px;
+}
+.messageConfir{
+  vertical-align: text-bottom !important; 
+  margin-bottom: 15px;
+}
+
+
+.idb-snackbar {
+  background: #0077bc;
+  color:#fff;
+}
+
+
+.full-width {
+  width: 100%;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: #0077bc;
+  color:#fff;
+}
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color:  rgba(0, 0, 0, 0.38);
+}

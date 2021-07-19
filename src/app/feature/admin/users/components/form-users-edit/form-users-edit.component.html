@@ -1,0 +1,173 @@
+<div class="container">
+  <form [formGroup]="iForm" #Form="ngForm"  *ngIf="this.iForm"  >
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Incicial de Rif" formControlName="tiporif" autofocus
+                (valueChange)="onChangeFocusOption($event,ced.id)"
+                #primero name="primer" id="primer" tabindex="0"
+                >
+                <mat-option *ngFor="let trif of tiporif" [value]="trif.type">
+                  {{ trif.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="iForm.controls['trif'].hasError('required')">
+                Tipo de rif es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Cédula"
+              formControlName="cedula"
+              minlength="6" maxlength="10"
+              (keypress)="onChangeFocus($event,nom.id)"
+              #ced name="ced" id="ced" tabindex="1"
+                >
+              <mat-error autofocus *ngIf="iForm.controls['cedula'].hasError('required')">
+                Cédula es <strong>requerido</strong> </mat-error>
+              <mat-error *ngIf="iForm.controls['cedula'].hasError('minLength')">
+                Se requiere <strong> 6 minimo de caracteres</strong>
+              </mat-error>
+              <mat-error *ngIf="iForm.controls['cedula'].hasError('maxlength')">
+                Se requiere <strong> maximo de 10 de caracteres</strong>
+              </mat-error>
+              <mat-error *ngIf="iForm.controls['cedula'].hasError('rifTaken')">
+                La cédula ya <strong> existe</strong>
+              </mat-error>
+              <mat-error *ngIf="iForm.controls['cedula'].hasError('pattern')">
+                Se requiere <strong> solo números</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Nombres"
+              formControlName="name"
+              (keypress)="onChangeFocus($event,ape.id)"
+              #nom name="nom" id="nom" tabindex="2"
+              >
+              <mat-error *ngIf="iForm.controls['name'].hasError('required')">
+                Nombres es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Apellidos"
+              formControlName="lastname"
+              (keypress)="onChangeFocus($event,se.id)"
+              #ape name="ape" id="ape" tabindex="3"
+              >
+              <mat-error *ngIf="iForm.controls['lastname'].hasError('required')">
+                Apellidos es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Sexo" formControlName="sex"
+              (valueChange)="onChangeFocusOption($event,addr.id)"
+              #se name="se" id="se" tabindex="4"
+              >
+                <mat-option *ngFor="let trif of tiposex" [value]="trif.type">
+                  {{ trif.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="iForm.controls['sex'].hasError('required')">
+                Tipo de sexo es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput required placeholder="Dirección"
+              formControlName="address"
+              (keypress)="onChangeFocus($event,wmail.id)"
+              #addr name="addr" id="addr" tabindex="5"
+              >
+              <mat-error *ngIf="iForm.controls['address'].hasError('required')">
+                La dirección es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput
+              placeholder="Correo eléctronico"
+              type="email" formControlName="mail"
+              (keypress)="onChangeFocus($event,tlfm.id)"
+              #wmail name="wmail" id="wmail" tabindex="6"
+              >
+            </mat-form-field>
+            <mat-error *ngIf="iForm.controls['mail'].hasError('email')">
+              Coloque un Correo eléctronico <strong>valido</strong>
+            </mat-error>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput
+              placeholder="Teléfono Movil 0411-555-5555"
+              formControlName="tlfcel"
+              (keypress)="onChangeFocus($event,role.id)"
+              #tlfm name="tlfm" id="tlfm" tabindex="7"
+              matTooltip="0411-555-5555"
+              [textMask]="{mask: tlfmask}"
+              [ngModel]="tlfModel"
+              >
+              <mat-error *ngIf="iForm.controls['tlfcel'].hasError('required')">
+                Teléfono Movil es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Rol"
+              formControlName="role"
+              required
+              (valueChange)="onChangeFocusOption($event,role.id)"
+              #role name="role" id="role" tabindex="8"
+
+              >
+                <mat-option *ngFor="let trif of roles" [value]="trif.id">
+                  {{ trif.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="iForm.controls['role'].hasError('required')">
+                Rol es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+      </mat-card-content>
+      <div class="row  align-items-center">
+        <div class="col text-center">
+          <button mat-raised-button  class="color-idb" (click)="onSubmit()"
+          [disabled]="Form.form.invalid"
+          tabindex="12"
+          >
+            <mat-icon>save</mat-icon>
+            Guardar
+          </button>
+          &nbsp;&nbsp;
+          <button mat-raised-button class="idb-color" (click)="onCancel()" tabindex="13" >
+            <mat-icon>cancel</mat-icon>
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+</div>

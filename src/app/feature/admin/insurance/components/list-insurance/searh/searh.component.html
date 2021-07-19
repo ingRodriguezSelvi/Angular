@@ -1,0 +1,78 @@
+<h2 mat-dialog-title>Busqueda de {{title}}</h2>
+<mat-dialog-content class="mat-typography">
+
+    <form  [formGroup]="iForm"  #Form="ngForm" >
+      <mat-card class="shipping-card">
+        <div class="row">
+
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Buscar por RIF o Razón social"
+                type="text"
+                formControlName="buscar"
+                #search name="search" id="search" tabindex="0"
+
+                >
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row  align-items-center">
+          <div class="col text-center">
+            <button mat-raised-button class="idb-color" (click)="onSearchInsurance()" >
+              <mat-icon>search</mat-icon>  Buscar</button>
+          </div>
+        </div>
+      </mat-card>
+    </form>
+
+  <br>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="full-width-table" matSort aria-label="Elements">
+      <ng-container matColumnDef="razon_social">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Razon social</th>
+        <td mat-cell *matCellDef="let row">{{row.razon_social}}</td>
+      </ng-container>
+      <ng-container matColumnDef="rif">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>RIF</th>
+        <td mat-cell *matCellDef="let row">{{row.rif}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Teléfono">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+        <td mat-cell *matCellDef="let row">{{row.telefonos}}</td>
+      </ng-container>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+        <td mat-cell *matCellDef="let row">
+
+          <button
+          class="btn btn-acciones"
+          title="Seleccionar"
+          (click)="onSelectCheck(row.id)"
+          [mat-dialog-close]="row.id"
+          >
+            <mat-icon>{{icoselect}}</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"
+
+      ></tr>
+    </table>
+
+    <mat-paginator
+        [length]="length"
+        [pageIndex]="pageIndex"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="onChangePage($event)"
+        >
+      </mat-paginator>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close ><mat-icon>cancel</mat-icon> Cancel</button>
+  <button mat-button [mat-dialog-close]="SelectSegu"
+  [disabled]="Form.form.invalid"
+  > <mat-icon>{{icoselect}}</mat-icon>  Seleccionar</button>
+</mat-dialog-actions>

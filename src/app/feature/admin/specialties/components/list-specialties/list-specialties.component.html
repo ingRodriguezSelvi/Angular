@@ -1,0 +1,103 @@
+<br>
+<div class="container">
+    <mat-card>
+      <mat-card-header>
+      </mat-card-header>
+      <mat-card-content>
+        <h3><strong> Buscar Especialidad</strong></h3>
+        <form [formGroup]='searchEsp' (ngSubmit)='SearchEsp()'>
+          <div class="row">
+            <div class="col-12">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Nombre" formControlName="name">
+              </mat-form-field>
+            </div>
+            <!-- <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="activo" formControlName="status">
+              </mat-form-field>
+            </div> -->
+          </div>
+        </form>
+
+      </mat-card-content>
+
+
+      <div class="row  align-items-center">
+        <div class="col text-center">
+          <button mat-raised-button class="idb-color"  type="submit">
+            <mat-icon>search</mat-icon>  Buscar</button>
+          &nbsp;
+
+          <a mat-raised-button  (click)="onNew()" class="btn btn-primary idb-color">
+            <mat-icon>add</mat-icon>
+            Nueva</a>
+
+        </div>
+      </div>
+
+
+    </mat-card>
+    <br>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class="full-width-table" matSort aria-label="Elements">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+          <td mat-cell *matCellDef="let row">{{row.id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</th>
+          <td mat-cell *matCellDef="let row">{{row.especialidad}}</td>
+        </ng-container>
+        <!-- <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+          <td mat-cell *matCellDef="let row">{{row.activo}}
+          </td>
+        </ng-container> -->
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+          <td mat-cell *matCellDef="let row">
+            <mat-slide-toggle
+              checked={{row.activo}}
+              (change)="onchange($event,row.id)"
+              >Activo</mat-slide-toggle>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <button
+            class="btn btn-acciones"
+            data-bs-toggle="tooltip" data-bs-placement="bottom"
+            title="Editar"
+            (click)="onSelectEdit(row.id)"
+            >
+              <mat-icon matTooltip="Editar">edit</mat-icon>
+            </button>
+
+            <button
+            class="btn btn-acciones"
+            title="Eliminar"
+            (click)="onSelectDelete(row.id)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator
+        [length]="length"
+        [pageIndex]="pageIndex"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="onChangePage($event)"
+      >
+      </mat-paginator>
+    </div>
+    <br>
+</div>

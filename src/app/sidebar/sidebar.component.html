@@ -1,0 +1,115 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>
+      <img class="logo" src="../../../assets/img/IDB-Cabudare-2.png">
+    </mat-toolbar>
+    <p class="user-login">
+      {{nameuser}}
+      <br />
+      {{carg}}
+    </p>
+    <mat-nav-list class="idb-color">
+      <a mat-list-item (click)="goToHome()">
+        <mat-icon >home</mat-icon>
+        Inicio
+      </a>
+      <button mat-button [matMenuTriggerFor]="patien">
+        <mat-icon>settings</mat-icon>
+        <!-- <fa-icon [icon]="faNotesMedical"></fa-icon> -->
+        Paciente
+      </button>
+      <mat-menu #patien="matMenu">
+        <button mat-menu-item  routerLink="/patient">Lista de Paciente</button>
+        <button mat-menu-item routerLink="/formpatient" >Nuevo Paciente</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="admin">
+        <mat-icon>settings</mat-icon>
+        Administrativo
+      </button>
+      <mat-menu #admin="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="especialidades">Especialidades</button>
+        <button mat-menu-item [matMenuTriggerFor]="doctor">Médicos</button>
+        <button mat-menu-item [matMenuTriggerFor]="seguro">Seguros</button>
+        <button mat-menu-item [matMenuTriggerFor]="users">Usuarios</button>
+        <!-- <button mat-menu-item [matMenuTriggerFor]="roles">Roles</button>
+        <button mat-menu-item [matMenuTriggerFor]="sede">Sucursales</button>-->
+        <button mat-menu-item [matMenuTriggerFor]="area">Area</button> 
+      </mat-menu>
+
+      <mat-menu #area="matMenu">
+        <button mat-menu-item routerLink="/area">Lista de area</button>
+        <button mat-menu-item routerLink="/formarea">Nueva area</button>
+      </mat-menu>
+
+      <mat-menu #users="matMenu">
+        <button mat-menu-item routerLink="/users">Lista de usuarios</button>
+        <button mat-menu-item routerLink="/formusers">Nuevo usuario</button>
+      </mat-menu>
+
+      <mat-menu #especialidades="matMenu">
+        <button mat-menu-item routerLink="/specialties">Lista de especialidades</button>
+        <button mat-menu-item routerLink="/formspecialties">Nueva especialidad</button>
+      </mat-menu>
+      <mat-menu #doctor="matMenu">
+        <button mat-menu-item routerLink="/doctor">Lista de médicos</button>
+        <button mat-menu-item routerLink="/formdoctor">Nuevo médico</button>
+      </mat-menu>
+      <mat-menu #seguro="matMenu">
+        <button mat-menu-item routerLink="/insurance">Lista de seguros</button>
+        <button mat-menu-item routerLink="/forminsurance">Nuevo seguro</button>
+      </mat-menu>
+      <mat-menu #pais="matMenu" >
+        <button mat-menu-item >Lista de paises</button>
+        <!-- <button mat-menu-item>Nuevo pais</button> -->
+      </mat-menu>
+      <mat-menu #estado="matMenu">
+        <button mat-menu-item>Lista de estado</button>
+        <!-- <button mat-menu-item>Nuevo estado</button> -->
+      </mat-menu>
+      <mat-menu #ciudad="matMenu">
+        <button mat-menu-item>Lista de ciudad</button>
+        <!-- <button mat-menu-item>Nuevo ciudad</button> -->
+      </mat-menu>
+      <mat-menu #municipio="matMenu">
+        <button mat-menu-item>Lista de municipio</button>
+        <!-- <button mat-menu-item>Nuevo municipio</button> -->
+      </mat-menu>
+      <mat-menu #parroquia="matMenu">
+        <button mat-menu-item>Lista de parroquia</button>
+        <!-- <button mat-menu-item>Nuevo parroquia</button> -->
+      </mat-menu>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <!-- <span>simmaterial</span> -->
+      <button xPosition="before" mat-icon-button [matMenuTriggerFor]="menu" class="icon-home-user"
+        aria-label="icon-button with a menu">
+        <fa-icon [icon]="faUser"></fa-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>assignment_ind</mat-icon>
+          <span>Mi perfil</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>admin_panel_settings</mat-icon>
+          <span>Configuración</span>
+        </button>
+        <button mat-menu-item (click)="outse()">
+          <mat-icon>logout</mat-icon>
+          <span>Cerrar sesión</span>
+        </button>
+      </mat-menu>
+      <p class="userstyle"></p>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,130 @@
+<div class="container">
+  <form [formGroup]="iForm" #Form="ngForm">
+    <mat-card class="shipping-card">
+      <h3><strong> Buscar {{title}}</strong></h3>
+      <div class="row">
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Buscar por RIF, Nombres, Apellidos, Correo"
+              type="text"
+              formControlName="buscar"
+              #search name="search" id="search" tabindex="0">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row  align-items-center">
+        <div class="col text-center">
+          <button mat-raised-button class="idb-color" (click)="onSearch()">
+            <mat-icon>search</mat-icon> Buscar
+          </button>
+          &nbsp;
+          <button mat-raised-button class="idb-color" (click)="onNew()" >
+            <mat-icon>add</mat-icon>
+          Nuevo
+        </button>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+
+  <br>
+  <div class="mat-elevation-z8">
+    <table mat-table
+      [dataSource]="dataSource"
+      class="full-width-table "
+      matSort
+      aria-label="Elements">
+      <ng-container matColumnDef="nombres">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombres</th>
+        <td mat-cell *matCellDef="let row">{{row.nombres}}</td>
+      </ng-container>
+      <ng-container matColumnDef="apellidos">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellidos</th>
+        <td mat-cell *matCellDef="let row">{{row.apellidos}}</td>
+      </ng-container>
+      <ng-container matColumnDef="rif">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>RIF</th>
+        <td mat-cell *matCellDef="let row">{{row.rif}}</td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>email</th>
+        <td mat-cell *matCellDef="let row">{{row.email}}</td>
+      </ng-container>
+      <ng-container matColumnDef="telefonos">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+        <td mat-cell *matCellDef="let row">{{row.telefonos}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="roles">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Rol</th>
+        <td mat-cell *matCellDef="let row">{{row.rol}}</td>
+      </ng-container>
+      <!-- <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+        <td mat-cell *matCellDef="let row">{{row.status}}</td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+        <td mat-cell *matCellDef="let row">
+
+          <mat-slide-toggle
+            checked={{row.status}}
+            (change)="onDesable($event,row.id)"
+            >Activo</mat-slide-toggle>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+        <td mat-cell *matCellDef="let row">
+
+          <button
+          class="btn btn-acciones"
+          data-bs-toggle="tooltip" data-bs-placement="bottom"
+          title="Editar"
+          (click)="onSelectEdit(row.id)"
+          >
+            <mat-icon matTooltip="Editar">edit</mat-icon>
+          </button>
+
+          <button
+          class="btn btn-acciones"
+          title="Eliminar"
+          (click)="onSelectDelete(row.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <!-- <button
+            class="btn btn-acciones"
+            title="Seleccionar"
+            (click)="onSelectCheck(row.id)"
+            [mat-dialog-close]="row.id">
+            <mat-icon>{{icoselect}}</mat-icon>
+          </button> -->
+
+          <button
+          class="btn btn-acciones"
+          title="Asignar Contraseña"
+          (click)="onAssignPassword(row.id)"
+          >
+            <mat-icon>admin_panel_settings</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+    </table>
+
+    <mat-paginator
+      [length]="length"
+      [pageIndex]="pageIndex"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="onChangePage($event)">
+    </mat-paginator>
+  </div>
+</div>

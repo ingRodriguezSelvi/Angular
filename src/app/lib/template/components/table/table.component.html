@@ -1,0 +1,106 @@
+<div class="container">
+    <form [formGroup]="Searchform" novalidate >
+  
+      <mat-card class="shipping-card">
+        <h3><strong> Buscar {{title}}</strong></h3>
+        <div class="row">
+  
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Buscar por Cédula, Nombres o Apellidos" type="text" formControlName="buscar">
+              <!-- <mat-error *ngIf="Searchform.controls['buscar'].hasError('required')">
+                 es <strong>requerido</strong> y no puede estar en blanco
+              </mat-error> -->
+            </mat-form-field>
+          </div> 
+  
+        </div>
+        <div class="row  align-items-center">
+          <div class="col text-center">
+            <button mat-raised-button class="idb-color" (click)="onSearchInsirance()" type="submit">
+              <mat-icon>search</mat-icon>  Buscar</button>
+            &nbsp;
+              <button mat-raised-button class="idb-color" (click)="onNewInsirance()" >
+                <mat-icon>add</mat-icon>
+              Nuevo paciente
+            </button>
+  
+          </div>
+        </div>
+  
+      </mat-card>
+    </form>
+    <br>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class="full-width-table" matSort aria-label="Elements">
+        <ng-container matColumnDef="Historia">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Historia</th>
+          <td mat-cell *matCellDef="let row">{{row.nro_historia}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Cédula">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Cédula</th>
+          <td mat-cell *matCellDef="let row">{{row.cedula}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Nombres y Apellidos">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombres y Apellidos</th>
+          <td mat-cell *matCellDef="let row">{{row.full_name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="Teléfono">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+          <td mat-cell *matCellDef="let row">{{row.telefonos}}</td>
+        </ng-container>    
+  
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <!-- <button  
+            class="btn btn-acciones"
+            data-bs-toggle="tooltip" data-bs-placement="bottom" 
+            title="agragar a triaje"
+            (click)="onSelectAddtriaje(row.id)"
+            >
+              <mat-icon>add_circle_outline</mat-icon>
+            </button>          
+            <button 
+            class="btn btn-acciones"
+            data-bs-toggle="tooltip" data-bs-placement="bottom" 
+            title="Ver historia"
+            (click)="onSelectView(row.id)"
+            >
+              <mat-icon>visibility</mat-icon>
+            </button> -->
+            <button 
+            class="btn btn-acciones"
+            data-bs-toggle="tooltip" data-bs-placement="bottom" 
+            title="Editar"
+            (click)="onSelectEdit(row.id)"
+            >
+              <mat-icon matTooltip="Editar">edit</mat-icon>
+            </button>
+            
+            <button  
+            class="btn btn-acciones"
+            title="Eliminar"
+            (click)="onSelectDelete(row.id)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"
+        
+        ></tr>
+      </table>
+  
+      <mat-paginator 
+          [length]="length"
+          [pageIndex]="pageIndex"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="onChangePage($event)"
+          >
+        </mat-paginator>
+    </div>
+  </div>
+  
